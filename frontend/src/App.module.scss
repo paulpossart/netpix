@@ -1,0 +1,26 @@
+.overflow {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+
+    .big {
+        animation: bigger 2s linear;
+    }
+}
+
+
+@keyframes bigger {
+    0% {
+        font-size: 10px;
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        font-size: 1000px;
+        opacity: 0;
+    }
+}

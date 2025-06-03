@@ -77,3 +77,6 @@
 
 ### for animating lists:
 - npm install framer-motion
+
+### rate limits:
+npm install express-rate-limit
