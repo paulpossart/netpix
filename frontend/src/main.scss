@@ -1,0 +1,29 @@
+@use './styles/global' as *;
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: black;
+  color: white;
+  text-align: center;
+  line-height: 1.5;
+
+  font: {
+    family: 'Roboto';
+    size: 1.6rem;
+  }
+}

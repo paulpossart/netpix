@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+$netpixRed: rgb(229, 9, 20);
+$hoverRed: rgb(193, 17, 25);
+
+$greytext: rgb(116, 114, 116);
+
+.tmdb {
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    text-align: right;
+    font-size: 9px;
+
+    @media (min-width: 350px) {
+        font-size: 10px;
+    }
+
+    @media (min-width: 420px) {
+        font-size: 12px;
+    }
+
+    & img {
+        height: 12px;
+    }
+}
+
+@mixin flex($dir: column, $jus: space-around, $align: center) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $jus;
+    align-items: $align;
+}

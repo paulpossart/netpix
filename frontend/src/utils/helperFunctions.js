@@ -1,28 +1,29 @@
 const safeRegex = /^[^<>{};\\]*$/;
 const bannedRegEx = '< > { } ; \\';
 
+const changeInput = (e, setValue, setError, type) => {
+    const value = e.target.value;
+    setValue(value);
+
+    if (value.length > 30) setError(`Maximum 30 characters`);
+    else if (value.length < 6 && type === 'password') setError('Password minimum 6 characters')
+    else if (!safeRegex.test(value) && type === 'username') setError(`Username cannot contain the following characters: ${bannedRegEx}`);
+    else setError(null);
+};
+
 const isValidSubmission = (username, password) => {
     if (!username.trim() || username.length > 30) {
-        return {
-            valid: false,
-            message: 'Username should be between 1 - 30 characters'
-        };
+        return false;
     };
 
     if (!password || password.length < 6 || password.length > 30) {
-        return {
-            valid: false,
-            message: 'Password should be between 6 - 30 characters'
-        };
+        return false;
     };
 
     if (!safeRegex.test(username)) {
-        return {
-            valid: false,
-            message: `Username cannot contain the following characters: ${bannedRegEx}`
-        };
+        return false;
     }
-    return { valid: true };
+    return true;
 };
 
-export {isValidSubmission};
+export { changeInput, isValidSubmission };

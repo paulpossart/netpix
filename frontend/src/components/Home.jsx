@@ -1,9 +1,11 @@
 import styles from '../App.module.scss'
+import { useEffect, useState } from 'react';
+import SignOut from './auth/SignOut';
 
 function Home() {
     const [tadum, setTadum] = useState(
         <div className={styles.overflow}>
-            <div className={styles.big}>hello</div>
+            <div className={styles.big}>N</div>
         </div>
     )
 
@@ -20,10 +22,12 @@ function Home() {
             {
                 tadum ?
                     tadum :
-                    (
+                    (<>
                         <div>
-                            goodbye
+                            Welcome to Netpix
                         </div>
+                        <SignOut />
+                    </>
                     )
             }
         </>
