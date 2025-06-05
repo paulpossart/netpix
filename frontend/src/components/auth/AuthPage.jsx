@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SignIn from './SignIn';
-import CreateUser from '../2_users/CreateUser';
+import CreateUser from '../users/CreateUser';
 import styles from './auth.module.scss';
 import tmdbLogo from '../../assets/tmdb-logo.svg';
 

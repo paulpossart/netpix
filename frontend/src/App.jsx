@@ -7,7 +7,7 @@ import {
 import { useAuth } from './context/AuthContext';
 
 import Root from './Root';
-import AuthPage from './components/1_auth/AuthPage';
+import AuthPage from './components/auth/AuthPage';
 
 import Home from './components/Home';
 

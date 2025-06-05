@@ -18,7 +18,7 @@
         background-color: rgba(0, 0, 0, 0.8);
         z-index: 2;
 
-        @media (min-width: 500px) {
+        @media (min-width: 500px) and (min-height: 400px) {
             background-color: rgba(0, 0, 0, 0.6);
         }
 
@@ -52,7 +52,7 @@
             width: clamp(320px, 100%, 450px);
             margin: 0 auto;
 
-            @media (min-width: 500px) {
+            @media (min-width: 500px) and (min-height: 400px) {
                 background-color: rgba(0, 0, 0, 0.8);
             }
         }
@@ -64,7 +64,11 @@
     padding: 0 1.6rem;
     margin: 0;
 
-    @media (min-width: 500px) and (min-height: 500px) {
+    @media (min-width: 500px) and (min-height: 400px) {
+        padding: 4rem 6rem;
+    }
+
+    @media (min-width: 500px) and (min-height: 400px) {
         padding: 4rem 6rem;
     }
 

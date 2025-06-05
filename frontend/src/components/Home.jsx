@@ -1,6 +1,6 @@
 import styles from '../App.module.scss'
 import { useEffect, useState } from 'react';
-import SignOut from './1_auth/SignOut';
+import SignOut from './auth/SignOut';
 
 function Home() {
     const [tadum, setTadum] = useState(
