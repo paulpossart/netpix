@@ -6,16 +6,18 @@ import {
 } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 
-import Root from './Root';
+import Root from './components/root/Root';
 import AuthPage from './components/auth/AuthPage';
 
-import Home from './components/Home';
+import Home from './components/root/home/Home';
+import Account from './components/root/account/Acount';
+
+import Loader from './components/utils/loader/Loader';
 
 function App() {
   const { user, isLoading } = useAuth();
-  console.log(user);
 
-  if (isLoading) return 'isLoading...'
+  if (isLoading) return <Loader />;
 
   return (
     <Router>
@@ -23,6 +25,7 @@ function App() {
 
         <Route path='/' element={user ? <Root /> : <Navigate to='/auth' />}>
           <Route index element={<Home />} />
+          <Route path='account' element={user ? <Account /> : <Navigate to='/auth' />} />
         </Route>
 
         <Route

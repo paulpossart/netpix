@@ -107,4 +107,96 @@ const getUser = async (req, res, next) => {
     }
 };
 
-export { createUser, getUser };
+const updateUser = async (req, res, next) => {
+    const userId = req.userId;
+    const { updatedUsername, updatedPassword } = req.body;
+
+    if (
+        !isValidInput('username', updatedUsername, 1, 30)
+        || !isValidInput('password', updatedPassword, 6, 30)
+    ) {
+        return res.status(400).json({
+            success: false,
+            message: 'Invalid username or password',
+            user: null
+        })
+    };
+
+    try {
+        const checkUsername = await pool.query(
+            'SELECT * FROM netpix.users WHERE username = $1',
+            [updatedUsername]
+        );
+
+        if (checkUsername.rows.length > 0) {
+            return res.status(409).json({
+                success: false,
+                message: 'Username unavailable',
+                user: null
+            });
+        }
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(updatedPassword, saltRounds);
+
+        await pool.query(
+            `UPDATE netpix.users
+            SET username = $1, password_hash = $2
+            WHERE id = $3
+            RETURNING id, username`,
+            [updatedUsername, hashedPassword, userId]
+        );
+
+        res
+            .clearCookie('accessToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .status(200).json({
+                success: true,
+                message: 'Username and password updated. Please sign in with new credentials',
+                user: null
+            });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+const deleteUser = async (req, res, next) => {
+    const userId = req.userId;
+
+    try {
+        await pool.query(
+            `DELETE FROM netpix.users
+            WHERE id = $1`,
+            [userId]
+        );
+        res
+            .clearCookie('accessToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .status(200).json({
+                success: true,
+                message: 'user successfully deleted'
+            });
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+export { createUser, getUser, updateUser, deleteUser };
