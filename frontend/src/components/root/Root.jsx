@@ -1,0 +1,76 @@
+import { Outlet } from 'react-router-dom';
+import Header from './header/Header';
+import { useEffect, useState } from 'react';
+import styles from './root.module.scss';
+import netpixLogo from '../../assets/netpix-logo.svg';
+import { useLocation } from 'react-router-dom';
+import Footer from '../utils/loader/footer/Footer';
+
+function Root() {
+    const [bigN, setBigN] = useState(
+        <div className={styles.bigN}>
+            <img src={netpixLogo} />
+        </div>
+
+    );
+    const location = useLocation();
+    const path = location.pathname;
+
+    useEffect(() => {
+        const seenIntro = sessionStorage.getItem('bigN');
+        if (seenIntro) {
+            setBigN(null);
+            return;
+        }
+
+        const intro = setTimeout(() => {
+            setBigN(null);
+            sessionStorage.setItem('bigN', 'seen');
+        }, 2000);
+
+        return () => {
+            clearTimeout(intro);
+        }
+
+    }, []);
+
+    useEffect(() => {
+        if (bigN === null) {
+            const spacerHeight = () => {
+                const header = document.getElementById('header');
+                const spacer = document.getElementById('spacer');
+                if (header && spacer) {
+                    spacer.style.height = `${header.offsetHeight}px`;
+                }
+            };
+
+            window.addEventListener('resize', spacerHeight);
+            setTimeout(spacerHeight, 10);
+
+            return () => {
+                window.removeEventListener('resize', spacerHeight);
+            };
+        }
+
+    }, [bigN]);
+
+
+    return (
+        <>
+            {
+                bigN ?
+                    bigN :
+                    <div className={styles.root}>
+                        <Header className={`${styles.header} ${path === '/account' ? styles.headerAccount : styles.headerHome}`} />
+                        <div id='spacer'></div>
+                        <div className={`${styles.outlet} ${path === '/account' ? styles.outletAccount : styles.outletHome}`}>
+                            <Outlet />
+                        </div>
+                        <Footer />
+                    </div>
+            }
+        </>
+    )
+};
+
+export default Root;
