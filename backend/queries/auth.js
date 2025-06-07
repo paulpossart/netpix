@@ -167,4 +167,47 @@ const verifyUser = (req, res, next) => {
     });
 };
 
-export { signIn, signOut, verifyUser };
+const passwordCheck = async (req, res, next) => {
+    const userId = req.userId;
+    const { password } = req.body;
+
+    if (!isValidInput('password', password, 6, 30)) {
+        return res.status(400).json({
+            success: false,
+            message: 'Invalid password'
+        });
+    }
+
+    try {
+        const result = await pool.query(
+            'SELECT password_hash FROM netpix.users WHERE id = $1',
+            [userId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        const passwordHash = result.rows[0].password_hash;
+        const isMatch = await bcrypt.compare(password, passwordHash);
+
+        if (!isMatch) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid password'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'User verified'
+        });
+    } catch (err) {
+        next(err);
+    };
+};
+
+export { signIn, signOut, verifyUser, passwordCheck };

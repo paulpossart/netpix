@@ -115,7 +115,6 @@ const updatePassword = async (req, res, next) => {
         return res.status(400).json({
             success: false,
             message: 'Current password incorrect',
-            user: null
         })
     };
 
@@ -123,7 +122,6 @@ const updatePassword = async (req, res, next) => {
         return res.status(400).json({
             success: false,
             message: 'New password invalid',
-            user: null
         })
     };
 
@@ -131,7 +129,6 @@ const updatePassword = async (req, res, next) => {
         return res.status(400).json({
             success: false,
             message: 'Passwords do not match',
-            user: null
         })
     }
 
@@ -146,7 +143,6 @@ const updatePassword = async (req, res, next) => {
             return res.status(401).json({
                 success: false,
                 message: 'Could not find user',
-                user: null
             });
         };
 
@@ -157,7 +153,6 @@ const updatePassword = async (req, res, next) => {
             return res.status(401).json({
                 success: false,
                 message: 'Current password invalid',
-                user: null
             });
         };
 
@@ -185,7 +180,6 @@ const updatePassword = async (req, res, next) => {
             .status(200).json({
                 success: true,
                 message: 'Password updated. Please sign in again',
-                user: null
             });
 
     } catch (err) {
@@ -195,15 +189,12 @@ const updatePassword = async (req, res, next) => {
 
 const updateUsername = async (req, res, next) => {
     const userId = req.userId;
-    const { updatedUsername, updatedPassword } = req.body;
+    const { updatedUsername } = req.body;
 
-    if (
-        !isValidInput('username', updatedUsername, 1, 30)
-        || !isValidInput('password', updatedPassword, 6, 30)
-    ) {
+    if (!isValidInput('username', updatedUsername, 1, 30)) {
         return res.status(400).json({
             success: false,
-            message: 'Invalid username or password',
+            message: 'Invalid username',
             user: null
         })
     };
@@ -222,33 +213,21 @@ const updateUsername = async (req, res, next) => {
             });
         }
 
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(updatedPassword, saltRounds);
-
-        await pool.query(
+        const result = await pool.query(
             `UPDATE netpix.users
-            SET username = $1, password_hash = $2
-            WHERE id = $3
-            RETURNING id, username`,
-            [updatedUsername, hashedPassword, userId]
+             SET username = $1
+             WHERE id = $2
+             RETURNING username, created_at`,
+            [updatedUsername, userId]
         );
 
-        res
-            .clearCookie('accessToken', {
-                httpOnly: true,
-                secure: isProd(),
-                sameSite: 'lax',
-            })
-            .clearCookie('refreshToken', {
-                httpOnly: true,
-                secure: isProd(),
-                sameSite: 'lax',
-            })
-            .status(200).json({
-                success: true,
-                message: 'Username and password updated. Please sign in with new credentials',
-                user: null
-            });
+        const user = result.rows[0];
+
+        res.status(200).json({
+            success: true,
+            message: `Username updated to: ${user.username}`,
+            user: user
+        });
 
     } catch (err) {
         next(err);
@@ -285,4 +264,4 @@ const deleteUser = async (req, res, next) => {
     }
 }
 
-export { createUser, getUser, updatePassword, deleteUser };
+export { createUser, getUser, updatePassword, updateUsername, deleteUser };

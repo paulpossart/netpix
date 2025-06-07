@@ -3,6 +3,8 @@ import { SecurityIcon, MemberIcon } from '../../utils/svgs/accountSvgs';
 import { Link } from 'react-router-dom';
 import styles from './Account.module.scss';
 import chevronRight from '../../../assets/chevron-right.svg';
+import securityIcon from '../../../assets/security.svg';
+import membershipIcon from '../../../assets/membership.svg';
 
 function Overview() {
     const { user } = useAuth();
@@ -34,19 +36,19 @@ function Overview() {
                             <Link
                                 to='security'
                                 className={styles.quickLink}
-                                style={{ borderBottom: 'solid 1px rgb(220, 220, 220)' }}
                             >
                                 <div className={styles.quickLinkDiv}>
-                                    <SecurityIcon />
+                                     <img src={securityIcon} />
                                     Change username and password
                                 </div>
                                 <img src={chevronRight} />
                             </Link>
                         </li>
+                        <div className={styles.border}></div>
                         <li>
                             <Link to='membership' className={styles.quickLink}>
                                 <div className={styles.quickLinkDiv}>
-                                    <MemberIcon />
+                                    <img src={membershipIcon} />
                                     Cancel membership
                                 </div>
                                 <img src={chevronRight} />

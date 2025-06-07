@@ -27,7 +27,6 @@ function Security() {
                             <Link
                                 to='update-password'
                                 className={styles.quickLink}
-                                style={{ borderBottom: 'solid 1px rgb(220, 220, 220)' }}
                             >
                                 <div className={styles.quickLinkDiv}>
                                     <img src={passwordIcon} />
@@ -36,6 +35,7 @@ function Security() {
                                 <img src={chevronRight} />
                             </Link>
                         </li>
+                        <div className={styles.border}></div>
                         <li>
                             <Link to='update-username' className={styles.quickLink}>
                                 <div className={styles.quickLinkDiv}>
