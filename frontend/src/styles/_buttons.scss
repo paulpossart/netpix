@@ -48,6 +48,11 @@
         }
     }
 
+    &:active {
+        transform: scale(0.99);
+        background-color: rgb(76, 76, 76);
+    }
+
 }
 
 .textBtn {
@@ -90,4 +95,10 @@
             background-color: rgb(226, 226, 226);
         }
     }
+
+    &:active {
+        transform: scale(0.99);
+       background-color: rgb(226, 226, 226);
+    }
+    
 }

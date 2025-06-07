@@ -2,7 +2,7 @@ import styles from './Account.module.scss';
 import { Link } from 'react-router-dom';
 import { callUpdatePassword } from '../../../apiCalls/usersCalls';
 import { useState, useEffect } from 'react';
-import { changeInput, isValidSubmission } from '../../../helpers/helperFunctions';
+import { changeInput } from '../../../helpers/helperFunctions';
 import { useAuth } from '../../../context/AuthContext';
 
 function UpdatePassword() {

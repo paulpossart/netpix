@@ -21,6 +21,21 @@ const callSignOut = async () => {
     });
     if (!response.ok) throw new Error('callSignOut error');
     return null;
+};
+
+const callPasswordCheck = async (password) => {
+    const response = await fetch('/api/auth/password-check', {
+        method: 'POST',
+        body: JSON.stringify({
+            password
+        }),
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
 }
 
-export {callSignIn, callSignOut};
+export {callSignIn, callSignOut, callPasswordCheck};

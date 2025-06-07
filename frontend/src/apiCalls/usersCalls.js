@@ -38,9 +38,24 @@ const callUpdatePassword = async (currentPassword, updatedPassword, reEnteredPas
         credentials: 'include'
     });
 
-    const data= await response.json();
+    const data = await response.json();
     if (!response.ok) throw new Error(data.message);
     return data;
-}
+};
 
-export { callCreateUser, callGetUser, callUpdatePassword };
+const callUpdateUsername = async (updatedUsername) => {
+    const response = await fetch('/api/users/update-username', {
+        method: 'PATCH',
+        body: JSON.stringify({
+            updatedUsername
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+};
+
+export { callCreateUser, callGetUser, callUpdatePassword, callUpdateUsername };
