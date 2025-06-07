@@ -10,7 +10,10 @@ import Root from './components/root/Root';
 import AuthPage from './components/auth/AuthPage';
 
 import Home from './components/root/home/Home';
-import Account from './components/root/account/Acount';
+import Account from './components/root/account/Account';
+import Overview from './components/root/account/AccOverview';
+import UpdateUser from './components/root/account/UpdateUser';
+import DeleteUser from './components/root/account/DeleteUser';
 
 import Loader from './components/utils/loader/Loader';
 
@@ -25,7 +28,11 @@ function App() {
 
         <Route path='/' element={user ? <Root /> : <Navigate to='/auth' />}>
           <Route index element={<Home />} />
-          <Route path='account' element={user ? <Account /> : <Navigate to='/auth' />} />
+          <Route path='account' element={<Account />}>
+            <Route index element={<Overview />} />
+            <Route path='update-user' element={<UpdateUser />} />
+            <Route path='delete-user' element={<DeleteUser />} />
+          </Route>
         </Route>
 
         <Route

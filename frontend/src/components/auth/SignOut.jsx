@@ -9,6 +9,7 @@ function SignOut() {
     const { setUser } = useAuth();
     const location = useLocation();
     const path = location.pathname;
+    const isAccountPath = path.startsWith('/account');
 
     const handleSignOut = async () => {
         await callSignOut();
@@ -20,7 +21,7 @@ function SignOut() {
     return (
         <button
             className={styles.textBtn}
-            style={path === '/account' ? { color: 'black' } : null}
+            style={isAccountPath ? { color: 'black' } : null}
             type='button'
             onClick={handleSignOut}
         >

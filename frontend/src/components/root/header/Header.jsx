@@ -13,8 +13,8 @@ import { useLocation } from 'react-router-dom';
 function Header({ className }) {
     const [sidebar, setSidebar] = useState(false);
     const [searchBar, setSearchBar] = useState(false);
-    const location = useLocation();
-    const path = location.pathname;
+    const path = useLocation().pathname;
+     const isAccountPath = path.startsWith('/account');
 
     return (
         <header id='header' className={className}>
@@ -31,7 +31,7 @@ function Header({ className }) {
 
                 <div className={styles.navBtns}>
                     {
-                        path === '/account' ?
+                        isAccountPath ?
                             null :
                             <div className={`${styles.searchDiv} ${searchBar ? styles.searchDivOpen : styles.searchDivClosed}`}>
                                 <img src={searchIcon} onClick={() => setSearchBar(prev => !prev)} />
@@ -42,7 +42,7 @@ function Header({ className }) {
                             </div>
                     }
                     <img
-                        src={path === '/account' ? accountBlack : accountWhite}
+                        src={isAccountPath ? accountBlack : accountWhite}
                         onClick={() => setSidebar(prev => !prev)}
                         onMouseEnter={() => setSidebar(true)} />
                 </div>

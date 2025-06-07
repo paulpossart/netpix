@@ -1,13 +1,14 @@
 import styles from './footer.module.scss';
-import tmdbLogo from '../../../../assets/tmdb-logo.svg';
+import tmdbLogo from '../../../assets/tmdb-logo.svg';
 import { useLocation } from 'react-router-dom';
 
 function Footer() {
     const path = useLocation().pathname;
+    const isAccountPath = path.startsWith('/account');
 
     return (
         <footer className={styles.tmdb}>
-            <p style={path === '/account' ? { color: 'black' } : { color: 'white' }}>This product uses the TMDB API but is not endorsed or certified by TMDB</p>
+            <p style={isAccountPath ? { color: 'black' } : { color: 'white' }}>This product uses the TMDB API but is not endorsed or certified by TMDB</p>
             <img src={tmdbLogo} />
         </footer>
     );

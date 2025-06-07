@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import SignIn from './SignIn';
-import CreateUser from '../users/CreateUser';
+import CreateUser from './CreateUser';
 import styles from './auth.module.scss';
-import tmdbLogo from '../../assets/tmdb-logo.svg';
-import Footer from '../utils/loader/footer/Footer';
+import Footer from '../utils/footer/Footer';
 
 function AuthPage() {
     const [view, setView] = useState('sign-in');

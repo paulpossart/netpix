@@ -1,9 +1,9 @@
 function Home() {
     return (
         <>
-            <div>
+            <main>
                 Welcome to Netpix
-            </div>
+            </main>
         </>
     )
 }

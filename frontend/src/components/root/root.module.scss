@@ -1,5 +1,21 @@
 @use '../../styles/global' as *;
 
+@keyframes bigger {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        width: 1000px;
+        opacity: 0;
+    }
+}
+
 .bigN {
     position: relative;
     overflow: hidden;
@@ -12,22 +28,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         animation: bigger 2s linear;
-
-        @keyframes bigger {
-            0% {
-                width: 0;
-                opacity: 1;
-            }
-
-            80% {
-                opacity: 1;
-            }
-
-            100% {
-                width: 1000px;
-                opacity: 0;
-            }
-        }
     }
 }
 
