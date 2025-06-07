@@ -7,7 +7,7 @@
         display: grid;
         grid-template-areas: 'nav main';
         grid-template-columns: 1fr 2fr;
-        padding-top: 4%;
+        padding-top: 1%;
     }
 
     @media (min-height: 400px) and (min-width: 1280px) {
@@ -105,13 +105,12 @@
     }
 
     .accountMain {
-        padding-top: 4%;
         text-align: left;
-        padding: 4% 16px 0 16px;
+        padding: 1% 16px 0 16px;
 
         @media (min-height: 400px) and (min-width: 550px) {
             //margin-right: 6vmax;
-            padding: 4% 6vmax 0 6vmax;
+            padding: 1% 6vmax 0 6vmax;
         }
 
         @media (min-height: 400px) and (min-width: 960px) {
