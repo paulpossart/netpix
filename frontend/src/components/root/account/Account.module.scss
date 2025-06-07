@@ -1,4 +1,5 @@
 @use '../../../styles/global' as *;
+@use '../../../styles/buttons';
 
 .accountPage {
     height: 100%;
@@ -7,7 +8,7 @@
         display: grid;
         grid-template-areas: 'nav main';
         grid-template-columns: 1fr 2fr;
-        padding-top: 4%;
+        padding-top: 1%;
     }
 
     @media (min-height: 400px) and (min-width: 1280px) {
@@ -105,13 +106,11 @@
     }
 
     .accountMain {
-        padding-top: 4%;
         text-align: left;
-        padding: 4% 16px 0 16px;
+        padding: 1% 16px 0 16px;
 
         @media (min-height: 400px) and (min-width: 550px) {
-            //margin-right: 6vmax;
-            padding: 4% 6vmax 0 6vmax;
+            padding: 1% 6vmax 0 6vmax;
         }
 
         @media (min-height: 400px) and (min-width: 960px) {
@@ -177,7 +176,7 @@
                 border-radius: 4px;
 
                 @media (hover: hover) and (pointer: fine) {
-                  
+
                     &:hover {
                         background-color: rgb(226, 226, 226);
                     }
@@ -191,6 +190,48 @@
                     @include flex(row, flex-start, center);
                     gap: 12px;
                 }
+            }
+        }
+
+        & form {
+            @include flex(column, flex-start, center);
+            width: 100%;
+
+            font: {
+                size: 1.6rem;
+                family: Roboto;
+            }
+
+            & input {
+                border: solid 1px rgb(94, 94, 94);
+                border-radius: 4px;
+                padding: 1.2rem;
+                margin: 1.2rem 0;
+                width: 100%;
+
+                @media (max-height: 500px) {
+                    margin: 2px 0;
+                }
+            }
+
+            .newPasswords {
+                width: 100%;
+                margin-top: 2em;
+            }
+
+            .inputError {
+                font-size: 1.2rem;
+                color: rgb(235, 57, 66);
+            }
+
+            .submitError {
+                font-size: 1.4rem;
+                color: rgb(235, 57, 66);
+                width: 100%;
+                text-align: center;
+                border-radius: 4px;
+                border: solid 2px rgb(235, 57, 66);
+                padding: 1rem;
             }
         }
     }

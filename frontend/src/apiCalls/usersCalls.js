@@ -26,4 +26,21 @@ const callGetUser = async () => {
     return null
 };
 
-export { callCreateUser, callGetUser };
+const callUpdatePassword = async (currentPassword, updatedPassword, reEnteredPassword) => {
+    const response = await fetch('/api/users/update-password', {
+        method: 'PATCH',
+        body: JSON.stringify({
+            currentPassword,
+            updatedPassword,
+            reEnteredPassword
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    });
+
+    const data= await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+}
+
+export { callCreateUser, callGetUser, callUpdatePassword };

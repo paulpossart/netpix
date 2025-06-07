@@ -99,6 +99,14 @@
     }
 }
 
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    pointer-events: auto;
+}
+
 .sidebar {
     @include flex(column);
     position: absolute;
@@ -107,6 +115,7 @@
     width: 200px;
     height: 300px;
     font-weight: 600;
+    z-index: 1001;
 
     transition:
         opacity 0.3s ease-in-out,
