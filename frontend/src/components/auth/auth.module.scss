@@ -32,7 +32,7 @@
         text-align: left;
 
         & h1 {
-            padding: 20px 0 10px 16px ;
+            padding: 20px 0 10px 16px;
             color: $netpixRed;
             z-index: 10;
             line-height: 1;
@@ -99,6 +99,11 @@
         @include flex(column, flex-start, center);
         width: 100%;
 
+        font: {
+            size: 1.6rem;
+            family: Roboto;
+        }
+
         & input {
             background-color: rgb(15, 15, 15);
             color: white;
@@ -110,11 +115,6 @@
 
             @media (max-height: 500px) {
                 margin: 2px 0;
-            }
-
-            font: {
-                size: 1.6rem;
-                family: Roboto;
             }
         }
 

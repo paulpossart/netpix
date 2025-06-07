@@ -1,0 +1,22 @@
+@use '../../../styles/global' as *;
+
+.active,
+.inactive {
+    width: 28px;
+    display: none;
+
+    @media (min-height: 550px) and (min-width: 960px) {
+        display: block;
+    }
+
+}
+
+.active {
+    stroke: black;
+    fill: black;
+}
+
+.inactive {
+    stroke: black;
+    fill: none;
+}

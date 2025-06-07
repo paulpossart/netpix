@@ -1,0 +1,118 @@
+@use '../../../styles/global' as *;
+
+.accountPage {
+    height: 100%;
+
+    @media (min-height: 550px) and (min-width: 960px) {
+        display: grid;
+        grid-template-areas: 'nav main';
+        grid-template-columns: 1fr 2fr;
+        padding-top: 4%;
+    }
+
+    .accountNav {
+        padding-left: 16px;
+        border-bottom: solid 1px rgb(230, 230, 230);
+        width: 100%;
+
+
+        @media (min-height: 550px) and (min-width: 550px) {
+            padding: 0 6vmax;
+        }
+
+        @media (min-height: 550px) and (min-width: 960px) {
+            grid-area: nav;
+        }
+
+        .accountUl {
+            @include flex(row, flex-start, center);
+
+            @media (min-height: 550px) and (min-width: 960px) {
+                @include flex(column, center, flex-start);
+                gap: 1.6rem;
+            }
+
+
+            & li {
+                margin-right: 1.6rem;
+
+                @media (hover: hover) and (pointer: fine) and (min-height: 550px) and (min-width: 960px) {
+                    //border: red solid 1px;
+                    border-radius: 4px;
+                    width: 100%;
+                    padding: 0.4rem;
+                    padding-left: 1.4rem;
+
+                    &:hover {
+                        background-color: rgb(226, 226, 226);
+                    }
+                }
+
+                & img {
+                    width: 28px;
+                }
+
+                .activeLink,
+                .inactiveLink {
+                    display: block;
+                    padding: 0.4rem 0;
+                    color: black;
+                    text-decoration: none;
+
+                    @media (min-height: 550px) and (min-width: 960px) {
+                        @include flex(row, flex-start, center);
+                        gap: 12px;
+                    }
+                }
+
+                .activeLink {
+                    border-bottom: solid 3px $netpixRed;
+                    font-weight: 600;
+
+                    @media (min-height: 550px) and (min-width: 960px) {
+                        border: none;
+                    }
+                }
+
+                .inactiveLink {
+                    border-bottom: solid 3px rgb(250, 250, 250);
+
+                    @media (hover: hover) and (pointer: fine) and (max-height: 549px) and (max-width: 959px) {
+                        &:hover {
+                            color: rgb(150, 150, 150);
+                        }
+                    }
+
+                    @media (min-height: 550px) and (min-width: 960px) {
+                        border: none;
+                    }
+                }
+            }
+
+            .toHome {
+                display: none;
+
+                @media (min-height: 550px) and (min-width: 960px) {
+                    display: block;
+                    margin-bottom: 4rem;
+                }
+            }
+        }
+    }
+
+    .accountMain {
+        padding-top: 4%;
+        text-align: left;
+        padding-left: 16px;
+
+        @media (min-height: 550px) and (min-width: 550px) {
+            padding: 4% 6vmax 0 6vmax;
+        }
+
+        @media (min-height: 550px) and (min-width: 960px) {
+            padding: 0;
+            grid-area: main;
+
+        }
+    }
+}

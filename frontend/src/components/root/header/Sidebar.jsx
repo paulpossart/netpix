@@ -8,24 +8,24 @@ import backIcon from '../../../assets/back-arrow.svg';
 function Sidebar({ sidebar, setSidebar }) {
     const { user } = useAuth();
     const username = user.username;
-    const location = useLocation();
-    const path = location.pathname;
+    const path = useLocation().pathname;
+    const isAccountPath = path.startsWith('/account');
 
     return (
         <div onMouseLeave={() => setSidebar(false)}
             className={
                 `${styles.sidebar} 
-                 ${path === '/account' ? styles.sidebarWhite : styles.sidebarBlack} 
+                 ${isAccountPath ? styles.sidebarWhite : styles.sidebarBlack} 
                  ${sidebar ? styles.sidebarOpen : styles.sidebarClosed}`
             }>
             <div className={styles.sidebarDiv}>
                 {
-                    path === '/account'
+                   isAccountPath
                         ? <Link className={styles.backBtn} to='/'><img src={backIcon} />Back to Netpix</Link>
                         : <p>Welcome {username}!</p>
                 }
             </div>
-            <div className={`${styles.sidebarDiv} ${path === '/account' ? null : styles.sidebarDivCentre}`}>
+            <div className={`${styles.sidebarDiv} ${isAccountPath ? null : styles.sidebarDivCentre}`}>
                 <Link to={'account'}>Account</Link>
             </div>
             <div className={styles.sidebarDiv}>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styles from './root.module.scss';
 import netpixLogo from '../../assets/netpix-logo.svg';
 import { useLocation } from 'react-router-dom';
-import Footer from '../utils/loader/footer/Footer';
+import Footer from '../utils/footer/Footer';
 
 function Root() {
     const [bigN, setBigN] = useState(
@@ -13,8 +13,9 @@ function Root() {
         </div>
 
     );
-    const location = useLocation();
-    const path = location.pathname;
+
+    const path = useLocation().pathname;
+    const isAccountPath = path.startsWith('/account');
 
     useEffect(() => {
         const seenIntro = sessionStorage.getItem('bigN');
@@ -61,9 +62,9 @@ function Root() {
                 bigN ?
                     bigN :
                     <div className={styles.root}>
-                        <Header className={`${styles.header} ${path === '/account' ? styles.headerAccount : styles.headerHome}`} />
+                        <Header className={`${styles.header} ${isAccountPath ? styles.headerAccount : styles.headerHome}`} />
                         <div id='spacer'></div>
-                        <div className={`${styles.outlet} ${path === '/account' ? styles.outletAccount : styles.outletHome}`}>
+                        <div className={`${styles.outlet} ${isAccountPath ? styles.outletAccount : styles.outletHome}`}>
                             <Outlet />
                         </div>
                         <Footer />
