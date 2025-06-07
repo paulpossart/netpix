@@ -1,2 +1,1 @@
-set up csurf
-check out morgan
+icons on quick links...
