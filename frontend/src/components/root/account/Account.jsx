@@ -36,7 +36,7 @@ function Account() {
                     </li>
                     <li>
                         <NavLink
-                            to='update-user'
+                            to='security'
                             className={({ isActive }) => isActive ? styles.activeLink : styles.inactiveLink}
                         >{
                                 ({ isActive }) => (
@@ -50,7 +50,7 @@ function Account() {
                     </li>
                     <li>
                         <NavLink
-                            to='delete-user'
+                            to='membership'
                             className={({ isActive }) => isActive ? styles.activeLink : styles.inactiveLink}
                         >{
                                 ({ isActive }) => (

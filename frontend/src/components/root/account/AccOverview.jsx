@@ -32,7 +32,7 @@ function Overview() {
                     <ul>
                         <li>
                             <Link
-                                to='update-user'
+                                to='security'
                                 className={styles.quickLink}
                                 style={{ borderBottom: 'solid 1px rgb(220, 220, 220)' }}
                             >
@@ -44,7 +44,7 @@ function Overview() {
                             </Link>
                         </li>
                         <li>
-                            <Link to='delete-user' className={styles.quickLink}>
+                            <Link to='membership' className={styles.quickLink}>
                                 <div className={styles.quickLinkDiv}>
                                     <MemberIcon />
                                     Cancel membership

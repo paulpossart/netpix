@@ -107,7 +107,93 @@ const getUser = async (req, res, next) => {
     }
 };
 
-const updateUser = async (req, res, next) => {
+const updatePassword = async (req, res, next) => {
+    const userId = req.userId;
+    const { currentPassword, updatedPassword, reEnteredPassword } = req.body;
+
+    if (!isValidInput('password', currentPassword, 6, 30)) {
+        return res.status(400).json({
+            success: false,
+            message: 'Current password incorrect',
+            user: null
+        })
+    };
+
+    if (!isValidInput('password', updatedPassword, 6, 30)) {
+        return res.status(400).json({
+            success: false,
+            message: 'New password invalid',
+            user: null
+        })
+    };
+
+    if (updatedPassword !== reEnteredPassword) {
+        return res.status(400).json({
+            success: false,
+            message: 'Passwords do not match',
+            user: null
+        })
+    }
+
+    try {
+        const result = await pool.query(
+            `SELECT * FROM netpix.users
+             WHERE id = $1`,
+            [userId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(401).json({
+                success: false,
+                message: 'Could not find user',
+                user: null
+            });
+        };
+
+        const user = result.rows[0];
+        const isMatch = await bcrypt.compare(currentPassword, user.password_hash);
+
+        if (!isMatch) {
+            return res.status(401).json({
+                success: false,
+                message: 'Current password invalid',
+                user: null
+            });
+        };
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(updatedPassword, saltRounds);
+
+        await pool.query(
+            `UPDATE netpix.users
+             SET password_hash = $1
+             WHERE id = $2`,
+            [hashedPassword, userId]
+        );
+
+        res
+            .clearCookie('accessToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: isProd(),
+                sameSite: 'lax',
+            })
+            .status(200).json({
+                success: true,
+                message: 'Password updated. Please sign in again',
+                user: null
+            });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+const updateUsername = async (req, res, next) => {
     const userId = req.userId;
     const { updatedUsername, updatedPassword } = req.body;
 
@@ -199,4 +285,4 @@ const deleteUser = async (req, res, next) => {
     }
 }
 
-export { createUser, getUser, updateUser, deleteUser };
+export { createUser, getUser, updatePassword, deleteUser };

@@ -12,8 +12,10 @@ import AuthPage from './components/auth/AuthPage';
 import Home from './components/root/home/Home';
 import Account from './components/root/account/Account';
 import Overview from './components/root/account/AccOverview';
-import UpdateUser from './components/root/account/UpdateUser';
-import DeleteUser from './components/root/account/DeleteUser';
+import Security from './components/root/account/Security';
+import Membership from './components/root/account/Membership';
+import UpdateUsername from './components/root/account/UpdateUsername';
+import UpdatePassword from './components/root/account/UpdatePassword';
 
 import Loader from './components/utils/loader/Loader';
 
@@ -30,8 +32,13 @@ function App() {
           <Route index element={<Home />} />
           <Route path='account' element={<Account />}>
             <Route index element={<Overview />} />
-            <Route path='update-user' element={<UpdateUser />} />
-            <Route path='delete-user' element={<DeleteUser />} />
+           
+            <Route path='security' element={<Security />}>
+              <Route path='update-username' element={<UpdateUsername />} />
+              <Route path='update-password' element={<UpdatePassword />} />
+            </Route>
+
+            <Route path='membership' element={<Membership />} />
           </Route>
         </Route>
 

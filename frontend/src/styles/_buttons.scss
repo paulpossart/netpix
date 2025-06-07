@@ -10,6 +10,7 @@
     margin-top: 0.6em;
     width: 100%;
 
+
     transition:
         background-color 0.2s linear,
         transform 0.2s linear;
@@ -37,6 +38,18 @@
     }
 }
 
+.btn2 {
+    @extend .btn1;
+     background-color: black;
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background-color: rgb(76, 76, 76);
+        }
+    }
+
+}
+
 .textBtn {
     border: none;
     background-color: transparent;
@@ -58,5 +71,23 @@
 
     &:active {
         transform: scale(0.98);
+    }
+}
+
+.cancelBtn {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 1.2rem;
+    width: 100%;
+
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background-color: rgb(226, 226, 226);
+        }
     }
 }
