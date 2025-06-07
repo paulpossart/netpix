@@ -7,7 +7,11 @@ function Footer() {
     const isAccountPath = path.startsWith('/account');
 
     return (
-        <footer className={styles.tmdb}>
+        <footer
+            className={styles.tmdb}
+            style={isAccountPath
+                ? { backgroundColor: 'rgba(255, 255, 255, 0.8)' }
+                : { backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
             <p style={isAccountPath ? { color: 'black' } : { color: 'white' }}>This product uses the TMDB API but is not endorsed or certified by TMDB</p>
             <img src={tmdbLogo} />
         </footer>

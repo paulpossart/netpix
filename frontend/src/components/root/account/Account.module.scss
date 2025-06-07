@@ -10,6 +10,10 @@
         padding-top: 4%;
     }
 
+    @media (min-height: 550px) and (min-width: 1280px) {
+        margin: 0 6.25%;
+    }
+
     .accountNav {
         padding-left: 16px;
         border-bottom: solid 1px rgb(230, 230, 230);
@@ -37,7 +41,6 @@
                 margin-right: 1.6rem;
 
                 @media (hover: hover) and (pointer: fine) and (min-height: 550px) and (min-width: 960px) {
-                    //border: red solid 1px;
                     border-radius: 4px;
                     width: 100%;
                     padding: 0.4rem;
@@ -103,7 +106,39 @@
     .accountMain {
         padding-top: 4%;
         text-align: left;
-        padding-left: 16px;
+        padding: 0 16px;
+
+        @media (min-height: 550px) and (min-width: 550px) {
+            margin-right: 6vmax;
+        }
+
+        & h2 {
+            font: {
+                size: 32px;
+                weight: 800;
+            }
+
+            @media (min-height: 550px) and (min-width: 550px) {
+                font-size: 40px;
+            }
+        }
+
+        & h3 {
+            color: rgb(51, 51, 51);
+
+            @media (min-height: 550px) and (min-width: 550px) {
+                font-size: 18px;
+            }
+        }
+
+        .overviewContainer {
+            background-color: white;
+            border: solid 1px rgb(204, 204, 204);
+            border-radius: 8px;
+            padding: 1em;
+        }
+
+
 
         @media (min-height: 550px) and (min-width: 550px) {
             padding: 4% 6vmax 0 6vmax;

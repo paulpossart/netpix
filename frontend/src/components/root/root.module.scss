@@ -48,6 +48,10 @@
     .headerAccount {
         background-color: white;
         border-bottom: solid 1px rgb(230, 230, 230);
+
+        @media (min-height: 550px) and (min-width: 1280px) {
+            padding: 0 6.25%;
+        }
     }
 
     .headerHome {
