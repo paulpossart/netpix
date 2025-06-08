@@ -58,4 +58,23 @@ const callUpdateUsername = async (updatedUsername) => {
     return data;
 };
 
-export { callCreateUser, callGetUser, callUpdatePassword, callUpdateUsername };
+const callDeleteUser = async () => {
+    const response = await fetch(`/api/users`, {
+        method: 'DELETE',
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error('Unable to delete user');
+    return data;
+}
+
+
+
+export {
+    callCreateUser,
+    callGetUser,
+    callUpdatePassword,
+    callUpdateUsername,
+    callDeleteUser
+};
