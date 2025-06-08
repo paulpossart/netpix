@@ -32,7 +32,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='account' element={<Account />}>
             <Route index element={<Overview />} />
-           
+
             <Route path='security' element={<Security />}>
               <Route path='update-username' element={<UpdateUsername />} />
               <Route path='update-password' element={<UpdatePassword />} />
