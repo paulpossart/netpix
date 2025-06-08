@@ -6,6 +6,7 @@ import { changeInput } from '../../../helpers/helperFunctions';
 import { useAuth } from '../../../context/AuthContext';
 
 function UpdatePassword() {
+    const [modal, setModal] = useState(null);
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [reEnteredPassword, setReEnteredPassword] = useState('');
@@ -23,6 +24,13 @@ function UpdatePassword() {
         }
         checkPassword();
     }, [reEnteredPassword])
+
+    const removeUser = (e) => {
+        e.preventDefault();
+        setModal(null)
+        setUser(null);
+        navigate('/auth')
+    };
 
     const handleNewPassword = (e) => {
         setSubmitError('');
@@ -46,7 +54,15 @@ function UpdatePassword() {
         try {
             const data = await callUpdatePassword(currentPassword, newPassword, reEnteredPassword);
             if (data?.success) {
-                setUser(null);
+                setModal(
+                    <>
+                        <div onClick={removeUser} className={styles.modalOverlay}></div>
+                        <div className={styles.modal}>
+                            <p>{data.message}</p>
+                            <button className={styles.btn1} onClick={removeUser}>OK</button>
+                        </div>
+                    </>
+                );
             }
         } catch (err) {
             setSubmitError(err.message)
@@ -59,6 +75,8 @@ function UpdatePassword() {
 
     return (
         <>
+            {modal && modal}
+
             <h2>Change Password</h2>
 
             <section>

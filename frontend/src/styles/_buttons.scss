@@ -40,7 +40,7 @@
 
 .btn2 {
     @extend .btn1;
-     background-color: black;
+    background-color: black;
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
@@ -88,7 +88,14 @@
     border-radius: 4px;
     padding: 1.2rem;
     width: 100%;
+    border: none;
+    background-color: transparent;
 
+    font: {
+        size: 16px;
+        family: Roboto;
+        weight: 600;
+    }
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
@@ -98,7 +105,26 @@
 
     &:active {
         transform: scale(0.99);
-       background-color: rgb(226, 226, 226);
+        background-color: rgb(226, 226, 226);
     }
-    
+
+}
+
+.deleteBtn {
+    @extend .btn1;
+    background-color: white;
+    color: rgb(235, 57, 66);
+    border: solid 2px rgb(235, 57, 66);
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background-color: rgb(226, 226, 226);
+        }
+    }
+
+    &:active {
+        transform: scale(0.99);
+        background-color: rgb(226, 226, 226);
+    }
+
 }

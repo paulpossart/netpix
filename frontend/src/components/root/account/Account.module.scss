@@ -204,6 +204,7 @@
         & form {
             @include flex(column, flex-start, center);
             width: 100%;
+            gap: 4px;
 
             font: {
                 size: 1.6rem;
@@ -268,6 +269,13 @@
         -1px 1px 4px rgb(215, 215, 215),
         1px -1px 4px rgb(215, 215, 215),
         -1px -1px 4px rgb(215, 215, 215);
+        text-align: center;
+        min-width: 200px;
+
+        .btnsDiv {
+            @include flex;
+            gap: 4px;
+        }
 
 
     & p {

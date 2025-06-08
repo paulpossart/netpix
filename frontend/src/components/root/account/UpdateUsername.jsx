@@ -93,7 +93,7 @@ function UpdateUsername() {
         }
     };
 
-    if (authorised) {
+    if (!authorised) {
         return (
             <>
                 <h2>Change Username</h2 >
@@ -152,7 +152,7 @@ function UpdateUsername() {
                             type='submit'
                             className={styles.btn2}
                         >
-                            Submit
+                            Save
                         </button>
                         <Link
                             to='/account/security'
