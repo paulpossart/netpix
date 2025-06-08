@@ -1,8 +1,11 @@
+import PopularMovies from './PopularMovies';
+
 function Home() {
     return (
         <>
             <main>
-                Welcome to Netpix
+                <p>Welcome to Netpix</p>
+                <PopularMovies />
             </main>
         </>
     )
