@@ -9,13 +9,13 @@ import { useAuth } from './context/AuthContext';
 import Root from './components/root/Root';
 import AuthPage from './components/auth/AuthPage';
 
-import Home from './components/root/home/Home';
-import Account from './components/root/account/Account';
-import Overview from './components/root/account/AccOverview';
-import Security from './components/root/account/Security';
-import Membership from './components/root/account/Membership';
-import UpdateUsername from './components/root/account/UpdateUsername';
-import UpdatePassword from './components/root/account/UpdatePassword';
+import Home from './components/home/Home';
+import Account from './components/account/Account';
+import Overview from './components/account/AccOverview';
+import Security from './components/account/Security';
+import Membership from './components/account/Membership';
+import UpdateUsername from './components/account/UpdateUsername';
+import UpdatePassword from './components/account/UpdatePassword';
 
 import Loader from './components/utils/loader/Loader';
 
@@ -29,17 +29,18 @@ function App() {
       <Routes>
 
         <Route path='/' element={user ? <Root /> : <Navigate to='/auth' />}>
+          
           <Route index element={<Home />} />
+          
           <Route path='account' element={<Account />}>
             <Route index element={<Overview />} />
-
             <Route path='security' element={<Security />}>
               <Route path='update-username' element={<UpdateUsername />} />
               <Route path='update-password' element={<UpdatePassword />} />
             </Route>
-
             <Route path='membership' element={<Membership />} />
           </Route>
+        
         </Route>
 
         <Route
@@ -47,7 +48,7 @@ function App() {
           element={user ? <Navigate to='/' /> : <AuthPage />}
         />
 
-        {/* will need new creds and a 404*/}
+        {/* will need a 404*/}
 
       </Routes>
     </Router>

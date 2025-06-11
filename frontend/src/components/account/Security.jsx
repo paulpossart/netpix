@@ -1,8 +1,8 @@
 import { Link, useLocation, Outlet } from "react-router-dom";
 import styles from './Account.module.scss';
-import chevronRight from '../../../assets/chevron-right.svg';
-import accountIcon from '../../../assets/account-black.svg';
-import passwordIcon from '../../../assets/padlock.svg';
+import chevronRight from '../../assets/chevron-right.svg';
+import accountIcon from '../../assets/account-black.svg';
+import passwordIcon from '../../assets/padlock.svg';
 
 function Security() {
     const path = useLocation().pathname;

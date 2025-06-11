@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import { callFetchPopular } from '../../../apiCalls/tmdbCalls';
-import chevronRight from '../../../assets/chevron-right.svg';
+import { callFetchPopular, callFetchVideosById } from '../../apiCalls/tmdbCalls';
+import chevronRight from '../../assets/chevron-right.svg';
 
 import styles from './movies.module.scss';
 
@@ -38,14 +38,55 @@ function PopularMovies() {
         scrollRef.current.scrollLeft -= scrollRef.current.offsetWidth
     }
 
+    const handleClick = async (movie) => {
+        const movieVids = await callFetchVideosById(movie.id);
+        console.log('vids:', movieVids)
 
-    const handleOnMouseEnter = (movie) => {
+        const movieClips = movieVids.filter(vid => vid.type === 'Clip');
+        const trailers = movieVids.filter(vid => vid.type === 'Trailer');
+
+        const randomIndexGenerator = (array) => {
+            const idx = Math.floor(array.length * Math.random());
+            return idx;
+        }
+
+
+        let key;
+        if (movieClips.length > 0) key = movieClips[randomIndexGenerator(movieClips)].key
+        else if (trailers.length > 0) key = trailers[randomIndexGenerator(trailers)].key
+        else if (movieVids.length > 0) movieVids[randomIndexGenerator(movieVids)].key;
+        else key = null;
+        console.log('key: ', key);
+
         setModal(
-            <div>
-                <p>{movie.title}</p>
+            <div className={styles.modal}>
+                { key ? <iframe
+                    src={`https://www.youtube.com/embed/${key}?autoplay=1`}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                >
+                </iframe> : <p>no video available</p>}
+                <h3>{movie.title}</h3>
+                <button>Trailer</button>
+                {/*<button>Add</button>*/}
+                <button>More</button>
+                <a
+                    href={`https://www.netflix.com/search?q=${encodeURIComponent(movie.title)}`}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >Netflix</a>
+                <a
+                    href={`https://www.amazon.co.uk/gp/video/search?phrase=${encodeURIComponent(movie.title)}`}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >Prime</a>
+                <button onClick={()=>setModal(null)}>Close</button>
+
+
             </div>
         )
-
     }
 
 
@@ -55,7 +96,7 @@ function PopularMovies() {
             {
                 movies.length > 0 ? (
                     <div className={styles.moviesWrapper}>
-                        <div onMouseLeave={() => setModal(null)} className={modal ? styles.popOut : styles.popIn} >
+                        <div /*onMouseLeave={() => setModal(null)}*/ className={modal ? styles.popOut : styles.popIn} >
                             {modal && modal}
                         </div>
                         <div onClick={() => setModal(false)} className={modal ? styles.overlayVisible : styles.overlayHidden} ></div>
@@ -66,8 +107,7 @@ function PopularMovies() {
 
                                 {movies.map((movie, index) =>
                                     <li
-                                        onMouseEnter={() => handleOnMouseEnter(movie)}
-                                        onMouseLeave={() => handleOnMouseEnter(null)}
+                                        onClick={() => handleClick(movie)}
                                         key={index}>
 
                                         {/*<h3 style={{ fontWeight: '900' }}>{movie.title}</h3>*/}

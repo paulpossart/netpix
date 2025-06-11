@@ -1,10 +1,9 @@
-import { useAuth } from '../../../context/AuthContext';
-import { SecurityIcon, MemberIcon } from '../../utils/svgs/accountSvgs';
+import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import styles from './Account.module.scss';
-import chevronRight from '../../../assets/chevron-right.svg';
-import securityIcon from '../../../assets/security.svg';
-import membershipIcon from '../../../assets/membership.svg';
+import chevronRight from '../../assets/chevron-right.svg';
+import securityIcon from '../../assets/security.svg';
+import membershipIcon from '../../assets/membership.svg';
 
 function Overview() {
     const { user } = useAuth();

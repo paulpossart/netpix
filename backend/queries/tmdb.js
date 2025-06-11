@@ -9,38 +9,50 @@ TMDB error response object:
 
 const bearerToken = process.env.BEARER_TOKEN;
 
-const fetchPopular = async (req, res, next) => {
-    try {
-        const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${bearerToken}`
-            }
-        });
-
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.status_message);
-        res.status(200).json(data.results)
-
-    } catch (err) {
-        next(err)
-    }
-};
-
-export {fetchPopular}
-
-/*
 const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
     Authorization: `Bearer ${bearerToken}`
   }
+}
+
+const fetchPopular = async (req, res, next) => {
+  try {
+    const response = await fetch(
+      'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+      options);
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data.results)
+
+  } catch (err) {
+    next(err)
+  }
 };
 
-fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
+const fetchVideosById = async (req, res, next) => {
+  const id = parseInt(req.params.id)
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
+      options
+    );
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data.results)
+  } catch (err) {
+    next(err)
+  }
+};
+
+export { fetchPopular, fetchVideosById }
+
+/*
+fetch('https://api.themoviedb.org/3/movie/1376434/videos?language=en-US', options)
   .then(res => res.json())
   .then(res => console.log(res))
   .catch(err => console.error(err));
-  */
+*/
