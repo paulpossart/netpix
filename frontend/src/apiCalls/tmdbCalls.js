@@ -11,6 +11,22 @@ const callFetchPopular = async () => {
     return data;
 };
 
+const callFetchUpcoming = async () => {
+    const response = await fetch('api/tmdb/upcoming', options);
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+};
+
+const callFetchNowPlaying = async () => {
+    const response = await fetch('api/tmdb/now-playing', options);
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+};
+
 const callFetchVideosById = async (id) => {
     const response = await fetch(`api/tmdb/${id}`, options);
 
@@ -19,4 +35,4 @@ const callFetchVideosById = async (id) => {
     return data;
 }
 
-export { callFetchPopular, callFetchVideosById };
+export { callFetchPopular, callFetchUpcoming, callFetchNowPlaying, callFetchVideosById };
