@@ -1,10 +1,10 @@
 import styles from './Account.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { callPasswordCheck } from '../../../apiCalls/authCalls';
+import { callPasswordCheck } from '../../apiCalls/authCalls';
 import { useState, useEffect } from 'react';
-import { changeInput } from '../../../helpers/helperFunctions';
-import { useAuth } from '../../../context/AuthContext';
-import { callUpdateUsername } from '../../../apiCalls/usersCalls';
+import { changeInput } from '../../helpers/helperFunctions';
+import { useAuth } from '../../context/AuthContext';
+import { callUpdateUsername } from '../../apiCalls/usersCalls';
 
 function UpdateUsername() {
     const [authorised, setAuthorised] = useState(false);

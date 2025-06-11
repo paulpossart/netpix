@@ -1,7 +1,7 @@
 import styles from './Account.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext';
-import { callDeleteUser } from '../../../apiCalls/usersCalls';
+import { useAuth } from '../../context/AuthContext';
+import { callDeleteUser } from '../../apiCalls/usersCalls';
 import { useState } from 'react';
 
 function Membership() {

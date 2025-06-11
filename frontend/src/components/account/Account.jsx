@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import styles from './Account.module.scss';
-import { HomeIcon, SecurityIcon, MemberIcon } from "../../utils/svgs/accountSvgs.jsx";
-import backIcon from '../../../assets/back-arrow.svg';
+import { HomeIcon, SecurityIcon, MemberIcon } from "../utils/svgs/accountSvgs.jsx";
+import backIcon from '../../assets/back-arrow.svg';
 
 function Account() {
     return (

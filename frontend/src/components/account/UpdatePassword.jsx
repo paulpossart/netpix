@@ -1,9 +1,9 @@
 import styles from './Account.module.scss';
 import { Link } from 'react-router-dom';
-import { callUpdatePassword } from '../../../apiCalls/usersCalls';
+import { callUpdatePassword } from '../../apiCalls/usersCalls';
 import { useState, useEffect } from 'react';
-import { changeInput } from '../../../helpers/helperFunctions';
-import { useAuth } from '../../../context/AuthContext';
+import { changeInput } from '../../helpers/helperFunctions';
+import { useAuth } from '../../context/AuthContext';
 
 function UpdatePassword() {
     const [modal, setModal] = useState(null);
