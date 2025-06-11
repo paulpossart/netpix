@@ -1,6 +1,7 @@
 @use '../../../styles/global' as *;
 
-.navbar {
+.accNav,
+.homeNav {
     position: relative;
     height: 100%;
     padding: 4px 16px;
@@ -10,7 +11,8 @@
         padding: 1vmin 6vmax;
     }
 
-    .h1 {
+    .accH1,
+    .homeH1 {
         color: $netpixRed;
         line-height: 1;
         display: inline-block;
@@ -24,6 +26,15 @@
 
         @media (min-height: 400px) and (min-width: 550px) {
             font-size: clamp(24px, 4vw, 40px);
+        }
+    }
+
+    .accH1 {
+        @media (min-height: 400px) and (min-width: 550px) {
+            font-size: clamp(24px, 4vw, 40px);
+        }
+
+        @media (min-height: 400px) and (min-width: 960px) {
             padding-left: 1.4rem;
         }
     }
@@ -96,6 +107,17 @@
                 width: 300px;
             }
         }
+    }
+}
+
+.homeNav {
+    position: relative;
+    height: 100%;
+    padding: 4px 3vw;
+    @include flex(row, space-between, center);
+
+    @media (min-height: 400px) and (min-width: 550px) {
+        padding: 1vmin 3vw;
     }
 }
 

@@ -1,11 +1,22 @@
 @use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+.title {
+    text-align: left;
+    margin-left: 3vw;
+
+    font: {
+        weight: 500;
+        size: clamp(12px, 3vw, 24px);
+    }
+}
 
 .moviesWrapper {
     @include flex(row, flex-start, center);
     position: relative;
-    width: 95vw;
+    width: 94vw;
     ///height: 100%;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
 
     .clickerRight,
     .clickerLeft {
@@ -135,11 +146,11 @@
         position: fixed;
         z-index: 8999;
         border-radius: 8px;
-        top: 45%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         transition: all 0.25s linear;
-        color: black;
+        color: white;
     }
 
     .popIn {
@@ -154,12 +165,8 @@
     .popOut {
         height: fit-content;
         width: fit-content;
-        background-color: yellow;
+        background-color: rgb(24, 24, 24);
         visibility: visible;
-
-        @media (orientation: landscape) {
-            width: 50%
-        }
     }
 
     .overlayVisible,
@@ -175,7 +182,7 @@
         inset: 0;
         background-color: rgba(0, 0, 0, 0.8);
 
-
+        overflow-y: auto;
         visibility: visible;
 
     }
@@ -184,5 +191,72 @@
         background-color: rgba(0, 0, 0, 0);
         transition: all 0.25s linear;
         visibility: hidden;
+    }
+}
+
+.modal {
+    width: fit-content;
+    overflow-y: auto;
+
+    & iframe {
+        max-width: 80vw;
+        max-height: 45vw;
+
+        @media (min-width: 700px) and (min-height: 500px) {
+            min-width: 600px;
+            min-height: 337.5px;
+        }
+
+        @media (min-width: 1000px) and (min-height: 600px) {
+            min-width: 900px;
+            min-height: 506.27px;
+        }
+    }
+
+    .btnContainer {
+        @include flex(row, space-between, center);
+        padding: 0 1em;
+
+        & h3 {
+            text-align: left;
+            font-weight: 500;
+            width: 50%;
+        }
+
+        .buttons {
+            @include flex(row, space-around, center);
+            width: 50%;
+            padding-bottom: 4px;
+
+
+
+            & button {
+                position: relative;
+
+                & img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 20px
+                }
+
+            }
+        }
+    }
+
+    .links {
+        @include flex(row);
+
+        & a {
+            @include flex(row, center);
+            gap: 12px;
+            text-decoration: none;
+            margin: 8px;
+
+            & img {
+                width: 20px;
+            }
+        }
     }
 }

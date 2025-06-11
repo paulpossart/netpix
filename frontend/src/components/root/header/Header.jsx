@@ -18,11 +18,11 @@ function Header({ className }) {
 
     return (
         <header id='header' className={className}>
-            <nav className={styles.navbar}>
+            <nav className={isAccountPath ? styles.accNav : styles.homeNav}>
 
                 <h1>
                     <NavLink
-                        className={styles.h1}
+                        className={isAccountPath ? styles.accH1 : styles.homeH1}
                         to='/'
                     >
                         NETPIX
