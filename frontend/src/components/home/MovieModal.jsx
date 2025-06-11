@@ -26,15 +26,15 @@ function MovieModal({ movie, vidKey, setModal, trailers }) {
                 >
                 </iframe> : <p style={{ padding: '12px' }}>no video available</p>}
 
-                <div className={styles.buttons}>
-                    <button
-                        className={styles.iconBtn}
-                        onClick={() => setModal(
-                            null
-                        )}>
-                        <img src={closeIcon} />
-                    </button>
+                <div className={styles.btnContainer}>
+                
+                <div className={styles.buttons}
+                style={{justify: 'center'}}>
+                    
+                    <button className={styles.iconBtn} onClick={() => setModal(null)}><img src={closeIcon} /></button>
                 </div>
+            </div>
+                
             </div>
         )
     }

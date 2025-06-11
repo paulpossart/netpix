@@ -214,7 +214,7 @@
     }
 
     .btnContainer {
-        @include flex(row, space-between, center);
+        @include flex(row, center, center);
         padding: 0 1em;
 
         & h3 {
