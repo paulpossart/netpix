@@ -1,8 +1,8 @@
 import styles from './loader.module.scss';
 
-function Loader() {
+function Loader({className}) {
     return (
-        <div className={styles.loader}></div>
+        <div className={className || styles.loader}></div>
     );
 };
 

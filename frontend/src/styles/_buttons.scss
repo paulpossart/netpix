@@ -199,3 +199,65 @@
         background-color: rgb(1, 90, 199);
     }
 }
+
+.whtBtn {
+    @extend .btn1;
+    background-color: rgba(255, 255, 255, 1);
+    color: black;
+    padding: 0.4rem;
+
+    transition:
+        background-color 0.2s linear,
+        transform 0.2s linear;
+
+    font: {
+        size: clamp(12px, 2vh, 18px);
+        family: Roboto;
+        weight: 600;
+    }
+
+    @media (min-height: 500px) {
+        padding: 0.8rem;
+        margin: 0.8rem 0;
+    }
+
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+    }
+
+    &:active {
+        transform: scale(0.99);
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+.opaqueBtn {
+    @extend .whtBtn;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: white;
+
+    transition:
+        background-color 0.2s linear,
+        transform 0.2s linear;
+
+    font: {
+        size: clamp(12px, 2vh, 18px);
+        family: Roboto;
+        weight: 600;
+    }
+
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    &:active {
+        transform: scale(0.99);
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+}

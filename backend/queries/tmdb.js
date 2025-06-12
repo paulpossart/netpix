@@ -78,4 +78,26 @@ const fetchVideosById = async (req, res, next) => {
   }
 };
 
-export { fetchPopular, fetchUpcoming, fetchNowPlaying, fetchVideosById }
+const fetchLogoById = async (req, res, next) => {
+  const id = parseInt(req.params.id)
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/images`,
+      options
+    );
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data.logos)
+  } catch (err) {
+    next(err)
+  }
+};
+
+export {
+  fetchPopular,
+  fetchUpcoming,
+  fetchNowPlaying,
+  fetchVideosById,
+  fetchLogoById
+}
