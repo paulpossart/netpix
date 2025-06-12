@@ -1,6 +1,17 @@
 @use '../../styles/global' as *;
 @use '../../styles/buttons';
 
+@keyframes rotation {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
 .title {
     text-align: left;
     margin-left: 3vw;
@@ -15,7 +26,7 @@
     @include flex(row, flex-start, center);
     position: relative;
     width: 94vw;
-    ///height: 100%;
+    //height: 100%;
     margin: 0 auto 2rem;
 
     .clickerRight,
@@ -64,7 +75,8 @@
         }
     }
 
-    .moviesContainer {
+    .moviesContainer,
+    .bannerContainer {
         position: relative;
         margin: 0 auto;
         padding: 0;
@@ -138,7 +150,108 @@
 
 
             }
+
+
         }
+    }
+
+    .bannerContainer,
+    .bannerFade {
+
+        width: 100%;
+        //height: 70vh;
+        opacity: 1;
+        transition: opacity 0.2s linear;
+
+        .imgOverlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+
+            .bannerInfo {
+                width: 50%;
+                height: 100%;
+                @include flex(column, flex-end, flex-start);
+                padding: 2rem;
+
+
+                .logo {
+                    width: 50%;
+                    padding-bottom: 2rem;
+
+                    & h3 {
+                        text-align: left;
+
+                        font: {
+                            weight: 500;
+                            size: clamp(24px, 4vh, 32px)
+                        }
+                    }
+                }
+
+                .btnDiv {
+                    @include flex(row);
+                    gap: 8px;
+
+                    & button {
+                        @include flex(row);
+                        gap: 8px;
+
+                        & img {
+                            width: 30px;
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        & img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+
+            border-radius: 8px;
+            z-index: 3;
+            transition: transform 0.1s linear;
+
+        }
+
+        .iframeWrapper {
+            position: relative;
+            width: 50%;
+            //height: 94vh;
+
+            .vidLoad {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                height: 48px;
+                width: 48px;
+                border-radius: 50%;
+                display: inline-block;
+                border-top: 4px solid $netpixRed;
+                border-right: 3px solid transparent;
+                box-sizing: border-box;
+                animation: rotation 1s linear infinite;
+            }
+
+            & iframe {
+                width: 100%;
+                height: 100%;
+                aspect-ratio: 16 / 9;
+                border: none;
+
+            }
+
+
+        }
+    }
+
+    .bannerFade {
+        opacity: 0;
     }
 
     .popIn,
@@ -201,6 +314,8 @@
     & iframe {
         max-width: 80vw;
         max-height: 45vw;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
 
         @media (min-width: 700px) and (min-height: 500px) {
             min-width: 600px;
@@ -227,8 +342,6 @@
             @include flex(row, space-around, center);
             width: 50%;
             padding-bottom: 4px;
-
-
 
             & button {
                 position: relative;
