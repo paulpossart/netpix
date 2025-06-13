@@ -1,4 +1,5 @@
 @use '../../../styles/global' as *;
+@use '../../../styles/buttons';
 
 .accNav,
 .homeNav {
@@ -57,11 +58,34 @@
         .searchDiv {
             @include flex(row);
             padding: 2px;
-            max-width: 200px;
+            //max-width: 200px;
             overflow: hidden;
 
+            
+
             @media (min-height: 400px) and (min-width: 550px) {
-                max-width: 300px;
+                //max-width: 300px;
+            }
+
+            & form {
+                @include flex(row, space-between);
+
+                .closeSearch {
+                    position: relative;
+                    width: 20px;
+                    height: 20px;
+                    padding: 1rem;
+                    margin: 0 4px 0 0;
+                    border: none;
+                    
+                    & img {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        padding: 0;
+                    }
+                }
             }
 
             & img {
@@ -73,11 +97,12 @@
                 color: white;
                 border: none;
                 padding: 0;
+               width: 100px;
                 transition: width 0.4s ease-in-out;
 
                 font: {
                     size: 1.6rem;
-                    family: Roboto;
+                    family: Roboto
                 }
 
                 &:focus {

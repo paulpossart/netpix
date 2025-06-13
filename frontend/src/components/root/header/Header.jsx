@@ -9,12 +9,27 @@ import Sidebar from './Sidebar';
 
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSearch } from '../../../context/SearchContext';
+
+import { callSearchTmdb } from '../../../apiCalls/tmdbCalls';
+
+import closeIcon from '../../../assets/cross.svg';
 
 function Header({ className }) {
     const [sidebar, setSidebar] = useState(false);
     const [searchBar, setSearchBar] = useState(false);
     const path = useLocation().pathname;
-     const isAccountPath = path.startsWith('/account');
+    const isAccountPath = path.startsWith('/account');
+    const { searchInput, setSearchInput, setQueryResults } = useSearch();
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        const results = await callSearchTmdb(searchInput);
+        console.log(results)
+        setQueryResults(results)
+    }
+
+
 
     return (
         <header id='header' className={className}>
@@ -33,12 +48,20 @@ function Header({ className }) {
                     {
                         isAccountPath ?
                             null :
-                            <div className={`${styles.searchDiv} ${searchBar ? styles.searchDivOpen : styles.searchDivClosed}`}>
+                            <div className={`${styles.searchDiv} ${searchBar ? styles.searchDivOpen : styles.searchDivOpen}`}>
                                 <img src={searchIcon} onClick={() => setSearchBar(prev => !prev)} />
-                                <input
-                                    className={searchBar ? styles.searchBarOpen : styles.searchBarClosed}
-                                    type='search'
-                                    placeholder='search' />
+                                <form onSubmit={handleSearch}>
+                                    <input
+                                        className={searchBar ? styles.searchBarOpen : styles.searchBarOpen}
+                                        type='text'
+                                        placeholder='search'
+                                        value={searchInput}
+                                        onChange={(e)=>setSearchInput(e.target.value)}
+                                    />
+                                    <button  type='button' onClick={()=>{setSearchInput(''); setQueryResults(null)}} className={`${styles.iconBtn} ${styles.closeSearch}`}><img src={closeIcon} /></button>
+                                    <button type='submit' className={styles.searchBtn}>Search</button>
+                              </form>
+
                             </div>
                     }
                     <img

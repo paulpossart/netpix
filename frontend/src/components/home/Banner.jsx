@@ -25,12 +25,9 @@ function Banner() {
             try {
                 const data = await callFetchPopular();
                 setMovie(data[randomIndexGenerator(data)]);
-                //setMovie(data[3]);
-                console.log(movie)
-
+                //setMovie(data[1])
             } catch (err) {
                 console.log('The err:', err)
-
             }
         }
 
@@ -46,11 +43,11 @@ function Banner() {
 
 
     //======================
-    useEffect(() => {
+    /*useEffect(() => {
         console.log('logo:', logo);
         console.log('movie:', movie)
 
-    }, [logo, movie]);
+    }, [logo, movie]);*/
     //======================
 
     const handleInfo = async (movie) => {
@@ -152,15 +149,16 @@ function Banner() {
                                         }
                                     </div>
                                     <div className={styles.btnDiv}>
-                                        <button onClick={() => handleTrailer(movie)} className={styles.whtBtn} ><img src={trailerIcon} />Play Trailer</button>
-                                        <button onClick={() => handleInfo(movie)} className={styles.opaqueBtn}><img src={infoIcon} />More Info</button>
+                                        <button style={{whiteSpace: 'nowrap'}} onClick={() => handleTrailer(movie)} className={styles.whtBtn} ><img src={trailerIcon} />Play Trailer</button>
+                                        <button style={{whiteSpace: 'nowrap'}} onClick={() => handleInfo(movie)} className={styles.opaqueBtn}><img src={infoIcon} />More Info</button>
                                     </div>
 
                                 </div>
 
                             </div>
                             <img
-                                src={`${imgSrc}${width}${movie.backdrop_path}`}
+                                src={`${imgSrc}${width}${movie.backdrop_path}`
+                                    }
                                 onLoad={() => {
                                     setLogo(null);
                                     fetchLogo(movie)
