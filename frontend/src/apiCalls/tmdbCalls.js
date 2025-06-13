@@ -43,10 +43,20 @@ const callFetchLogoById = async (id) => {
     return data;
 }
 
+const callSearchTmdb = async (query) => {
+    console.log('called')
+    const response = await fetch(`api/tmdb/search/${query}`, options);
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+}
+
 export {
     callFetchPopular,
     callFetchUpcoming,
     callFetchNowPlaying,
     callFetchVideosById,
-    callFetchLogoById
+    callFetchLogoById,
+    callSearchTmdb
 };

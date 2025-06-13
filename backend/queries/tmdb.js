@@ -94,10 +94,42 @@ const fetchLogoById = async (req, res, next) => {
   }
 };
 
+const searchTmdb = async (req, res, next) => {
+  const query = req.params.query
+  const bannedWords = ['breasts', 'tits', 'nude', 'nudity', 'sex', 'erotic', 'porn', 'explicit']
+
+  const rudeText = (text) => {
+    if (!text) text = '';
+    return bannedWords.some(word => text.toLowerCase().includes(word))
+  }
+
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=false`,
+      options
+    );
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+
+    const cleanData = data.results.filter(movie => (
+      !rudeText(movie.title || '') &&
+      !rudeText(movie.overview || '') &&
+      (movie.title || '').trim() &&
+      (movie.overview || '').trim()
+    ))
+
+    res.status(200).json(cleanData)
+  } catch (err) {
+    next(err)
+  }
+};
+
 export {
   fetchPopular,
   fetchUpcoming,
   fetchNowPlaying,
   fetchVideosById,
-  fetchLogoById
+  fetchLogoById,
+  searchTmdb
 }
