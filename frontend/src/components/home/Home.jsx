@@ -4,6 +4,7 @@ import { callFetchPopular, callFetchUpcoming, callFetchNowPlaying } from '../../
 import { useState } from 'react';
 import SearchResults from './SearchResults';
 import { useSearch } from '../../context/SearchContext';
+import MyList from './MyList';
 
 function Home() {
     const {queryResults} = useSearch();
@@ -16,6 +17,7 @@ function Home() {
                 ) : (
                     <>
                         <Banner />
+                        <MyList />
                         <MovieCarousel title='Popular Movies' callFetch={callFetchPopular} />
                         <MovieCarousel title='Upcoming Movies' callFetch={callFetchUpcoming} />
                         <MovieCarousel title='Now in Cinemas' callFetch={callFetchNowPlaying} />

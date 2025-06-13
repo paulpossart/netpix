@@ -64,7 +64,7 @@ function Banner() {
         console.log('key: ', vidKey);
 
         setModal(
-            <MovieModal movie={movie} vidKey={vidKey} setModal={setModal} trailers={trailers} />
+            <MovieModal movie={movie} vidKey={vidKey} setModal={setModal} trailers={trailers} listItem={false} />
         )
     }
 
