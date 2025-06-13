@@ -125,11 +125,31 @@ const searchTmdb = async (req, res, next) => {
   }
 };
 
+const fetchDetailsById = async (req, res, next) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+      options);
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data)
+
+  } catch (err) {
+    next(err);
+  }
+}
+
 export {
   fetchPopular,
   fetchUpcoming,
   fetchNowPlaying,
   fetchVideosById,
   fetchLogoById,
-  searchTmdb
+  searchTmdb,
+  fetchDetailsById
 }
+
+// 75780

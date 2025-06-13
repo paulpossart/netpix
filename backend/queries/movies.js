@@ -21,7 +21,7 @@ const createMoviesById = async (req, res, next) => {
         const rowCount = await pool.query(
             `SELECT COUNT(*) FROM netpix.movies
              WHERE user_id = $1`,
-             [userId]
+            [userId]
         );
 
         const numRows = parseInt(rowCount.rows[0].count);
@@ -50,4 +50,61 @@ const createMoviesById = async (req, res, next) => {
     };
 };
 
-export { createMoviesById };
+const getMovies = async (req, res, next) => {
+    const userId = req.userId;
+    try {
+
+        const result = await pool.query(
+            `SELECT movie_id FROM netpix.movies
+             WHERE user_id = $1`,
+            [userId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'List data not found',
+                data: null
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'List data retrieved',
+            data: result.rows
+        });
+
+    } catch (err) {
+        next(err)
+    }
+};
+
+const deleteMoviesById = async (req, res, next) => {
+    const movieId = parseInt(req.params.id);
+    const userId = req.userId;
+
+    try {
+        const result = await pool.query(
+            `DELETE FROM netpix.movies
+             WHERE user_id = $1 AND movie_id = $2`,
+             [userId, movieId]
+        );
+       
+        if (result.rowCount > 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'Movie removed from list.'
+            });
+        } else {
+            return res.status(404).json({
+                sucess: false,
+                message: 'Could not complete request.'
+            })
+        }
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+export { createMoviesById, getMovies, deleteMoviesById };

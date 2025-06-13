@@ -156,6 +156,86 @@
         }
     }
 
+    .listContainer {
+        position: relative;
+        margin: 0 auto;
+        padding: 0;
+        overflow: hidden;
+
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        z-index: 1;
+
+        & ul {
+            @include flex(row, space-around, center);
+            
+            position: relative;
+            width: 100%;
+            gap: 1%;
+            z-index: 2;
+
+            & li {
+                position: relative;
+                flex: 0 0 24.5%;
+                min-width: 24.25%;
+                max-width: 24.25%;
+                cursor: pointer;
+                border-radius: 8px;
+                overflow: hidden;
+
+                scroll-snap-align: start;
+
+                @media (orientation: landscape) {
+                    flex: 0 0 19.2%;
+                    min-width: 19.2%;
+                    max-width: 19.2%;
+
+                }
+
+                @media (orientation: landscape) and (min-width: 800px) {
+                    flex: 0 0 11.625%;
+                    min-width: 11.625%;
+                    max-width: 11.625%;
+                }
+
+                @media (orientation: landscape) and (min-width: 1200px) {
+                    flex: 0 0 9.1%;
+                    min-width: 9.1%;
+                    max-width: 9.1%;
+
+                }
+
+
+                & img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    object-fit: cover;
+
+                    border-radius: 8px;
+                    z-index: 3;
+                    transition: transform 0.1s linear;
+
+                    @media (hover: hover) and (pointer: fine) {
+                        &:hover {
+                            transform: scale(1.1);
+                        }
+                    }
+
+
+                    &:active {
+                        transform: scale(0.9);
+
+                    }
+                }
+
+
+            }
+
+
+        }
+    }
+
     .searchContainer {
         position: relative;
         margin: 0 auto;

@@ -52,11 +52,20 @@ const callSearchTmdb = async (query) => {
     return data;
 }
 
+const callFetchDetailsById = async (id) => {
+    const response = await fetch(`api/tmdb/details/${id}`, options);
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+    return data;
+}
+
 export {
     callFetchPopular,
     callFetchUpcoming,
     callFetchNowPlaying,
     callFetchVideosById,
     callFetchLogoById,
-    callSearchTmdb
+    callSearchTmdb,
+    callFetchDetailsById
 };
