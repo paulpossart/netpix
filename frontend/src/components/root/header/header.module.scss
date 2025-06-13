@@ -113,20 +113,26 @@
 
         .searchDivClosed {
             border: solid 1px rgb(0, 0, 0, 0);
+            width: 30px;
+             transition: width 0.2s linear;
         }
 
         .searchDivOpen {
             border: solid 1px white;
+            width: 220px;
+             transition: width 0.2s linear;
         }
 
         .searchBarClosed {
             width: 0;
             visibility: hidden;
+            transition: width 0.2s linear;
         }
 
         .searchBarOpen {
             width: 150px;
             visibility: visible;
+            transition: width 0.2s linear;
 
             @media (min-height: 400px) and (min-width: 550px) {
                 width: 300px;
