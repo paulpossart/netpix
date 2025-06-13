@@ -37,6 +37,7 @@ function Header({ className }) {
 
                 <h1>
                     <NavLink
+                    onClick={()=>{setQueryResults(null); setSearchInput('')}}
                         className={isAccountPath ? styles.accH1 : styles.homeH1}
                         to='/'
                     >
@@ -48,11 +49,11 @@ function Header({ className }) {
                     {
                         isAccountPath ?
                             null :
-                            <div className={`${styles.searchDiv} ${searchBar ? styles.searchDivOpen : styles.searchDivOpen}`}>
+                            <div className={`${styles.searchDiv} ${searchBar ? styles.searchDivOpen : styles.searchDivClosed}`}>
                                 <img src={searchIcon} onClick={() => setSearchBar(prev => !prev)} />
                                 <form onSubmit={handleSearch}>
                                     <input
-                                        className={searchBar ? styles.searchBarOpen : styles.searchBarOpen}
+                                        className={searchBar ? styles.searchBarOpen : styles.searchBarClosed}
                                         type='text'
                                         placeholder='search'
                                         value={searchInput}
