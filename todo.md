@@ -1,1 +1,0 @@
-finish setting up search bar: submit triggers search, not onChange. Style search bar
