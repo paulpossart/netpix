@@ -2,8 +2,32 @@ import styles from './movies.module.scss';
 import trailerIcon from '../../assets/trailer.svg'
 import closeIcon from '../../assets/cross.svg'
 import playIcon from '../../assets/play-button.svg'
+import addIcon from '../../assets/add.svg';
+
+import { callCreateMoviesById } from '../../apiCalls/moviesCalls';
 
 function MovieModal({ movie, vidKey, setModal, trailers }) {
+
+    const addToList = async (id) => {
+        try {
+            const data = await callCreateMoviesById(id);
+            setModal(
+            <div className={styles.modal}>
+                <p style={{padding: '2rem'}}>{data?.message}</p>
+                <div className={styles.btnContainer}>
+                    <div className={styles.buttons}>
+                        <button className={styles.btn1} onClick={() => setModal(null)}>OK</button>
+                    </div>
+                </div>
+
+            </div>
+        )
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
     const handleClick = async () => {
 
         const randomIndexGenerator = (array) => {
@@ -53,13 +77,14 @@ function MovieModal({ movie, vidKey, setModal, trailers }) {
             <div className={styles.btnContainer}>
                 <h3>{movie.title}</h3>
                 <div className={styles.buttons}>
+
+                    <button onClick={() => addToList(movie.id)} className={styles.iconBtn}><img src={addIcon} /></button>
                     <button onClick={handleClick} className={styles.iconBtn}><img src={trailerIcon} /></button>
                     <button className={styles.iconBtn} onClick={() => setModal(null)}><img src={closeIcon} /></button>
+
                 </div>
             </div>
 
-
-            {/*<button>Add</button>*/}
             {/*<button>More</button>*/}
 
             <div className={styles.links}>
