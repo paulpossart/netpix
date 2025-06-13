@@ -39,7 +39,7 @@ function MovieModal({ movie, vidKey, setModal, trailers, listItem }) {
                 </div>
             )
         } finally {
-            fetchList()
+            await fetchList()
         }
     }
 
@@ -71,7 +71,8 @@ function MovieModal({ movie, vidKey, setModal, trailers, listItem }) {
                 </div>
             )
         } finally {
-            fetchList()
+            await fetchList();
+           
         }
     }
 

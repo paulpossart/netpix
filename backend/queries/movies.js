@@ -61,10 +61,10 @@ const getMovies = async (req, res, next) => {
         );
 
         if (result.rows.length === 0) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: 'List data not found',
-                data: null
+                data: []
             });
         }
 

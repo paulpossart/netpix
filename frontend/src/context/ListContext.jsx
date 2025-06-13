@@ -5,12 +5,13 @@ const ListContext = createContext();
 const useList = () => useContext(ListContext);
 
 function ListProvider({ children }) {
-    const [myList, setMyList] = useState('');
+    const [myList, setMyList] = useState([]);
 
     const fetchList = async () => {
         try {
             const data = await callGetMovies();
-            setMyList(data)
+            setMyList(data);
+    
         } catch (err) {
             console.log('The err:', err)
         }
