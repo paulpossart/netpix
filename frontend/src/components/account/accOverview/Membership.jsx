@@ -50,8 +50,6 @@ function Membership() {
 
     return (
         <div className={styles.accountOverview}>
-            {/*modal && modal*/}
-
             <h2>Cancel Membership</h2 >
             <section>
                 <h3>We're sad to see you go</h3>

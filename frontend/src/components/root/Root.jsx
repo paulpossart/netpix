@@ -54,15 +54,14 @@ function Root() {
                 window.removeEventListener('resize', spacerHeight);
             };
         }
-    }, [bigN]);
-
+    }, [bigN, path]);
 
     return (
         <>
             {
                 bigN ? bigN :
                     <div className={styles.root}>
-                        {modal && <Modal>{modal}</Modal>}
+                        {modal && <Modal modalData={modal} />}
                         <Header className={`${styles.header} ${isAccountPath ? styles.headerAccount : styles.headerHome}`} />
                         <div id='spacer'></div>
                         <div className={`${styles.outlet} ${isAccountPath ? styles.outletAccount : styles.outletHome}`}>
