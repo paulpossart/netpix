@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { callCreateUser } from '../../apiCalls/usersCalls';
-import { changeInput, isValidSubmission } from '../../helpers/helperFunctions';
-import { useAuth } from '../../context/AuthContext';
-
-import styles from './../auth/auth.module.scss';
+import { useAuth } from '../../../context/AuthContext';
+import { callCreateUser } from '../../../apiCalls/usersCalls';
+import { changeInput, isValidSubmission } from '../../../helpers/helperFunctions';
+import styles from './authView.module.scss';
 
 function CreateUser({ setView }) {
     const [newUsername, setNewUsername] = useState('');
@@ -64,7 +63,14 @@ function CreateUser({ setView }) {
                 />
                 <button type='submit' className={styles.btn1}>Become a Member!</button>
             </form>
-            <p className={styles.p}><button className={styles.textBtn} onClick={() => setView('sign-in')}>Go back to sign in.</button></p>
+            <p className={styles.p}>
+                <button
+                    className={styles.textBtn}
+                    onClick={() => setView('sign-in')}
+                >
+                    Go back to sign in.
+                </button>
+            </p>
         </div>
     );
 }
