@@ -1,0 +1,78 @@
+@use '../../../styles/global' as *;
+@use '../../../styles/buttons';
+
+.searchDivClosed {
+    border: solid 1px rgb(0, 0, 0, 0);
+    width: 28px;
+    transition: width 0.2s linear;
+
+    @media (min-width: 550px) {
+        width: 40px;
+    }
+
+    & input {
+        opacity: 0;
+    }
+}
+
+.searchDivOpen {
+    border: solid 1px white;
+    width: 210px;
+    transition: width 0.2s linear;
+
+    @media (min-height: 400px) and (min-width: 550px) {
+        width: 300px;
+    }
+
+    & input {
+        opacity: 1;
+    }
+}
+
+.searchDiv {
+    @include flex(row, space-between);
+    padding: 2px;
+    overflow: hidden;
+
+    & form {
+        @include flex(row, space-between);
+
+        & input {
+            background-color: rgb(15, 15, 15);
+            color: white;
+            border: none;
+            padding: 0;
+            width: 90px;
+            transition: opacity 0.4s ease-in-out;
+
+            font: {
+                size: 1.6rem;
+                family: Roboto
+            }
+
+            @media (min-height: 400px) and (min-width: 550px) {
+                width: 170px;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        & button {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            & img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

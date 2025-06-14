@@ -1,17 +1,15 @@
-import { Outlet } from 'react-router-dom';
-import Header from './header/Header';
 import { useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import Header from '../header/Header';
+import Footer from '../utils/footer/Footer';
 import styles from './root.module.scss';
 import netpixLogo from '../../assets/netpix-logo.svg';
-import { useLocation } from 'react-router-dom';
-import Footer from '../utils/footer/Footer';
 
 function Root() {
     const [bigN, setBigN] = useState(
         <div className={styles.bigN}>
             <img src={netpixLogo} />
         </div>
-
     );
 
     const path = useLocation().pathname;
@@ -52,15 +50,13 @@ function Root() {
                 window.removeEventListener('resize', spacerHeight);
             };
         }
-
     }, [bigN]);
 
 
     return (
         <>
             {
-                bigN ?
-                    bigN :
+                bigN ? bigN :
                     <div className={styles.root}>
                         <Header className={`${styles.header} ${isAccountPath ? styles.headerAccount : styles.headerHome}`} />
                         <div id='spacer'></div>
