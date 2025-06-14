@@ -1,17 +1,19 @@
-import styles from './Account.module.scss';
-import { Link } from 'react-router-dom';
-import { callUpdatePassword } from '../../apiCalls/usersCalls';
 import { useState, useEffect } from 'react';
-import { changeInput } from '../../helpers/helperFunctions';
-import { useAuth } from '../../context/AuthContext';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
+import { callUpdatePassword } from '../../../apiCalls/usersCalls';
+import { changeInput } from '../../../helpers/helperFunctions';
+import { setTextModal } from '../../modal/Modal';
+import { useModal } from '../../../context/ModalContext';
+import styles from './accOverview.module.scss';
 
 function UpdatePassword() {
-    const [modal, setModal] = useState(null);
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [reEnteredPassword, setReEnteredPassword] = useState('');
     const [submitError, setSubmitError] = useState('');
     const [inputError, setInputError] = useState('');
+    const { setModal } = useModal();
     const { setUser } = useAuth();
 
     useEffect(() => {
@@ -54,15 +56,11 @@ function UpdatePassword() {
         try {
             const data = await callUpdatePassword(currentPassword, newPassword, reEnteredPassword);
             if (data?.success) {
-                setModal(
-                    <>
-                        <div onClick={removeUser} className={styles.modalOverlay}></div>
-                        <div className={styles.modal}>
-                            <p>{data.message}</p>
-                            <button className={styles.btn1} onClick={removeUser}>OK</button>
-                        </div>
-                    </>
-                );
+                setTextModal({
+                    setter: setModal,
+                    onClick: removeUser,
+                    message: data.message
+                });
             }
         } catch (err) {
             setSubmitError(err.message)
@@ -74,9 +72,7 @@ function UpdatePassword() {
     }
 
     return (
-        <>
-            {modal && modal}
-
+        <div className={styles.accountOverview}>
             <h2>Change Password</h2>
 
             <section>
@@ -117,14 +113,14 @@ function UpdatePassword() {
                         </button>
                         <Link
                             to='/account/security'
-                            className={styles.cancelBtn}
+                            className={styles.transparentBtn}
                         >
                             Cancel
                         </Link>
                     </form>
                 </div>
             </section >
-        </>
+        </div>
     );
 };
 

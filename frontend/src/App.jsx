@@ -9,11 +9,11 @@ import { useAuth } from './context/AuthContext';
 import Root from './components/root/Root';
 import Home from './components/home/Home';
 import Account from './components/account/Account';
-import Overview from './components/account/AccOverview';
-import Security from './components/account/Security';
-import Membership from './components/account/Membership';
-import UpdateUsername from './components/account/UpdateUsername';
-import UpdatePassword from './components/account/UpdatePassword';
+import Overview from './components/account/accOverview/AccOverview';
+import Security from './components/account/accOverview/Security';
+import Membership from './components/account/accOverview/Membership';
+import UpdateUsername from './components/account/accOverview/UpdateUsername';
+import UpdatePassword from './components/account/accOverview/UpdatePassword';
 import AuthPage from './components/auth/AuthPage';
 import Loader from './components/utils/loader/Loader';
 import NotFound from './components/notFound/NotFound';
@@ -38,6 +38,7 @@ function App() {
               <Route path='update-password' element={<UpdatePassword />} />
             </Route>
             <Route path='membership' element={<Membership />} />
+
           </Route>
 
         </Route>

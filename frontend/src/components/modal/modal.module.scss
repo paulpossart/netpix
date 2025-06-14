@@ -1,0 +1,50 @@
+@use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+}
+
+.accModal {
+    color: black;
+
+    .modal {
+        background-color: white;
+        border: solid 1px rgb(204, 204, 204);
+        border-radius: 8px;
+        box-shadow:
+            1px 1px 4px rgb(215, 215, 215),
+            -1px 1px 4px rgb(215, 215, 215),
+            1px -1px 4px rgb(215, 215, 215),
+            -1px -1px 4px rgb(215, 215, 215);
+
+    }
+}
+
+.modal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+
+
+    padding: 0.8rem 1.6rem;
+    margin: 1em 0 2em 0;
+
+    text-align: center;
+    min-width: 200px;
+
+    .btnsDiv {
+        @include flex;
+        gap: 4px;
+    }
+
+
+    & p {
+        padding: 1.6rem 0;
+    }
+}

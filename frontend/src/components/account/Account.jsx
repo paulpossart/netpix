@@ -1,14 +1,14 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from 'react-router-dom';
+import { HomeIcon, SecurityIcon, MemberIcon } from './svgs/accountSvgs';
 import styles from './Account.module.scss';
-import { HomeIcon, SecurityIcon, MemberIcon } from "../utils/svgs/accountSvgs.jsx";
 import backIcon from '../../assets/back-arrow.svg';
 
 function Account() {
     return (
-        <div className={styles.accountPage}>
+        <main className={styles.accountPage}>
 
-            <nav className={styles.accountNav}>
-                <ul className={styles.accountUl}>
+            <nav>
+                <ul>
                     <li className={styles.toHome}>
                         <NavLink
                             to='/'
@@ -65,11 +65,9 @@ function Account() {
                 </ul>
             </nav>
 
-            <main className={styles.accountMain}>
-                <Outlet />
-            </main>
+            <Outlet />
 
-        </div>
+        </main>
     )
 };
 

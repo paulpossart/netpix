@@ -9,6 +9,8 @@
     line-height: 1;
     padding: 0;
     margin: 0;
+    text-decoration: none;
+    text-align: center;
 
     transition:
         background-color 0.2s linear,
@@ -20,10 +22,8 @@
         weight: 600;
     }
 
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: $bgColHover;
-        }
+    &:hover {
+        background-color: $bgColHover;
     }
 
     &:active {
@@ -32,95 +32,49 @@
     }
 }
 
+@mixin mainStyle {
+    padding: 1.2rem;
+    width: 100%;
+    display: block;
+    width: 100%;
+}
+
+// Main Buttons ===================
+
 .btn1 {
     @include button($netpixRed, $hoverRed);
-    padding: 1.2rem;
-    margin-top: 0.6em;
-    width: 100%;
-
-    @media (min-height: 500px) {
-        padding: 1.2rem;
-        margin: 1.2rem 0;
-    }
+    @include mainStyle;
 }
 
 .btn2 {
-    @extend .btn1;
-    background-color: black;
-
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: rgb(76, 76, 76);
-        }
-    }
-
-    &:active {
-        transform: scale(0.99);
-        background-color: rgb(76, 76, 76);
-    }
-
+    @include button(black, rgb(76, 76, 76));
+    @include mainStyle;
 }
 
 .textBtn {
     @include button(transparent, transparent, white);
     margin: 0 8px;
 
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            text-decoration: underline;
-        }
+    &:hover {
+        text-decoration: underline;
     }
 }
 
-.cancelBtn {
-    text-decoration: none;
-    color: black;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 1.2rem;
-    width: 100%;
-    border: none;
-    background-color: transparent;
-
-    font: {
-        size: 16px;
-        family: Roboto;
-        weight: 600;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: rgb(226, 226, 226);
-        }
-    }
-
-    &:active {
-        transform: scale(0.99);
-        background-color: rgb(226, 226, 226);
-    }
-
+.transparentBtn {
+    @include button(transparent, rgb(226, 226, 226), black);
+    @include mainStyle;
+    border: solid 2px white;
 }
+
+// Membership =====================
 
 .deleteBtn {
-    @extend .btn1;
-    background-color: white;
-    color: rgb(235, 57, 66);
+    @include button(white, rgb(226, 226, 226), rgb(235, 57, 66));
+    @include mainStyle;
     border: solid 2px rgb(235, 57, 66);
-
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: rgb(226, 226, 226);
-        }
-    }
-
-    &:active {
-        transform: scale(0.99);
-        background-color: rgb(226, 226, 226);
-    }
-
 }
+
+
 
 .iconBtn {
     @include button(transparent, rgba(255, 255, 255, 0.4));
@@ -164,11 +118,12 @@
         margin: 1.2rem 0;
     }
 
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: rgb(1, 90, 199);
-        }
+    // @media (hover: hover) and (pointer: fine) {
+    &:hover {
+        background-color: rgb(1, 90, 199);
     }
+
+    //}
 
     &:active {
         transform: scale(0.99);
@@ -199,11 +154,12 @@
     }
 
 
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-        }
+    //@media (hover: hover) and (pointer: fine) {
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.9);
     }
+
+    //}
 
     &:active {
         transform: scale(0.99);
@@ -227,11 +183,12 @@
     }
 
 
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+    // @media (hover: hover) and (pointer: fine) {
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
     }
+
+    //}
 
     &:active {
         transform: scale(0.99);

@@ -61,9 +61,9 @@ function CreateUser({ setView }) {
                     onChange={handleChangePassword}
                     placeholder='new password'
                 />
-                <button type='submit' className={styles.btn1}>Become a Member!</button>
+                <button style={{marginTop: '0.6em'}} type='submit' className={styles.btn1}>Become a Member!</button>
             </form>
-            <p className={styles.p}>
+            <p>
                 <button
                     className={styles.textBtn}
                     onClick={() => setView('sign-in')}

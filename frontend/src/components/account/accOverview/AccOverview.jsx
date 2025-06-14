@@ -1,20 +1,20 @@
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext'
 import { Link } from 'react-router-dom';
-import styles from './Account.module.scss';
-import chevronRight from '../../assets/chevron-right.svg';
-import securityIcon from '../../assets/security.svg';
-import membershipIcon from '../../assets/membership.svg';
+import styles from './accOverview.module.scss';
+import chevronRight from '../../../assets/chevron-right.svg';
+import securityIcon from '../../../assets/security.svg';
+import membershipIcon from '../../../assets/membership.svg';
 
 function Overview() {
     const { user } = useAuth();
-
     const username = user.username;
     const createdAt = new Date(user.created_at).toLocaleDateString('en-GB', {
         year: 'numeric',
         month: 'long',
     })
+
     return (
-        <>
+        <div className={styles.accountOverview}>
             <h2>Account</h2>
 
             <section >
@@ -30,6 +30,7 @@ function Overview() {
             <section>
                 <h3>Quick Links</h3>
                 <div className={styles.overviewContainer}>
+
                     <ul>
                         <li>
                             <Link
@@ -37,13 +38,15 @@ function Overview() {
                                 className={styles.quickLink}
                             >
                                 <div className={styles.quickLinkDiv}>
-                                     <img src={securityIcon} />
+                                    <img src={securityIcon} />
                                     Change username and password
                                 </div>
                                 <img src={chevronRight} />
                             </Link>
                         </li>
+
                         <div className={styles.border}></div>
+                        
                         <li>
                             <Link to='membership' className={styles.quickLink}>
                                 <div className={styles.quickLinkDiv}>
@@ -54,10 +57,11 @@ function Overview() {
                             </Link>
                         </li>
                     </ul>
+
                 </div>
             </section >
 
-        </>
+        </div>
     );
 };
 
