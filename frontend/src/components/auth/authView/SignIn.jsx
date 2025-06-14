@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { callSignIn } from '../../apiCalls/authCalls';
-import { changeInput, isValidSubmission } from '../../helpers/helperFunctions';
-import { useAuth } from '../../context/AuthContext';
+import { callSignIn } from '../../../apiCalls/authCalls';
+import { changeInput, isValidSubmission } from '../../../helpers/helperFunctions';
+import { useAuth } from '../../../context/AuthContext';
 
-import styles from './auth.module.scss';
+import styles from '../auth.module.scss';
 
 function SignIn({ setView }) {
     const [username, setUsername] = useState('');

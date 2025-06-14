@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { callCreateUser } from '../../apiCalls/usersCalls';
-import { changeInput, isValidSubmission } from '../../helpers/helperFunctions';
-import { useAuth } from '../../context/AuthContext';
+import { callCreateUser } from '../../../apiCalls/usersCalls';
+import { changeInput, isValidSubmission } from '../../../helpers/helperFunctions';
+import { useAuth } from '../../../context/AuthContext';
 
-import styles from './../auth/auth.module.scss';
+import styles from '../auth.module.scss';
 
 function CreateUser({ setView }) {
     const [newUsername, setNewUsername] = useState('');

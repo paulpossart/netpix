@@ -1,13 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-import { callSignOut } from '../../apiCalls/authCalls';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { callSignOut } from '../../apiCalls/authCalls';
 import styles from '../auth/auth.module.scss';
-import { useLocation } from 'react-router-dom';
 
 function SignOut() {
     const navigate = useNavigate();
-    const { setUser } = useAuth();
     const location = useLocation();
+    const { setUser } = useAuth();
+
     const path = location.pathname;
     const isAccountPath = path.startsWith('/account');
 

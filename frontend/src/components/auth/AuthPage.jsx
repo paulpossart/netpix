@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import SignIn from './SignIn';
-import CreateUser from './CreateUser';
+import SignIn from './authView/SignIn';
+import CreateUser from './authView/CreateUser';
 import styles from './auth.module.scss';
 import Footer from '../utils/footer/Footer';
 

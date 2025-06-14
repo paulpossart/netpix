@@ -4,21 +4,19 @@ import styles from './notFound.module.scss';
 
 function NotFound() {
     return (
-        <div className={styles.notFound}>
+        <main className={styles.notFound}>
             <header>
                 <Header />
             </header>
-            <main>
+            <section>
                 <div className={styles.notFoundTextAndBtn}>
                     <h2>Lost your way?</h2>
                     <p>Sorry, we can't find that page. You'll find loads to explore on the home page.</p>
-                    <div className={styles.homeNav}>
-                        <Link className={styles.btnHomeLink} to={'/'}>Netpix Home</Link>
-                    </div>
+                    <Link className={styles.homeLinkBtn} to={'/'}>Netpix Home</Link>
                     <aside>FROM <span>LOST IN SPACE</span></aside>
                 </div>
-            </main>
-        </div>
+            </section>
+        </main>
     );
 };
 
