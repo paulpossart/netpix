@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 import { callUpdatePassword } from '../../../apiCalls/usersCalls';
 import { changeInput } from '../../../helpers/helperFunctions';
-import { setTextModal } from '../../modal/Modal';
+import { textModalContent } from '../../modal/TextModal';
 import { useModal } from '../../../context/ModalContext';
 import styles from './accOverview.module.scss';
 
@@ -13,7 +13,7 @@ function UpdatePassword() {
     const [reEnteredPassword, setReEnteredPassword] = useState('');
     const [submitError, setSubmitError] = useState('');
     const [inputError, setInputError] = useState('');
-    const { setModal } = useModal();
+    const { setTextModal } = useModal();
     const { setUser } = useAuth();
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function UpdatePassword() {
 
     const removeUser = (e) => {
         e.preventDefault();
-        setModal(null)
+        setTextModal(null)
         setUser(null);
         navigate('/auth')
     };
@@ -56,8 +56,8 @@ function UpdatePassword() {
         try {
             const data = await callUpdatePassword(currentPassword, newPassword, reEnteredPassword);
             if (data?.success) {
-                setTextModal({
-                    setter: setModal,
+                textModalContent({
+                    setter: setTextModal,
                     onClick: removeUser,
                     message: data.message
                 });

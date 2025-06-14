@@ -4,7 +4,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { useModal } from '../../../context/ModalContext';
 import { callPasswordCheck } from '../../../apiCalls/authCalls';
 import { callUpdateUsername } from '../../../apiCalls/usersCalls';
-import { setTextModal } from '../../modal/Modal';
+import { textModalContent } from '../../modal/TextModal';
 import { changeInput } from '../../../helpers/helperFunctions';
 import styles from './accOverview.module.scss';
 
@@ -15,18 +15,18 @@ function UpdateUsername() {
     const [inputError, setInputError] = useState('');
     const [username, setUsername] = useState('');
     const { setUser } = useAuth();
-    const {setModal} = useModal();
+    const {setTextModal} = useModal();
     const navigate = useNavigate();
     const safeRegex = /^[^<>{};\\]*$/;
 
     const modalClick = () => {
-        setModal(null);
+        setTextModal(null);
         navigate('/account')
     }
 
     const setModalContent = (message) => {
-        setTextModal({
-            setter: setModal,
+        textModalContent({
+            setter: setTextModal,
             onClick: modalClick,
             message: message
         })

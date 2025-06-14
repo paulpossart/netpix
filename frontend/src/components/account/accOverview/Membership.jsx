@@ -2,17 +2,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 import { useModal } from '../../../context/ModalContext';
 import { callDeleteUser } from '../../../apiCalls/usersCalls';
-import { setTextModal } from '../../modal/Modal';
+import { textModalContent } from '../../modal/TextModal';
 import styles from './accOverview.module.scss';
 
 function Membership() {
-    const { setModal } = useModal();
     const navigate = useNavigate();
+    const { setTextModal } = useModal();
     const { setUser } = useAuth();
 
     const removeUser = (e) => {
         e.preventDefault();
-        setModal(null)
+        setTextModal(null)
         setUser(null);
         navigate('/auth')
     };
@@ -22,16 +22,16 @@ function Membership() {
             const deleteUser = await callDeleteUser();
 
             if (deleteUser?.success) {
-                setTextModal({
-                    setter: setModal,
+                textModalContent({
+                    setter: setTextModal,
                     onClick: removeUser,
                     message: deleteUser.message,
                 });
             }
         } catch (err) {
-            setTextModal({
-                setter: setModal,
-                onClick: () => setModal(null),
+            textModalContent({
+                setter: setTextModal,
+                onClick: () => setTextModal(null),
                 message: err.message,
             });
         }
@@ -39,9 +39,9 @@ function Membership() {
 
     const confirmDel = (e) => {
         e.preventDefault();
-        setTextModal({
-            setter: setModal,
-            onClick: () => setModal(null),
+        textModalContent({
+            setter: setTextModal,
+            onClick: () => setTextModal(null),
             message: 'Really delete?',
             extraBtn: true,
             extraOnClick: deleteUser

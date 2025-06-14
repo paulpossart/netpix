@@ -1,24 +1,21 @@
-import { useSearch } from "../../context/SearchContext";
-import { useState, useEffect } from "react";
-import styles from './movies.module.scss'
-import MovieModal from "./MovieModal";
-import { callFetchVideosById } from "../../apiCalls/tmdbCalls";
+import { useState } from "react";
+import { useSearch } from "../../../context/SearchContext";
+import { callFetchVideosById } from "../../../apiCalls/tmdbCalls";
+import { fetchRandomClips } from "../../../helpers/helperFunctions";
+import MovieModal from "../MovieModal";
+import styles from '../movies.module.scss'
 
 function SearchResults() {
-    const { searchInput, queryResults } = useSearch();
-
+    const { queryResults } = useSearch();
     const [modal, setModal] = useState(false);
-
     const imgSrc = 'https://image.tmdb.org/t/p/';
     const width = 'w300';
 
-    useEffect(()=>{
-        console.log('from searchResults', queryResults)
-    }, [queryResults])
-
-
-
     const handleClick = async (movie) => {
+        const vidKey = await fetchRandomClips(movie, callFetchVideosById);
+
+
+
         const movieVids = await callFetchVideosById(movie.id);
         console.log('vids:', movieVids)
 
@@ -30,12 +27,12 @@ function SearchResults() {
             return idx;
         }
 
-        let vidKey;
+       
         if (movieClips.length > 0) vidKey = movieClips[randomIndexGenerator(movieClips)].key
         else if (trailers.length > 0) vidKey = trailers[randomIndexGenerator(trailers)].key
         else if (movieVids.length > 0) vidKey = movieVids[randomIndexGenerator(movieVids)].key;
         else vidKey = null;
-        console.log('key: ', vidKey);
+    
 
         setModal(
             <MovieModal movie={movie} vidKey={vidKey} setModal={setModal} trailers={trailers} listItem={false} />

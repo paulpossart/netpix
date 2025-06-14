@@ -1,15 +1,15 @@
 import { useLocation } from "react-router-dom";
 import styles from './modal.module.scss';
 
-const setTextModal = ({
+const textModalContent = ({
     setter, onClick, message, extraBtn = false, extraOnClick
 }) => {
     setter({
-        setter, onClick, message, extraBtn, extraOnClick
+        onClick, message, extraBtn, extraOnClick
     })
 }
 
-function Modal({ modalData }) {
+function TextModal({ modalData }) {
     const path = useLocation().pathname;
     const isAccount = path.startsWith('/account');
 
@@ -28,4 +28,4 @@ function Modal({ modalData }) {
     );
 };
 
-export { setTextModal, Modal };
+export { textModalContent, TextModal };

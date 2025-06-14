@@ -1,15 +1,18 @@
+import SearchResults from './searchResults/SearchResults';
+import { useSearch } from '../../context/SearchContext';
+import { useList } from '../../context/ListContext';
+import {
+    callFetchPopular,
+    callFetchUpcoming,
+    callFetchNowPlaying
+} from '../../apiCalls/tmdbCalls';
 import MovieCarousel from './MovieCarousel';
 import Banner from './Banner';
-import { callFetchPopular, callFetchUpcoming, callFetchNowPlaying } from '../../apiCalls/tmdbCalls';
-import { useState } from 'react';
-import SearchResults from './SearchResults';
-import { useSearch } from '../../context/SearchContext';
 import MyList from './MyList';
-import { useList } from '../../context/ListContext';
 
 function Home() {
-    const {queryResults} = useSearch();
-    const {myList} = useList()
+    const { queryResults } = useSearch();
+    const { myList } = useList()
 
     return (
         <>
@@ -18,11 +21,11 @@ function Home() {
                     <SearchResults />
                 ) : (
                     <>
-                        <Banner />
-                        {myList?.length > 0 && <MyList />}
-                        <MovieCarousel title='Popular Movies' callFetch={callFetchPopular} />
+                        {/*<Banner />*/}
+                        {/*myList?.length > 0 && <MyList />*/}
+                       {/* <MovieCarousel title='Popular Movies' callFetch={callFetchPopular} />
                         <MovieCarousel title='Upcoming Movies' callFetch={callFetchUpcoming} />
-                        <MovieCarousel title='Now in Cinemas' callFetch={callFetchNowPlaying} />
+                        <MovieCarousel title='Now in Cinemas' callFetch={callFetchNowPlaying} />*/}
                     </>
                 )
                 }

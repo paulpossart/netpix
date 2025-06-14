@@ -19,9 +19,9 @@ function MyList({ title, callFetch }) {
     const imgSrc = 'https://image.tmdb.org/t/p/';
     const width = 'w300';
 
-    /**useEffect(() => {
+    useEffect(() => {
         fetchList();
-    }, []);*/
+    }, []);
 
     useEffect(() => {
         const getDetails = async (id) => {
