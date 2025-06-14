@@ -1,0 +1,87 @@
+@use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+%textShadow {
+    text-shadow: -1px 1px 4px black;
+}
+
+.notFound {
+    @include flex;
+
+    position: relative;
+    height: 100vh;
+    width: 100%;
+
+
+    & header {
+        flex: 0 0 auto;
+        width: 100%;
+
+    }
+
+    & main {
+        flex: 1 1 auto;  
+        position: relative;
+        width: 100vw;
+        height: 100%;
+        background-image: url(../../assets/bg-lost-in-space.png);
+        background-position: center;
+        background-size: cover;
+        z-index: 0;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .notFoundTextAndBtn {
+            position: relative;
+            top: 24%;
+            z-index: 2;
+            margin: 0 20vw;
+
+            & h2 {
+                @extend %textShadow;
+                line-height: 2.5;
+
+                font: {
+                    size: clamp(28px, 6vw, 68px);
+                    weight: 600;
+                }
+            }
+
+            & p {
+                @extend %textShadow;
+
+                font: {
+                    size: clamp(16px, 3vw, 28px);
+                }
+            }
+
+            .homeNav {
+                margin-top: 2rem;
+            }
+
+            & aside {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                margin: 12px 24px;
+
+                font: {
+                    size: clamp(10px, 2vw, 16px);
+                    weight: 300;
+                }
+
+                & span {
+                    @extend %textShadow;
+                    font-weight: 600;
+                    ;
+                }
+            }
+        }
+    }
+}

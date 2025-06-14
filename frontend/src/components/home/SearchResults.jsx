@@ -1,5 +1,5 @@
 import { useSearch } from "../../context/SearchContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from './movies.module.scss'
 import MovieModal from "./MovieModal";
 import { callFetchVideosById } from "../../apiCalls/tmdbCalls";
@@ -11,6 +11,10 @@ function SearchResults() {
 
     const imgSrc = 'https://image.tmdb.org/t/p/';
     const width = 'w300';
+
+    useEffect(()=>{
+        console.log('from searchResults', queryResults)
+    }, [queryResults])
 
 
 
@@ -42,7 +46,7 @@ function SearchResults() {
     return (
         <>
             <div>
-                {queryResults.length > 0
+                {queryResults?.results && queryResults?.results.length > 0
                     ? (<div className={styles.moviesWrapper}>
                         <div className={modal ? styles.popOut : styles.popIn} >
                             {modal && modal}
@@ -53,7 +57,7 @@ function SearchResults() {
 
                             <ul style={{ flexWrap: 'wrap' }}>
 
-                                {queryResults.map((movie, index) =>
+                                {queryResults.results.map((movie, index) =>
                                     <li
                                         onClick={() => handleClick(movie)}
                                         key={index}>
@@ -73,7 +77,7 @@ function SearchResults() {
                     </div>
                     )
                     : (
-                        <p>please search for a movie</p>
+                        <p>{queryResults.message || 'No results found.'}</p>
                     )}
             </div>
         </>

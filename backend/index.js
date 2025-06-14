@@ -9,6 +9,8 @@ import usersRouter from './routes/usersRouter.js';
 import tmdbRouter from './routes/tmdbRouter.js';
 import moviesRouter from './routes/moviesRouter.js';
 
+import { verifyUser } from './queries/auth.js';
+
 const allowedOrigin = process.env.ALLOWED_URL;
 const PORT = process.env.PORT || 3000;
 
@@ -23,8 +25,8 @@ app.get('/', (req, res) => res.json({ backend: 'running' }));
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/tmdb', tmdbRouter);
-app.use('/api/movies', moviesRouter)
+app.use('/api/tmdb', verifyUser, tmdbRouter);
+app.use('/api/movies', verifyUser, moviesRouter)
 
 app.use((err, req, res, next) => {
     const status = err.status || 500;
