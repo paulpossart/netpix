@@ -1,12 +1,11 @@
 import { Link, useLocation, Outlet } from "react-router-dom";
-import styles from './Account.module.scss';
-import chevronRight from '../../assets/chevron-right.svg';
-import accountIcon from '../../assets/account-black.svg';
-import passwordIcon from '../../assets/padlock.svg';
+import styles from './accOverview.module.scss';
+import chevronRight from '../../../assets/chevron-right.svg';
+import accountIcon from '../../../assets/account-black.svg';
+import passwordIcon from '../../../assets/padlock.svg';
 
 function Security() {
     const path = useLocation().pathname;
-    console.log(path);
 
     if (
         path === '/account/security/update-username'
@@ -16,12 +15,13 @@ function Security() {
     }
 
     return (
-        <>
+        <div className={styles.accountOverview}>
             <h2>Security</h2>
 
             <section>
                 <h3>Account Details</h3>
                 <div className={styles.overviewContainer}>
+
                     <ul>
                         <li>
                             <Link
@@ -35,7 +35,9 @@ function Security() {
                                 <img src={chevronRight} />
                             </Link>
                         </li>
+
                         <div className={styles.border}></div>
+
                         <li>
                             <Link to='update-username' className={styles.quickLink}>
                                 <div className={styles.quickLinkDiv}>
@@ -46,10 +48,11 @@ function Security() {
                             </Link>
                         </li>
                     </ul>
+
                 </div>
             </section >
 
-        </>
+        </div>
     )
 };
 

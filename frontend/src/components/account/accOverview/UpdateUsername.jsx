@@ -1,10 +1,12 @@
-import styles from './Account.module.scss';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { callPasswordCheck } from '../../apiCalls/authCalls';
-import { useState, useEffect } from 'react';
-import { changeInput } from '../../helpers/helperFunctions';
-import { useAuth } from '../../context/AuthContext';
-import { callUpdateUsername } from '../../apiCalls/usersCalls';
+import { useAuth } from '../../../context/AuthContext';
+import { useModal } from '../../../context/ModalContext';
+import { callPasswordCheck } from '../../../apiCalls/authCalls';
+import { callUpdateUsername } from '../../../apiCalls/usersCalls';
+import { setTextModal } from '../../modal/Modal';
+import { changeInput } from '../../../helpers/helperFunctions';
+import styles from './accOverview.module.scss';
 
 function UpdateUsername() {
     const [authorised, setAuthorised] = useState(false);
@@ -13,9 +15,9 @@ function UpdateUsername() {
     const [inputError, setInputError] = useState('');
     const [username, setUsername] = useState('');
     const { setUser } = useAuth();
-
-    const [modal, setModal] = useState(null);
+    const {setModal} = useModal();
     const navigate = useNavigate();
+    const safeRegex = /^[^<>{};\\]*$/;
 
     const modalClick = () => {
         setModal(null);
@@ -23,18 +25,12 @@ function UpdateUsername() {
     }
 
     const setModalContent = (message) => {
-        setModal(
-            <>
-                <div onClick={modalClick} className={styles.modalOverlay}></div>
-                <div className={styles.modal}>
-                    <p>{message}</p>
-                    <button className={styles.btn1} onClick={modalClick}>OK</button>
-                </div>
-            </>
-        )
+        setTextModal({
+            setter: setModal,
+            onClick: modalClick,
+            message: message
+        })
     };
-
-    const safeRegex = /^[^<>{};\\]*$/;
 
     const handleChangePassword = (e) => {
         setSubmitError('');
@@ -95,7 +91,7 @@ function UpdateUsername() {
 
     if (!authorised) {
         return (
-            <>
+            <div className={styles.accountOverview}>
                 <h2>Change Username</h2 >
                 <section>
                     <h3>Let's make sure it's you</h3>
@@ -119,20 +115,19 @@ function UpdateUsername() {
                             </button>
                             <Link
                                 to='/account/security'
-                                className={styles.cancelBtn}
+                                className={styles.transparentBtn}
                             >
                                 Cancel
                             </Link>
                         </form>
                     </div>
                 </section>
-            </>
+            </div>
         );
     };
 
     return (
-        <>
-            {modal && modal}
+        <div className={styles.accountOverview}>
             <h2>Change Username</h2 >
             <section>
                 <h3>Choose a memorable username</h3>
@@ -156,14 +151,14 @@ function UpdateUsername() {
                         </button>
                         <Link
                             to='/account/security'
-                            className={styles.cancelBtn}
+                            className={styles.transparentBtn}
                         >
                             Cancel
                         </Link>
                     </form>
                 </div>
             </section>
-        </>
+        </div>
     );
 };
 

@@ -61,9 +61,9 @@ function SignIn({ setView }) {
                     onChange={handleChangePassword}
                     placeholder='password'
                 />
-                <button type='submit' className={styles.btn1}>Sign in</button>
+                <button style={{marginTop: '0.6em'}} type='submit' className={styles.btn1}>Sign in</button>
             </form>
-            <p className={styles.p}>New to Netpix?
+            <p>New to Netpix?
                 <button
                     className={styles.textBtn}
                     onClick={() => setView('create-user')}

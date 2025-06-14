@@ -1,6 +1,42 @@
 @use '../../styles/global' as *;
 @use '../../styles/buttons';
 
+.activeLink,
+.inactiveLink {
+    display: block;
+    padding: 0.4rem 0;
+    color: black;
+    text-decoration: none;
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        @include flex(row, flex-start, center);
+        gap: 12px;
+    }
+}
+
+.activeLink {
+    border-bottom: solid 3px $netpixRed;
+    font-weight: 600;
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        border: none;
+    }
+}
+
+.inactiveLink {
+    border-bottom: solid 3px rgb(250, 250, 250);
+
+    @media (hover: hover) and (pointer: fine) and (max-height: 399px) and (max-width: 959px) {
+        &:hover {
+            color: rgb(150, 150, 150);
+        }
+    }
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        border: none;
+    }
+}
+
 .accountPage {
     height: 100%;
 
@@ -15,7 +51,7 @@
         margin: 0 6.25%;
     }
 
-    .accountNav {
+    & nav {
         padding-left: 16px;
         border-bottom: solid 1px rgb(230, 230, 230);
         width: 100%;
@@ -30,7 +66,7 @@
             grid-area: nav;
         }
 
-        .accountUl {
+        & ul {
             @include flex(row, flex-start, center);
 
             @media (min-height: 400px) and (min-width: 960px) {
@@ -38,6 +74,14 @@
                 gap: 1.6rem;
             }
 
+            .toHome {
+                display: none;
+
+                @media (min-height: 400px) and (min-width: 960px) {
+                    display: block;
+                    margin-bottom: 4rem;
+                }
+            }
 
             & li {
                 margin-right: 1.6rem;
@@ -56,196 +100,158 @@
                 & img {
                     width: 28px;
                 }
-
-                .activeLink,
-                .inactiveLink {
-                    display: block;
-                    padding: 0.4rem 0;
-                    color: black;
-                    text-decoration: none;
-
-                    @media (min-height: 400px) and (min-width: 960px) {
-                        @include flex(row, flex-start, center);
-                        gap: 12px;
-                    }
-                }
-
-                .activeLink {
-                    border-bottom: solid 3px $netpixRed;
-                    font-weight: 600;
-
-                    @media (min-height: 400px) and (min-width: 960px) {
-                        border: none;
-                    }
-                }
-
-                .inactiveLink {
-                    border-bottom: solid 3px rgb(250, 250, 250);
-
-                    @media (hover: hover) and (pointer: fine) and (max-height: 399px) and (max-width: 959px) {
-                        &:hover {
-                            color: rgb(150, 150, 150);
-                        }
-                    }
-
-                    @media (min-height: 400px) and (min-width: 960px) {
-                        border: none;
-                    }
-                }
-            }
-
-            .toHome {
-                display: none;
-
-                @media (min-height: 400px) and (min-width: 960px) {
-                    display: block;
-                    margin-bottom: 4rem;
-                }
-            }
-        }
-    }
-
-    .accountMain {
-        text-align: left;
-        padding: 1% 16px 0 16px;
-
-        @media (min-height: 400px) and (min-width: 550px) {
-            padding: 1% 6vmax 0 6vmax;
-        }
-
-        @media (min-height: 400px) and (min-width: 960px) {
-            grid-area: main;
-            padding: 0 6vmax 0 0;
-        }
-
-        & h2 {
-            font: {
-                size: 32px;
-                weight: 800;
-            }
-
-            @media (min-height: 400px) and (min-width: 550px) {
-                font-size: 40px;
-            }
-        }
-
-        & h3 {
-            color: rgb(51, 51, 51);
-
-            @media (min-height: 400px) and (min-width: 550px) {
-                font-size: 18px;
-            }
-        }
-
-        .overviewContainer {
-            background-color: white;
-            border: solid 1px rgb(204, 204, 204);
-            border-radius: 8px;
-            padding: 0.8rem 1.6rem;
-            margin: 1em 0 2em 0;
-
-            & p {
-                padding: 1.6rem 0;
-            }
-
-            .username {
-                font-weight: 600;
-            }
-
-            .memberSince {
-                margin-left: -1.6rem;
-                margin-top: 1.2rem;
-                padding: 0.8rem 1.6rem;
-                color: white;
-                display: inline-block;
-                background: linear-gradient(90deg, rgb(30, 38, 97), rgb(33, 113, 226));
-                border-top-right-radius: 20px;
-                border-bottom-right-radius: 20px;
-
-                font: {
-                    size: 1.2rem;
-                    weight: 700;
-                }
-            }
-
-            .quickLink {
-                @include flex(row, space-between, center);
-                text-decoration: none;
-                color: black;
-                font-weight: 500;
-                padding: 2rem 0;
-                border-radius: 4px;
-
-                @media (hover: hover) and (pointer: fine) {
-
-                    &:hover {
-                        background-color: rgb(226, 226, 226);
-                    }
-                }
-
-                & img {
-                    width: 28px;
-                }
-
-                .quickLinkDiv {
-                    @include flex(row, flex-start, center);
-                    gap: 12px;
-                }
-            }
-        }
-
-        .border {
-            width: 100%;
-            height: 1px;
-            background-color: rgb(220, 220, 220);
-            margin: 0.8rem 0;
-        }
-
-        & form {
-            @include flex(column, flex-start, center);
-            width: 100%;
-            gap: 4px;
-
-            font: {
-                size: 1.6rem;
-                family: Roboto;
-            }
-
-            & input {
-                border: solid 1px rgb(94, 94, 94);
-                border-radius: 4px;
-                padding: 1.2rem;
-                margin: 1.2rem 0;
-                width: 100%;
-
-                @media (max-height: 500px) {
-                    margin: 2px 0;
-                }
-            }
-
-            .newPasswords {
-                width: 100%;
-                margin-top: 2em;
-            }
-
-            .inputError {
-                font-size: 1.2rem;
-                color: rgb(235, 57, 66);
-            }
-
-            .submitError {
-                font-size: 1.4rem;
-                color: rgb(235, 57, 66);
-                width: 100%;
-                text-align: center;
-                border-radius: 4px;
-                border: solid 2px rgb(235, 57, 66);
-                padding: 1rem;
             }
         }
     }
 }
 
+
+
+//=================================
+//=================================
+//========================================
+/*
+.accountMain {
+    text-align: left;
+    padding: 1% 16px 0 16px;
+
+    @media (min-height: 400px) and (min-width: 550px) {
+        padding: 1% 6vmax 0 6vmax;
+    }
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        grid-area: main;
+        padding: 0 6vmax 0 0;
+    }
+
+    & h2 {
+        font: {
+            size: 32px;
+            weight: 800;
+        }
+
+        @media (min-height: 400px) and (min-width: 550px) {
+            font-size: 40px;
+        }
+    }
+
+    & h3 {
+        color: rgb(51, 51, 51);
+
+        @media (min-height: 400px) and (min-width: 550px) {
+            font-size: 18px;
+        }
+    }
+
+    .overviewContainer {
+        background-color: white;
+        border: solid 1px rgb(204, 204, 204);
+        border-radius: 8px;
+        padding: 0.8rem 1.6rem;
+        margin: 1em 0 2em 0;
+
+        & p {
+            padding: 1.6rem 0;
+        }
+
+        .username {
+            font-weight: 600;
+        }
+
+        .memberSince {
+            margin-left: -1.6rem;
+            margin-top: 1.2rem;
+            padding: 0.8rem 1.6rem;
+            color: white;
+            display: inline-block;
+            background: linear-gradient(90deg, rgb(30, 38, 97), rgb(33, 113, 226));
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+
+            font: {
+                size: 1.2rem;
+                weight: 700;
+            }
+        }
+
+        .quickLink {
+            @include flex(row, space-between, center);
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+            padding: 2rem 0;
+            border-radius: 4px;
+
+            @media (hover: hover) and (pointer: fine) {
+
+                &:hover {
+                    background-color: rgb(226, 226, 226);
+                }
+            }
+
+            & img {
+                width: 28px;
+            }
+
+            .quickLinkDiv {
+                @include flex(row, flex-start, center);
+                gap: 12px;
+            }
+        }
+    }
+
+    .border {
+        width: 100%;
+        height: 1px;
+        background-color: rgb(220, 220, 220);
+        margin: 0.8rem 0;
+    }
+
+    & form {
+        @include flex(column, flex-start, center);
+        width: 100%;
+        gap: 4px;
+
+        font: {
+            size: 1.6rem;
+            family: Roboto;
+        }
+
+        & input {
+            border: solid 1px rgb(94, 94, 94);
+            border-radius: 4px;
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            width: 100%;
+
+            @media (max-height: 500px) {
+                margin: 2px 0;
+            }
+        }
+
+        .newPasswords {
+            width: 100%;
+            margin-top: 2em;
+        }
+
+        .inputError {
+            font-size: 1.2rem;
+            color: rgb(235, 57, 66);
+        }
+
+        .submitError {
+            font-size: 1.4rem;
+            color: rgb(235, 57, 66);
+            width: 100%;
+            text-align: center;
+            border-radius: 4px;
+            border: solid 2px rgb(235, 57, 66);
+            padding: 1rem;
+        }
+    }
+}
+
+*/
 .modalOverlay {
     position: fixed;
     inset: 0;
@@ -269,13 +275,13 @@
         -1px 1px 4px rgb(215, 215, 215),
         1px -1px 4px rgb(215, 215, 215),
         -1px -1px 4px rgb(215, 215, 215);
-        text-align: center;
-        min-width: 200px;
+    text-align: center;
+    min-width: 200px;
 
-        .btnsDiv {
-            @include flex;
-            gap: 4px;
-        }
+    .btnsDiv {
+        @include flex;
+        gap: 4px;
+    }
 
 
     & p {

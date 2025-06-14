@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useModal } from '../../context/ModalContext';
 import Header from '../header/Header';
 import Footer from '../utils/footer/Footer';
+import { Modal } from '../modal/Modal';
 import styles from './root.module.scss';
 import netpixLogo from '../../assets/netpix-logo.svg';
 
@@ -11,6 +13,8 @@ function Root() {
             <img src={netpixLogo} />
         </div>
     );
+
+    const { modal } = useModal();
 
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
@@ -58,6 +62,7 @@ function Root() {
             {
                 bigN ? bigN :
                     <div className={styles.root}>
+                        {modal && <Modal>{modal}</Modal>}
                         <Header className={`${styles.header} ${isAccountPath ? styles.headerAccount : styles.headerHome}`} />
                         <div id='spacer'></div>
                         <div className={`${styles.outlet} ${isAccountPath ? styles.outletAccount : styles.outletHome}`}>
