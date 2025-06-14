@@ -1,38 +1,24 @@
 
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSearch } from '../../context/SearchContext';
-import { callSearchTmdb } from '../../apiCalls/tmdbCalls';
 import { useState, useEffect } from 'react';
-
-
+import Sidebar from './sidebar/Sidebar';
+import Searchbar from './searchbar/Searchbar';
 import styles from './header.module.scss';
-import searchIcon from '../../assets/search.svg';
 import accountWhite from '../../assets/account-white.svg';
 import accountBlack from '../../assets/account-black.svg';
-import closeIcon from '../../assets/cross.svg';
-
-import Sidebar from './sidebar/Sidebar';
 
 function Header({ className }) {
     const [sidebar, setSidebar] = useState(false);
-    const [searchBar, setSearchBar] = useState(false);
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
     const isNotFound = path === '/not-found';
-    const { searchInput, setSearchInput, setQueryResults, queryResults } = useSearch();
+    const { setSearchInput, setQueryResults } = useSearch();
 
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        const results = await callSearchTmdb(searchInput);
-        // if (results?.message) setQueryResults(results.message);
-        // console.log(results)
-        setQueryResults(results)
-    }
-
-    useEffect(() => {
-        console.log('from Header', queryResults)
-    }, [queryResults])
-
+    const clearInput = () => {
+        setQueryResults([]);
+        setSearchInput('')
+    };
 
     return (
         <header id='header' className={className}>
@@ -40,7 +26,7 @@ function Header({ className }) {
 
                 <h1>
                     <NavLink
-                        onClick={() => { setQueryResults([]); setSearchInput('') }}
+                        onClick={clearInput}
                         className={isAccountPath ? styles.accH1 : styles.homeH1}
                         to='/'
                     >
@@ -53,23 +39,8 @@ function Header({ className }) {
                         <>
                             <div className={styles.navBtns}>
                                 {
-                                    isAccountPath ?
-                                        null :
-                                        <div className={`${styles.searchDiv} ${searchBar ? styles.searchDivOpen : styles.searchDivClosed}`}>
-                                            <img src={searchIcon} onClick={() => setSearchBar(prev => !prev)} />
-                                            <form onSubmit={handleSearch}>
-                                                <input
-                                                    className={searchBar ? styles.searchBarOpen : styles.searchBarClosed}
-                                                    type='text'
-                                                    placeholder='search'
-                                                    value={searchInput}
-                                                    onChange={(e) => setSearchInput(e.target.value)}
-                                                />
-                                                <button type='button' onClick={() => { setSearchInput(''); setQueryResults(null) }} className={`${styles.iconBtn} ${styles.closeSearch}`}><img src={closeIcon} /></button>
-                                                <button type='submit' className={styles.searchBtn}>Search</button>
-                                            </form>
-
-                                        </div>
+                                    isAccountPath ? null :
+                                        <Searchbar clearInput={clearInput} />
                                 }
                                 <img
                                     src={isAccountPath ? accountBlack : accountWhite}
@@ -77,12 +48,11 @@ function Header({ className }) {
                                     onMouseEnter={() => setSidebar(true)} />
                             </div>
 
-
                             <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
                         </>
                 }
             </nav>
-        </header>
+        </header >
     )
 };
 

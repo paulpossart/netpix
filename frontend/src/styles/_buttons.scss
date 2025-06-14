@@ -22,7 +22,7 @@
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
-            background-color: $bgCol;
+            background-color: $bgColHover;
         }
     }
 
@@ -30,44 +30,17 @@
         transform: scale(0.99);
         background-color: $bgColHover;
     }
-
 }
 
 .btn1 {
-    cursor: pointer;
-    background-color: $netpixRed;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    @include button($netpixRed, $hoverRed);
     padding: 1.2rem;
     margin-top: 0.6em;
     width: 100%;
 
-
-    transition:
-        background-color 0.2s linear,
-        transform 0.2s linear;
-
-    font: {
-        size: 16px;
-        family: 'Roboto';
-        weight: 600;
-    }
-
     @media (min-height: 500px) {
         padding: 1.2rem;
         margin: 1.2rem 0;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: $hoverRed;
-        }
-    }
-
-    &:active {
-        transform: scale(0.99);
-        background-color: $hoverRed;
     }
 }
 
@@ -150,9 +123,7 @@
 }
 
 .iconBtn {
-    @extend .btn1;
-    background-color: transparent;
-
+    @include button(transparent, rgba(255, 255, 255, 0.4));
     border: solid 1px white;
     border-radius: 50%;
     padding: 4%;
@@ -160,24 +131,9 @@
     width: 30px;
     height: 30px;
 
-    transition:
-        background-color 0.2s linear,
-        transform 0.2s linear;
-
     @media (min-height: 500px) {
         padding: 1.2rem;
         margin: 1.2rem 0;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.4);
-        }
-    }
-
-    &:active {
-        transform: scale(0.9);
-        background-color: rgba(255, 255, 255, 0.4);
     }
 }
 
@@ -283,13 +239,28 @@
     }
 }
 
+// Searcbar =======================
+
 .searchBtn {
     @extend .whtBtn;
-    padding: 0.4rem;
-    margin: 0;
+    padding: 0.4rem 0.8rem;
+    margin: 0 4px;
+    font-size: 1.2rem;
 
-    font-size: 12px;
+    /*@media (min-width: 800px) and (min-height: 400px) {
+        font-size: 1.4rem;
+        padding: 0.6rem 1.2rem
+    }*/
 }
+
+.clearSearchBtn {
+    @extend .iconBtn;
+    padding: 1.2rem;
+    margin: 0;
+    border: none;
+}
+
+// Not Found ======================
 
 .homeLinkBtn {
     @extend .whtBtn;
