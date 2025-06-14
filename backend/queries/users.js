@@ -118,19 +118,15 @@ const updatePassword = async (req, res, next) => {
         })
     };
 
-    if (!isValidInput('password', updatedPassword, 6, 30)) {
+    if (
+        !isValidInput('password', updatedPassword, 6, 30) ||
+        updatedPassword !== reEnteredPassword
+    ) {
         return res.status(400).json({
             success: false,
-            message: 'New password invalid',
-        })
+            message: 'New password invalid, or does not match',
+        });
     };
-
-    if (updatedPassword !== reEnteredPassword) {
-        return res.status(400).json({
-            success: false,
-            message: 'Passwords do not match',
-        })
-    }
 
     try {
         const result = await pool.query(

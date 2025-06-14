@@ -1,13 +1,14 @@
-/*
-TMDB error response object: 
-{
+// TMDB error response object: ===================================== 
+/*{
 "status_code":7,
 "status_message":"Invalid API key: You must be granted a valid key.",
 "success":false
-}
-*/
+}*/
+//================================================================== 
+
 
 const bearerToken = process.env.BEARER_TOKEN;
+const baseUrl = 'https://api.themoviedb.org/3/movie/';
 
 const options = {
   method: 'GET',
@@ -20,7 +21,7 @@ const options = {
 const fetchPopular = async (req, res, next) => {
   try {
     const response = await fetch(
-      'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+      `${baseUrl}popular?language=en-US&page=1`,
       options);
 
     const data = await response.json();
@@ -35,7 +36,7 @@ const fetchPopular = async (req, res, next) => {
 const fetchUpcoming = async (req, res, next) => {
   try {
     const response = await fetch(
-      'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&region=GB',
+      `${baseUrl}upcoming?language=en-US&page=1&region=GB`,
       options);
 
     const data = await response.json();
@@ -50,7 +51,7 @@ const fetchUpcoming = async (req, res, next) => {
 const fetchNowPlaying = async (req, res, next) => {
   try {
     const response = await fetch(
-      'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&region=GB',
+      `${baseUrl}now_playing?language=en-US&page=1&region=GB`,
       options);
 
     const data = await response.json();
@@ -66,7 +67,7 @@ const fetchVideosById = async (req, res, next) => {
   const id = parseInt(req.params.id)
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
+      `${baseUrl}${id}/videos?language=en-US`,
       options
     );
 
@@ -82,7 +83,7 @@ const fetchLogoById = async (req, res, next) => {
   const id = parseInt(req.params.id)
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images`,
+      `${baseUrl}${id}/images`,
       options
     );
 
@@ -96,9 +97,12 @@ const fetchLogoById = async (req, res, next) => {
 
 const searchTmdb = async (req, res, next) => {
   const query = req.params.query
-  const bannedWords = ['breasts', 'tits', 'nude', 'nudity', 'sex', 'erotic', 'porn', 'explicit']
+  const bannedWords = [
+    'bdsm', 'bondage', 'breast', 'erotic', 'explicit', 'fetish',
+    'hardcore', 'nudity', 'porn', 'porno', 'softcore', 'tits'
+  ]
 
-  const rudeText = (text) => {
+  const adultText = (text) => {
     if (!text) text = '';
     return bannedWords.some(word => text.toLowerCase().includes(word))
   }
@@ -113,13 +117,23 @@ const searchTmdb = async (req, res, next) => {
     if (!response.ok) throw new Error(data.status_message);
 
     const cleanData = data.results.filter(movie => (
-      !rudeText(movie.title || '') &&
-      !rudeText(movie.overview || '') &&
+      !adultText(movie.title || '') &&
+      !adultText(movie.overview || '') &&
       (movie.title || '').trim() &&
       (movie.overview || '').trim()
     ))
 
-    res.status(200).json(cleanData)
+    if (cleanData.length === 0) {
+      return res.status(200).json({
+        success: true,
+        results: [],
+        message: 'Please try using different search terms.'
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      results: cleanData})
   } catch (err) {
     next(err)
   }
@@ -130,7 +144,7 @@ const fetchDetailsById = async (req, res, next) => {
 
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+      `${baseUrl}${id}?language=en-US`,
       options);
 
     const data = await response.json();
@@ -151,5 +165,3 @@ export {
   searchTmdb,
   fetchDetailsById
 }
-
-// 75780

@@ -5,7 +5,7 @@ const useSearch = () => useContext(SearchContext);
 
 function SearchProvider({ children }) {
     const [searchInput, setSearchInput] = useState('');
-    const [queryResults, setQueryResults] = useState([])
+    const [queryResults, setQueryResults] = useState([{ results: [], message: '' }])
 
     return (
         <SearchContext.Provider value={{ searchInput, setSearchInput, queryResults, setQueryResults }}>

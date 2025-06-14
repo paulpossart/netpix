@@ -14,7 +14,7 @@ function Home() {
     return (
         <>
             <main>
-                {queryResults?.length > 0 ? (
+                {queryResults?.success ? (
                     <SearchResults />
                 ) : (
                     <>

@@ -7,7 +7,7 @@ import accountBlack from '../../../assets/account-black.svg';
 
 import Sidebar from './Sidebar';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSearch } from '../../../context/SearchContext';
 
@@ -20,15 +20,19 @@ function Header({ className }) {
     const [searchBar, setSearchBar] = useState(false);
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
-    const { searchInput, setSearchInput, setQueryResults } = useSearch();
+    const { searchInput, setSearchInput, setQueryResults, queryResults } = useSearch();
 
     const handleSearch = async (e) => {
         e.preventDefault();
         const results = await callSearchTmdb(searchInput);
-        console.log(results)
+        // if (results?.message) setQueryResults(results.message);
+       // console.log(results)
         setQueryResults(results)
     }
 
+    useEffect(()=>{
+            console.log('from Header', queryResults)
+        }, [queryResults])
 
 
     return (
@@ -37,7 +41,7 @@ function Header({ className }) {
 
                 <h1>
                     <NavLink
-                    onClick={()=>{setQueryResults(null); setSearchInput('')}}
+                        onClick={() => { setQueryResults([]); setSearchInput('') }}
                         className={isAccountPath ? styles.accH1 : styles.homeH1}
                         to='/'
                     >
@@ -57,11 +61,11 @@ function Header({ className }) {
                                         type='text'
                                         placeholder='search'
                                         value={searchInput}
-                                        onChange={(e)=>setSearchInput(e.target.value)}
+                                        onChange={(e) => setSearchInput(e.target.value)}
                                     />
-                                    <button  type='button' onClick={()=>{setSearchInput(''); setQueryResults(null)}} className={`${styles.iconBtn} ${styles.closeSearch}`}><img src={closeIcon} /></button>
+                                    <button type='button' onClick={() => { setSearchInput(''); setQueryResults(null) }} className={`${styles.iconBtn} ${styles.closeSearch}`}><img src={closeIcon} /></button>
                                     <button type='submit' className={styles.searchBtn}>Search</button>
-                              </form>
+                                </form>
 
                             </div>
                     }
