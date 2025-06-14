@@ -1,11 +1,11 @@
 @use '../../styles/global' as *;
 @use '../../styles/buttons';
 
-.authBackground {
-
+.authPage {
     position: relative;
     width: 100vw;
     height: 100vh;
+    text-align: left;
     background-image: url(../../assets/auth-bg.png);
     background-position: center;
     background-size: cover;
@@ -16,7 +16,7 @@
         position: absolute;
         inset: 0;
         background-color: rgba(0, 0, 0, 0.8);
-        z-index: 2;
+        z-index: -1;
 
         @media (min-width: 500px) and (min-height: 400px) {
             background-color: rgba(0, 0, 0, 0.6);
@@ -24,114 +24,29 @@
 
     }
 
-    .authPage {
-        position: relative;
-        z-index: 3;
-        width: 100vw;
-        height: 100vh;
-        text-align: left;
-
-        & h1 {
-            padding: 20px 0 10px 16px;
-            color: $netpixRed;
-            z-index: 10;
-            line-height: 1;
-
-            font: {
-                family: 'Bebas Neue';
-                size: 3.2rem;
-            }
-
-            @media (min-height: 550px) and (min-width: 750px) {
-                padding: 8vmin 16vmax;
-                font-size: clamp(32px, 4.5vw, 55px);
-            }
-        }
-
-        .authContainer {
-            width: clamp(320px, 100%, 450px);
-            margin: 0 auto;
-
-            @media (min-width: 500px) and (min-height: 400px) {
-                background-color: rgba(0, 0, 0, 0.8);
-            }
-        }
-    }
-}
-
-.authForm {
-    width: 100%;
-    padding: 0 1.6rem;
-    margin: 0;
-
-    @media (min-width: 500px) and (min-height: 400px) {
-        padding: 4rem 6rem;
-    }
-
-    @media (min-width: 500px) and (min-height: 400px) {
-        padding: 4rem 6rem;
-    }
-
-    & h2 {
-        padding: 4px 0;
+    & h1 {
+        padding: 20px 0 10px 16px;
+        color: $netpixRed;
+        z-index: 10;
         line-height: 1;
 
         font: {
+            family: 'Bebas Neue';
             size: 3.2rem;
-            weight: 700;
         }
 
-        @media (min-width: 500px) and (min-height: 500px) {
-            padding: 0 0 1.2rem 0;
-        }
-    }
-
-    .signInError {
-        font-size: 1.4rem;
-        color: black;
-        background-color: rgb(216, 157, 49);
-        text-align: center;
-        border-radius: 4px;
-        padding: 1rem 0;
-    }
-
-    & form {
-        @include flex(column, flex-start, center);
-        width: 100%;
-
-        font: {
-            size: 1.6rem;
-            family: Roboto;
-        }
-
-        & input {
-            background-color: rgb(15, 15, 15);
-            color: white;
-            border: solid 1px rgb(94, 94, 94);
-            border-radius: 4px;
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            width: 100%;
-
-            @media (max-height: 500px) {
-                margin: 2px 0;
-            }
-        }
-
-        .inputError {
-            font-size: 1.2rem;
-            color: rgb(235, 57, 66);
+        @media (min-height: 550px) and (min-width: 750px) {
+            padding: 8vmin 16vmax;
+            font-size: clamp(32px, 4.5vw, 55px);
         }
     }
 
-    .p {
-        margin: 0;
-        padding: 0.6rem 0;
+    & section {
+        width: clamp(320px, 100%, 450px);
+        margin: 0 auto;
 
-        @media (min-height: 500px) {
-            padding: 1.2rem 0 2rem 0;
-            ;
+        @media (min-width: 500px) and (min-height: 400px) {
+            background-color: rgba(0, 0, 0, 0.8);
         }
     }
-
 }

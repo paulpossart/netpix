@@ -1,9 +1,8 @@
 import { useState } from 'react';
+import { useAuth } from '../../../context/AuthContext';
 import { callSignIn } from '../../../apiCalls/authCalls';
 import { changeInput, isValidSubmission } from '../../../helpers/helperFunctions';
-import { useAuth } from '../../../context/AuthContext';
-
-import styles from '../auth.module.scss';
+import styles from './authView.module.scss';
 
 function SignIn({ setView }) {
     const [username, setUsername] = useState('');
@@ -64,7 +63,14 @@ function SignIn({ setView }) {
                 />
                 <button type='submit' className={styles.btn1}>Sign in</button>
             </form>
-            <p className={styles.p}>New to Netpix?  <button className={styles.textBtn} onClick={() => setView('create-user')}>Sign up now.</button></p>
+            <p className={styles.p}>New to Netpix?
+                <button
+                    className={styles.textBtn}
+                    onClick={() => setView('create-user')}
+                >
+                    Sign up now.
+                </button>
+            </p>
         </div>
     );
 }

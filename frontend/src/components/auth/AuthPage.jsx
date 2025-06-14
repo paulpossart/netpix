@@ -8,23 +8,21 @@ function AuthPage() {
     const [view, setView] = useState('sign-in');
 
     return (
-        <div className={styles.authBackground}>
-            <main className={styles.authPage}>
+        <main className={styles.authPage}>
 
-                <header>
-                    <h1>NETPIX</h1>
-                </header>
+            <header>
+                <h1>NETPIX</h1>
+            </header>
 
-                <section className={styles.authContainer}>
-                    {view === 'sign-in'
+            <section>
+                {
+                    view === 'sign-in'
                         ? <SignIn setView={setView} />
                         : <CreateUser setView={setView} />
-                    }
-                </section>
-                <Footer />
-            </main>
-        </div>
-
+                }
+            </section>
+            <Footer />
+        </main>
     );
 };
 
