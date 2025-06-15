@@ -1,31 +1,47 @@
-import { useLocation } from "react-router-dom";
+import { useModal } from '../../context/ModalContext';
 import styles from './modal.module.scss';
+import closeIcon from '../../assets/cross.svg'
 
-const setTrailerModal = ({
-    setter, onClick, message, extraBtn = false, extraOnClick
+const trailerModalContent = ({
+    setter, vidKey
 }) => {
     setter({
-        onClick, message, extraBtn, extraOnClick
+        vidKey
     })
 }
 
 function TrailerModal({ modalData }) {
-    const path = useLocation().pathname;
-    const isAccount = path.startsWith('/account');
-
+    const { setTrailerModal } = useModal();
     if (!modalData) return null;
-
-    const { message, onClick, extraBtn, extraOnClick } = modalData;
+    const { vidKey } = modalData;
 
     return (
-        <div onClick={onClick} className={styles.modalOverlay}>
-            <div className={`${styles.modal} ${isAccount ? styles.accModal : styles.HomeModal}`}>
-                <p>{message}</p>
-                {extraBtn && <button className={styles.btn1} onClick={extraOnClick}>Confirm</button>}
-                <button style={{ marginTop: '0.8rem' }} className={styles.btn2} onClick={onClick}>{extraBtn ? 'Cancel' : 'OK'}</button>
+        <>
+            <div onClick={() => setTrailerModal(null)} className={styles.modalOverlay}></div>
+            <div className={styles.modal}>
+                {
+                    vidKey ?
+                        <iframe
+                            src={`https://www.youtube.com/embed/${vidKey}?autoplay=1`}
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                        >
+                        </iframe>
+                        : <p style={{ padding: '12px' }}>no video available</p>
+                }
+
+
+                <div className={styles.btnContainer}>
+                    <div className={styles.buttons}>
+                        <button className={styles.iconBtn} onClick={() => setTrailerModal(null)}><img src={closeIcon} /></button>
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </>
     );
 };
 
-export { setTrailerModal, TrailerModal };
+export { trailerModalContent, TrailerModal };

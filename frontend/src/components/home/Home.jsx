@@ -6,8 +6,8 @@ import {
     callFetchUpcoming,
     callFetchNowPlaying
 } from '../../apiCalls/tmdbCalls';
-import MovieCarousel from './MovieCarousel';
-import Banner from './Banner';
+import MovieCarousel from './movieCarousel/MovieCarousel';
+import Banner from './banner/Banner';
 import MyList from './MyList';
 
 function Home() {
@@ -21,11 +21,11 @@ function Home() {
                     <SearchResults />
                 ) : (
                     <>
-                        {/*<Banner />*/}
+                        <Banner />
                         {/*myList?.length > 0 && <MyList />*/}
-                       {/* <MovieCarousel title='Popular Movies' callFetch={callFetchPopular} />
+                        <MovieCarousel title='Popular Movies' callFetch={callFetchPopular} />
                         <MovieCarousel title='Upcoming Movies' callFetch={callFetchUpcoming} />
-                        <MovieCarousel title='Now in Cinemas' callFetch={callFetchNowPlaying} />*/}
+                        <MovieCarousel title='Now in Cinemas' callFetch={callFetchNowPlaying} />
                     </>
                 )
                 }

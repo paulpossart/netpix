@@ -18,13 +18,14 @@ function TextModal({ modalData }) {
     const { message, onClick, extraBtn, extraOnClick } = modalData;
 
     return (
-        <div onClick={onClick} className={styles.modalOverlay}>
-            <div className={`${styles.modal} ${isAccount ? styles.accModal : styles.HomeModal}`}>
+        <>
+            <div onClick={onClick} className={isAccount ? styles.txtModOverlayAcc : styles.txtModOverlayHome}></div>
+            <div className={`${styles.textModal} ${isAccount ? styles.accModal : styles.HomeModal}`}>
                 <p>{message}</p>
                 {extraBtn && <button className={styles.btn1} onClick={extraOnClick}>Confirm</button>}
-                <button style={{ marginTop: '0.8rem' }} className={styles.btn2} onClick={onClick}>{extraBtn ? 'Cancel' : 'OK'}</button>
+                <button style={{ marginTop: '0.8rem' }} className={isAccount ? styles.btn2 : styles.btn1} onClick={onClick}>{extraBtn ? 'Cancel' : 'OK'}</button>
             </div>
-        </div>
+        </>
     );
 };
 

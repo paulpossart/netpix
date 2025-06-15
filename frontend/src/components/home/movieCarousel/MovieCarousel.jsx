@@ -1,14 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
-import { callFetchPopular, callFetchVideosById } from '../../apiCalls/tmdbCalls';
-import chevronRight from '../../assets/chevron-right.svg';
-import MovieModal from './MovieModal';
+import { callFetchVideosById } from '../../../apiCalls/tmdbCalls';
+import { fetchVidKeyAndTrailers } from "../../../helpers/helperFunctions";
+import { infoModalContent } from "../../modal/InfoModal";
+import { useModal } from "../../../context/ModalContext";
+import styles from './movieCarousel.module.scss';
+import chevronRight from '../../../assets/chevron-right.svg';
 
-import styles from './movies.module.scss';
-
-function MovieCarousel({title, callFetch}) {
+function MovieCarousel({ title, callFetch }) {
     const [movies, setMovies] = useState([]);
     const scrollRef = useRef(null);
     const [modal, setModal] = useState(false);
+    const { setInfoModal } = useModal();
 
     const imgSrc = 'https://image.tmdb.org/t/p/';
     const width = 'w300';
@@ -24,14 +26,6 @@ function MovieCarousel({title, callFetch}) {
         }
         fetchPopular();
     }, [])
- 
-    //======================
-   {/* useEffect(() => {
-        console.log('movieArray:', movies)
-        if (scrollRef.current) console.log('scrollRef:', scrollRef.current.scrollLeft);
-
-    }, [movies]);*/}
-    //======================
 
     const handleClickRight = () => {
         scrollRef.current.scrollLeft += scrollRef.current.offsetWidth
@@ -42,27 +36,13 @@ function MovieCarousel({title, callFetch}) {
     }
 
     const handleClick = async (movie) => {
-        const movieVids = await callFetchVideosById(movie.id);
-        console.log('vids:', movieVids)
-
-        const movieClips = movieVids.filter(vid => vid.type === 'Clip');
-        const trailers = movieVids.filter(vid => vid.type === 'Trailer');
-
-        const randomIndexGenerator = (array) => {
-            const idx = Math.floor(array.length * Math.random());
-            return idx;
-        }
-
-        let vidKey;
-        if (movieClips.length > 0) vidKey = movieClips[randomIndexGenerator(movieClips)].key
-        else if (trailers.length > 0) vidKey = trailers[randomIndexGenerator(trailers)].key
-        else if (movieVids.length > 0) vidKey =  movieVids[randomIndexGenerator(movieVids)].key;
-        else vidKey = null;
-        console.log('key: ', vidKey);
-
-        setModal(
-            <MovieModal movie={movie} vidKey={vidKey} setModal={setModal} trailers={trailers} listItem={false} />
-        )
+        const { YTKey } = await fetchVidKeyAndTrailers(movie, callFetchVideosById);
+        infoModalContent({
+            setter: setInfoModal,
+            vidKey: YTKey,
+            movie: movie,
+            lisItem: false
+        });
     }
 
 
@@ -84,9 +64,8 @@ function MovieCarousel({title, callFetch}) {
                                 {movies.map((movie, index) =>
                                     <li
                                         onClick={() => handleClick(movie)}
-                                        key={index}>
-
-                                        {/*<h3 style={{ fontWeight: '900' }}>{movie.title}</h3>*/}
+                                        key={index}
+                                    >
                                         <img src={`${imgSrc}${width}${movie.poster_path}`} />
                                     </li>
                                 )}

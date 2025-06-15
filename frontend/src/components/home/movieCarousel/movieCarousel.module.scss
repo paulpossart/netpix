@@ -1,13 +1,23 @@
-@use '../../styles/global' as *;
-@use '../../styles/buttons';
+@use '../../../styles/global' as *;
+@use '../../../styles/buttons';
+
+
+
+
 
 .title {
     text-align: left;
     margin-left: 3vw;
+    max-width: 1280px;
+    display: block;
 
     font: {
         weight: 500;
         size: clamp(12px, 3vw, 24px);
+    }
+
+    @media (min-width: 1370px) {
+        margin: 0 auto;
     }
 }
 
@@ -15,9 +25,56 @@
     @include flex(row, flex-start, center);
     position: relative;
     width: 94vw;
+    max-width: 1290px;
     margin: 0 auto 2rem;
 
-    .searchContainer {
+    .clickerRight,
+    .clickerLeft {
+        cursor: pointer;
+        position: absolute;
+        z-index: 5;
+        background-color: rgba(255, 255, 255, 0.5);
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        padding: 1.5%;
+        transition: transform 0.1s linear;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        &:active {
+            transform: scale(0.9);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+
+        & img {
+            width: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-45%, -50%);
+        }
+    }
+
+    .clickerRight {
+        right: 1%;
+    }
+
+    .clickerLeft {
+        left: 1%;
+
+        & img {
+            transform: translate(-55%, -50%) scaleX(-1);
+
+        }
+    }
+
+    .moviesContainer {
         position: relative;
         margin: 0 auto;
         padding: 0;
@@ -54,10 +111,18 @@
                 }
 
                 @media (orientation: landscape) and (min-width: 800px) {
-                    flex: 0 0 16.5%;
-                    min-width: 16.5%;
-                    max-width: 16.5%;
+                    flex: 0 0 11.625%;
+                    min-width: 11.625%;
+                    max-width: 11.625%;
                 }
+
+                @media (orientation: landscape) and (min-width: 1200px) {
+                    flex: 0 0 9.1%;
+                    min-width: 9.1%;
+                    max-width: 9.1%;
+
+                }
+
 
                 & img {
                     width: 100%;
@@ -81,7 +146,11 @@
 
                     }
                 }
+
+
             }
+
+
         }
     }
 }

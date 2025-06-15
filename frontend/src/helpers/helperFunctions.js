@@ -31,15 +31,15 @@ const randomIndexGenerator = (array) => {
     return idx;
 }
 
-const fetchRandomClips = async (movie, callFetch) => {
+const fetchVidKeyAndTrailers = async (movie, callFetch) => {
     const vidArray = await callFetch(movie.id);
     const clipsArray = vidArray.filter(vid => vid.type === 'Clip');
     const trailerArray = vidArray.filter(vid => vid.type === 'Trailer');
 
     let vidKey;
-    if (clipsArray.length > 0) vidKey = clipsArray[randomIndexGenerator(movieClips)].key
-    else if (trailerArray.length > 0) vidKey = trailerArray[randomIndexGenerator(trailers)].key
-    else if (movieVids.length > 0) vidKey = vidArray[randomIndexGenerator(movieVids)].key;
+    if (clipsArray.length > 0) vidKey = clipsArray[randomIndexGenerator(clipsArray)].key
+    else if (trailerArray.length > 0) vidKey = trailerArray[randomIndexGenerator(trailerArray)].key
+    else if (vidArray.length > 0) vidKey = vidArray[randomIndexGenerator(vidArray)].key;
     else vidKey = null;
 
     return {
@@ -48,4 +48,4 @@ const fetchRandomClips = async (movie, callFetch) => {
     }
 }
 
-export { changeInput, isValidSubmission, fetchRandomClips };
+export { changeInput, isValidSubmission, randomIndexGenerator, fetchVidKeyAndTrailers };

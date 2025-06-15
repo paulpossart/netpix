@@ -1,0 +1,85 @@
+@use '../../../styles/global' as *;
+@use '../../../styles/buttons';
+
+.title {
+    text-align: left;
+    margin-left: 3vw;
+
+    font: {
+        weight: 500;
+        size: clamp(12px, 3vw, 24px);
+    }
+}
+
+.moviesWrapper {
+    @include flex(row, flex-start, center);
+    position: relative;
+    width: 94vw;
+    margin: 0 auto 2rem;
+
+    .bannerContainer {
+        position: relative;
+        margin: 0 auto;
+        padding: 0;
+        overflow: hidden;
+
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        z-index: 1;
+    }
+
+    .imgOverlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+
+        .bannerInfo {
+            width: 50%;
+            height: 100%;
+            @include flex(column, flex-end, flex-start);
+            padding: 2rem;
+
+
+            .logo {
+                width: clamp(120px, 75%, 600px);
+                padding-bottom: 2rem;
+
+                & h3 {
+                    text-align: left;
+
+                    font: {
+                        weight: 500;
+                        size: clamp(24px, 4vh, 32px)
+                    }
+                }
+            }
+
+            .btnDiv {
+                @include flex(row);
+                gap: 8px;
+
+                & button {
+                    @include flex(row);
+                    gap: 8px;
+
+                    & img {
+                        width: 30px;
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    & img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+
+        border-radius: 8px;
+        z-index: 3;
+        transition: transform 0.1s linear;
+    }
+}

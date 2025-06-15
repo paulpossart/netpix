@@ -1,11 +1,19 @@
 @use '../../styles/global' as *;
 @use '../../styles/buttons';
 
-.modalOverlay {
+.txtModOverlayAcc,
+.txtModOverlayHome {
     position: fixed;
     inset: 0;
-    background-color: rgba(255, 255, 255, 0.8);
     z-index: 1000;
+}
+
+.txtModOverlayAcc {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.txtModOverlayHome {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .accModal {
@@ -21,17 +29,20 @@
 
 }
 
-.modal {
+.HomeModal {
+    color: white;
+    background-color: rgb(24, 24, 24);;
+    border-radius: 8px;
+}
+
+
+.textModal {
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1001;
-
-
     padding: 0.8rem 1.6rem;
-    // margin: 1em 0 2em 0;
-
     text-align: center;
     min-width: 200px;
 
@@ -42,5 +53,90 @@
 
     & p {
         padding: 1.6rem 0;
+    }
+}
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.modal {
+    pointer-events: auto;
+    border-radius: 8px;
+    width: fit-content;
+    overflow-y: auto;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    text-align: center;
+    min-width: 200px;
+    background-color: rgb(24, 24, 24);
+
+    & iframe {
+        max-width: 80vw;
+        max-height: 45vw;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        @media (min-width: 700px) and (min-height: 500px) {
+            min-width: 600px;
+            min-height: 337.5px;
+        }
+
+        @media (min-width: 1000px) and (min-height: 600px) {
+            min-width: 900px;
+            min-height: 506.27px;
+        }
+    }
+
+    .btnContainer {
+        @include flex(row, center, center);
+        padding: 0 1em;
+
+        & h3 {
+            text-align: left;
+            font-weight: 500;
+            width: 50%;
+        }
+ 
+
+        .buttons  {
+            @include flex(row, space-around, center);
+            width: 50%;
+            padding-bottom: 4px;
+
+            & button {
+                position: relative;
+
+                & img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 20px
+                }
+
+            }
+        }
+    }
+}
+
+.links {
+    @include flex(row);
+
+    & a {
+        @include flex(row, center);
+        gap: 12px;
+        text-decoration: none;
+        margin: 8px;
+
+        & img {
+            width: 20px;
+        }
     }
 }
