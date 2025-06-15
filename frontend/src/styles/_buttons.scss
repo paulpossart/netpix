@@ -74,6 +74,8 @@
     border: solid 2px rgb(235, 57, 66);
 }
 
+// Modals =========================
+
 .iconBtn {
     @include button(transparent, rgba(255, 255, 255, 0.4));
     border: solid 1px white;
@@ -90,108 +92,34 @@
 }
 
 .primeBtn {
-    @extend .btn1;
-
-    background-color: rgb(0, 114, 249);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    //padding: 1.2rem;
-    //margin: 0.6em;
-    width: 100%;
-
-
-    transition:
-        background-color 0.2s linear,
-        transform 0.2s linear;
-
-    font: {
-        size: 16px;
-        family: Roboto;
-        weight: 600;
-    }
-
-    @media (min-height: 500px) {
-        padding: 1.2rem;
-        margin: 1.2rem 0;
-    }
-
-    // @media (hover: hover) and (pointer: fine) {
-    &:hover {
-        background-color: rgb(1, 90, 199);
-    }
-
-    //}
-
-    &:active {
-        transform: scale(0.99);
-        background-color: rgb(1, 90, 199);
-    }
+    @include button(rgb(0, 114, 249), rgb(1, 90, 199));
+    @include mainStyle;
 }
 
-.whtBtn {
-    @extend .btn1;
-    background-color: rgba(255, 255, 255, 1);
-    color: black;
-    padding: 0.4rem;
-    text-decoration: none;
+// Banner =========================
 
-    transition:
-        background-color 0.2s linear,
-        transform 0.2s linear;
+.whtBtn {
+    @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
+    @include mainStyle;
 
     font: {
-        size: clamp(12px, 2vh, 18px);
-        family: Roboto;
-        weight: 600;
+        size: clamp(12px, 2vw, 18px);
     }
 
-    @media (min-height: 500px) {
-        padding: 0.8rem;
-        margin: 0.8rem 0;
-    }
-
-
-    //@media (hover: hover) and (pointer: fine) {
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.9);
-    }
-
-    //}
-
-    &:active {
-        transform: scale(0.99);
-        background-color: rgba(255, 255, 255, 0.9);
-    }
+    padding: 0.25em 0.5em;
+    margin: 0.8rem 0.8rem 0.8rem 0;
 }
 
 .opaqueBtn {
-    @extend .whtBtn;
-    background-color: rgba(255, 255, 255, 0.4);
-    color: white;
-
-    transition:
-        background-color 0.2s linear,
-        transform 0.2s linear;
+    @include button(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+    @include mainStyle;
 
     font: {
-        size: clamp(12px, 2vh, 18px);
-        family: Roboto;
-        weight: 600;
+        size: clamp(12px, 2vw, 18px);
     }
 
-
-    // @media (hover: hover) and (pointer: fine) {
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    //}
-
-    &:active {
-        transform: scale(0.99);
-        background-color: rgba(255, 255, 255, 0.2);
-    }
+    padding: 0.25em 0.5em;
+    margin: 0.8rem 0.8rem 0.8rem 0;
 }
 
 // Searcbar =======================
@@ -201,11 +129,6 @@
     padding: 0.4rem 0.8rem;
     margin: 0 4px;
     font-size: 1.2rem;
-
-    /*@media (min-width: 800px) and (min-height: 400px) {
-        font-size: 1.4rem;
-        padding: 0.6rem 1.2rem
-    }*/
 }
 
 .clearSearchBtn {

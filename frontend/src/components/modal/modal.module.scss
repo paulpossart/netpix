@@ -31,7 +31,8 @@
 
 .HomeModal {
     color: white;
-    background-color: rgb(24, 24, 24);;
+    background-color: rgb(24, 24, 24);
+    ;
     border-radius: 8px;
 }
 
@@ -69,7 +70,7 @@
     width: fit-content;
     overflow-y: auto;
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1001;
@@ -78,19 +79,14 @@
     background-color: rgb(24, 24, 24);
 
     & iframe {
-        max-width: 80vw;
-        max-height: 45vw;
+        width: 95vw;
+        height: 95vw * (9 / 16);
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
 
-        @media (min-width: 700px) and (min-height: 500px) {
-            min-width: 600px;
-            min-height: 337.5px;
-        }
-
-        @media (min-width: 1000px) and (min-height: 600px) {
-            min-width: 900px;
-            min-height: 506.27px;
+        @media (orientation: landscape) {
+            width: 70vw;
+            height: 70vw * (9 / 16);
         }
     }
 
@@ -103,9 +99,9 @@
             font-weight: 500;
             width: 50%;
         }
- 
 
-        .buttons  {
+
+        .buttons {
             @include flex(row, space-around, center);
             width: 50%;
             padding-bottom: 4px;
