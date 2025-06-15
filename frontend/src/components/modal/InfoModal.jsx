@@ -31,13 +31,21 @@ function InfoModal({ modalData }) {
 
             textModalContent({
                 setter: setTextModal,
-                onClick: () => setTextModal(null),
+                onClick: () => {
+                    setTrailerModal(null),
+                        setInfoModal(null),
+                        setTextModal(null)
+                },
                 message: data?.message
             });
         } catch (err) {
             textModalContent({
                 setter: setTextModal,
-                onClick: () => setTextModal(null),
+                onClick: () => {
+                    setTrailerModal(null),
+                        setInfoModal(null),
+                        setTextModal(null)
+                },
                 message: err?.message
             });
         } finally {
@@ -91,7 +99,11 @@ function InfoModal({ modalData }) {
 
     return (
         <>
-            <div onClick={() => setInfoModal(null)} className={styles.modalOverlay}></div>
+            <div onClick={() => {
+                setTrailerModal(null);
+                setInfoModal(null);
+                setTextModal(null)
+            }} className={styles.modalOverlay}></div>
             <div className={styles.modal}>
                 {
                     vidKey ?
@@ -112,7 +124,12 @@ function InfoModal({ modalData }) {
 
                         <button onClick={listItem ? () => removeFromList(movie.id) : () => addToList(movie.id)} className={styles.iconBtn}><img src={listItem ? tickIcon : addIcon} /></button>
                         <button onClick={() => handleTrailers(movie, callFetchVideosById)} className={styles.iconBtn}><img src={trailerIcon} /></button>
-                        <button className={styles.iconBtn} onClick={() => setInfoModal(null)}><img src={closeIcon} /></button>
+                        <button className={styles.iconBtn} onClick={() => {
+
+                            setTrailerModal(null);
+                            setInfoModal(null);
+                            setTextModal(null)
+                        }}><img src={closeIcon} /></button>
 
                     </div>
                 </div>

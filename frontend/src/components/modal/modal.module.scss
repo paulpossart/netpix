@@ -80,13 +80,13 @@
 
     & iframe {
         width: 95vw;
-        height: 95vw * (9 / 16);
+        height: calc(95vw * (9 / 16));
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
 
         @media (orientation: landscape) {
             width: 70vw;
-            height: 70vw * (9 / 16);
+            height: calc(70vw * (9 / 16));
         }
     }
 

@@ -11,13 +11,18 @@ const trailerModalContent = ({
 }
 
 function TrailerModal({ modalData }) {
-    const { setTrailerModal } = useModal();
+    const { setTrailerModal, setInfoModal, setTextModal } = useModal();
     if (!modalData) return null;
     const { vidKey } = modalData;
 
     return (
         <>
-            <div onClick={() => setTrailerModal(null)} className={styles.modalOverlay}></div>
+            <div onClick={() => {
+                setTrailerModal(null);
+                setInfoModal(null);
+                setTextModal(null)
+            }
+            } className={styles.modalOverlay}></div>
             <div className={styles.modal}>
                 {
                     vidKey ?
@@ -32,13 +37,16 @@ function TrailerModal({ modalData }) {
                         : <p style={{ padding: '12px' }}>no video available</p>
                 }
 
-
                 <div className={styles.btnContainer}>
                     <div className={styles.buttons}>
-                        <button className={styles.iconBtn} onClick={() => setTrailerModal(null)}><img src={closeIcon} /></button>
+                        <button className={styles.iconBtn} onClick={() => {
+                            setTrailerModal(null);
+                            setInfoModal(null);
+                            setTextModal(null)
+                        }}><img src={closeIcon} /></button>
                     </div>
                 </div>
-            </div>
+            </div >
 
         </>
     );
