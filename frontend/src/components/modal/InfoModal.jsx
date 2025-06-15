@@ -51,13 +51,21 @@ function InfoModal({ modalData }) {
 
             textModalContent({
                 setter: setTextModal,
-                onClick: () => setTextModal(null),
+                onClick: () => {
+                    setTextModal(null);
+                    setTrailerModal(null);
+                    setInfoModal(null);
+                },
                 message: data?.message
             });
         } catch (err) {
             textModalContent({
                 setter: setTextModal,
-                onClick: () => setTextModal(null),
+                onClick: () => {
+                    setTextModal(null);
+                    setTrailerModal(null);
+                    setInfoModal(null);
+                },
                 message: err?.message
             });
         } finally {
@@ -69,8 +77,8 @@ function InfoModal({ modalData }) {
         console.log('called')
         const { trailers } = await fetchVidKeyAndTrailers(movie, callFetch);
         console.log(trailers)
-        
-         let trailerKey;
+
+        let trailerKey;
         if (trailers.length > 0) trailerKey = trailers[randomIndexGenerator(trailers)].key
         else trailerKey = null;
 

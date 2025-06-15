@@ -3,7 +3,7 @@ import { callFetchVideosById } from "../../../apiCalls/tmdbCalls";
 import { fetchVidKeyAndTrailers } from "../../../helpers/helperFunctions";
 import { infoModalContent } from "../../modal/InfoModal";
 import { useModal } from "../../../context/ModalContext";
-import styles from '../movies.module.scss'
+import styles from './searchResults.module.scss'
 
 function SearchResults() {
     const { queryResults } = useSearch();

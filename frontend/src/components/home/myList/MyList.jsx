@@ -1,27 +1,22 @@
 import { useEffect, useState, useRef } from 'react';
-import { callFetchDetailsById, callFetchVideosById } from '../../apiCalls/tmdbCalls';
-import chevronRight from '../../assets/chevron-right.svg';
-import MovieModal from './MovieModal';
-import dummyIcon from '../../assets/black-trailer.svg'
+import { callFetchDetailsById, callFetchVideosById } from '../../../apiCalls/tmdbCalls';
+import { fetchVidKeyAndTrailers } from "../../../helpers/helperFunctions";
+import { infoModalContent } from "../../modal/InfoModal";
+import { useModal } from "../../../context/ModalContext";
+import { useList } from '../../../context/ListContext';
+import styles from './myList.module.scss';
+import dummyIcon from '../../../assets/black-trailer.svg';
+import chevronRight from '../../../assets/chevron-right.svg';
 
-
-import styles from './movies.module.scss';
-import { callGetMovies } from '../../apiCalls/moviesCalls';
-import { useList } from '../../context/ListContext';
-
-function MyList({ title, callFetch }) {
-    const [fetch, setFetch] = useState([]);
+function MyList() {
     const [movies, setMovies] = useState([]);
     const scrollRef = useRef(null);
     const [modal, setModal] = useState(false);
-    const { myList, setMyList, fetchList } = useList();
+    const { myList } = useList();
+    const { setInfoModal } = useModal();
 
     const imgSrc = 'https://image.tmdb.org/t/p/';
     const width = 'w300';
-
-    useEffect(() => {
-        fetchList();
-    }, []);
 
     useEffect(() => {
         const getDetails = async (id) => {
@@ -50,15 +45,6 @@ function MyList({ title, callFetch }) {
     }, [myList])
 
 
-
-    //======================
-    /*useEffect(() => {
-            console.log('TheMovieArray:', fetch)
-            //if (scrollRef.current) console.log('scrollRef:', scrollRef.current.scrollLeft);
-    
-        }, [fetch]);*/
-    //======================
-
     const handleClickRight = () => {
         scrollRef.current.scrollLeft += scrollRef.current.offsetWidth
     }
@@ -68,27 +54,13 @@ function MyList({ title, callFetch }) {
     }
 
     const handleClick = async (movie) => {
-        const movieVids = await callFetchVideosById(movie.id);
-        console.log('vids:', movieVids)
-
-        const movieClips = movieVids.filter(vid => vid.type === 'Clip');
-        const trailers = movieVids.filter(vid => vid.type === 'Trailer');
-
-        const randomIndexGenerator = (array) => {
-            const idx = Math.floor(array.length * Math.random());
-            return idx;
-        }
-
-        let vidKey;
-        if (movieClips.length > 0) vidKey = movieClips[randomIndexGenerator(movieClips)].key
-        else if (trailers.length > 0) vidKey = trailers[randomIndexGenerator(trailers)].key
-        else if (movieVids.length > 0) vidKey = movieVids[randomIndexGenerator(movieVids)].key;
-        else vidKey = null;
-        console.log('key: ', vidKey);
-
-        setModal(
-            <MovieModal movie={movie} vidKey={vidKey} setModal={setModal} trailers={trailers} listItem={true} />
-        )
+        const { YTKey } = await fetchVidKeyAndTrailers(movie, callFetchVideosById);
+        infoModalContent({
+            setter: setInfoModal,
+            vidKey: YTKey,
+            movie: movie,
+            listItem: true
+        });
     }
 
 
@@ -98,10 +70,7 @@ function MyList({ title, callFetch }) {
             {
                 movies.length > 0 ? (
                     <div className={styles.moviesWrapper}>
-                        <div className={modal ? styles.popOut : styles.popIn} >
-                            {modal && modal}
-                        </div>
-                        <div onClick={() => setModal(false)} className={modal ? styles.overlayVisible : styles.overlayHidden} ></div>
+                
                         <div className={styles.clickerLeft} onClick={handleClickLeft}><img src={chevronRight} /></div>
                         <div ref={scrollRef} className={styles.listContainer}>
 
@@ -114,7 +83,6 @@ function MyList({ title, callFetch }) {
                                             onClick={() => handleClick(movie)}
                                             key={index}>
 
-                                            {/*<h3 style={{ fontWeight: '900' }}>{movie.title}</h3>*/}
                                             <img src={`${imgSrc}${width}${movie.poster_path}`} />
                                         </li>)
                                 )}
