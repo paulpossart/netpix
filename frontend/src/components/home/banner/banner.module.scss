@@ -31,13 +31,19 @@
     .imgOverlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 40%);
+        background: linear-gradient(0deg,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.8) 5%,
+                rgba(0, 0, 0, 0.4) 10%,
+                rgba(0, 0, 0, 0) 20%);
 
         .bannerInfo {
             width: 50%;
             height: 100%;
             @include flex(column, flex-end, flex-start);
-            padding: 2rem;
+            padding-left: 4%;
+            padding-bottom: 4%;
+           
 
 
             .logo {
