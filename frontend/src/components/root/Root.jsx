@@ -3,7 +3,9 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useModal } from '../../context/ModalContext';
 import Header from '../header/Header';
 import Footer from '../utils/footer/Footer';
-import { Modal } from '../modal/Modal';
+import { TextModal } from '../modal/TextModal';
+import { TrailerModal } from '../modal/TrailerModal';
+import { InfoModal } from '../modal/InfoModal';
 import styles from './root.module.scss';
 import netpixLogo from '../../assets/netpix-logo.svg';
 
@@ -14,7 +16,7 @@ function Root() {
         </div>
     );
 
-    const { modal } = useModal();
+    const { textModal, trailerModal, infoModal } = useModal();
 
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
@@ -54,15 +56,19 @@ function Root() {
                 window.removeEventListener('resize', spacerHeight);
             };
         }
-    }, [bigN]);
-
+    }, [bigN, path]);
 
     return (
         <>
             {
                 bigN ? bigN :
                     <div className={styles.root}>
-                        {modal && <Modal>{modal}</Modal>}
+                        {
+                            textModal ? <TextModal modalData={textModal} /> :
+                                trailerModal ? <TrailerModal modalData={trailerModal} /> :
+                                    infoModal ? <InfoModal modalData={infoModal} /> :
+                                        null
+                        }
                         <Header className={`${styles.header} ${isAccountPath ? styles.headerAccount : styles.headerHome}`} />
                         <div id='spacer'></div>
                         <div className={`${styles.outlet} ${isAccountPath ? styles.outletAccount : styles.outletHome}`}>

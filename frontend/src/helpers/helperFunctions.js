@@ -26,4 +26,26 @@ const isValidSubmission = (username, password) => {
     return true;
 };
 
-export { changeInput, isValidSubmission };
+const randomIndexGenerator = (array) => {
+    const idx = Math.floor(array.length * Math.random());
+    return idx;
+}
+
+const fetchVidKeyAndTrailers = async (movie, callFetch) => {
+    const vidArray = await callFetch(movie.id);
+    const clipsArray = vidArray.filter(vid => vid.type === 'Clip');
+    const trailerArray = vidArray.filter(vid => vid.type === 'Trailer');
+
+    let vidKey;
+    if (clipsArray.length > 0) vidKey = clipsArray[randomIndexGenerator(clipsArray)].key
+    else if (trailerArray.length > 0) vidKey = trailerArray[randomIndexGenerator(trailerArray)].key
+    else if (vidArray.length > 0) vidKey = vidArray[randomIndexGenerator(vidArray)].key;
+    else vidKey = null;
+
+    return {
+        YTKey: vidKey,
+        trailers: trailerArray
+    }
+}
+
+export { changeInput, isValidSubmission, randomIndexGenerator, fetchVidKeyAndTrailers };

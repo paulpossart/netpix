@@ -1,15 +1,24 @@
-import MovieCarousel from './MovieCarousel';
-import Banner from './Banner';
-import { callFetchPopular, callFetchUpcoming, callFetchNowPlaying } from '../../apiCalls/tmdbCalls';
-import { useState } from 'react';
-import SearchResults from './SearchResults';
+import { useEffect } from 'react';
+
 import { useSearch } from '../../context/SearchContext';
-import MyList from './MyList';
 import { useList } from '../../context/ListContext';
+import {
+    callFetchPopular,
+    callFetchUpcoming,
+    callFetchNowPlaying
+} from '../../apiCalls/tmdbCalls';
+import MovieCarousel from './movieCarousel/MovieCarousel';
+import SearchResults from './searchResults/SearchResults';
+import Banner from './banner/Banner';
+import MyList from './myList/MyList';
 
 function Home() {
-    const {queryResults} = useSearch();
-    const {myList} = useList()
+    const { queryResults } = useSearch();
+    const { myList, fetchList } = useList();
+
+    useEffect(() => {
+        fetchList();
+    }, []);
 
     return (
         <>
