@@ -12,11 +12,13 @@ Netpix is a full-stack task Netflix clone that uses the PERN stack. It allows us
 - **Auth:** JWTs with refresh/access token rotation
 
 ## TMDB API
+- Uses the popular third-party API: The Movie Database.
+
 - Create a watchlist.
 
 - Search the database for favourite movies.
 
-- Returns collections of movies: popular, upcoming, now in cinemas.
+- Return collections of movies: popular, upcoming, now in cinemas.
 
 - Video and logo endpoints are integrated seamlessly for a satisfying user experience.
 
