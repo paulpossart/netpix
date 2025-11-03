@@ -1,34 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate
+} from 'react-router-dom';
+
+import Home from './components/home/Home';
+import AuthMain from './components/auth/AuthMain';
+import Root from './Root';
+import NotFound from './components/auth/NotFound';
+
+import { useAuth } from './context/AuthContext';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) return <p>loading...</p>;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+
+        <Route path='/' element={user ? <Root user={user} /> : <Navigate to='/auth' replace />}>
+          <Route index element={<Home />} />
+        </Route>
+
+        <Route path='/auth' element={user ? <Navigate to='/' replace /> : <AuthMain />} />
+
+        <Route path='*' element={<NotFound />} />
+
+      </Routes>
+    </BrowserRouter>
   )
 }
 
