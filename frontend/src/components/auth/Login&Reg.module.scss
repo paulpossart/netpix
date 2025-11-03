@@ -1,0 +1,59 @@
+@use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+.LoginAndReg {
+    width: 100%;
+    padding: 0 1.6rem;
+    margin: 0;
+
+    @media (min-width: 500px) and (min-height: 400px) {
+        padding: 4rem 6rem;
+    }
+
+    & h2 {
+        padding: 0.4rem 0;
+        line-height: 1;
+
+        font: {
+            size: 3.2rem;
+            weight: 700;
+        }
+
+        @media (min-width: 500px) and (min-height: 500px) {
+            padding: 0 0 1.2rem 0;
+        }
+    }
+
+    & input {
+        background-color: rgb(15, 15, 15);
+        color: white;
+        border: solid 1px rgb(94, 94, 94);
+        border-radius: 4px;
+        font-size: 1.4rem;
+        padding: 0.9em;
+        margin: 0.9em 0;
+        width: 100%;
+
+        &::placeholder {
+            font-size: 1.4rem;
+        }
+
+        @media (max-height: 500px) {
+            margin: 0.2em 0;
+        }
+    }
+
+    & p {
+        margin: 0;
+        padding: 0.4em 0;
+    }
+}
+
+p.submitErr {
+    font-size: 1.4rem;
+    color: black;
+    background-color: rgb(216, 157, 49);
+    text-align: center;
+    border-radius: 4px;
+    padding: 0.75em; 
+}

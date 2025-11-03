@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+$netpixRed: rgb(229, 9, 20);
+$hoverRed: rgb(193, 17, 25);
+$greytext: rgb(116, 114, 116);
+$errorText: rgb(225, 0, 0);
+
+@mixin flex($dir: column, $jus: space-around, $align: center) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $jus;
+    align-items: $align;
+}
+
+%focusVisible {
+    outline: none;
+    box-shadow:
+        0 0 0 2px white,
+        0 0 0 4px blue;
+}
+
+.inputErr {
+    width: 100%;    
+    text-align: center;
+    color: $errorText;
+    font: {
+        size: 1.3rem;
+        weight: 500;
+    }
+
+    & img {
+        width: 1.5em;
+        vertical-align: middle;
+        margin-right: 0.4rem;
+    }
+
+    & span {
+        vertical-align: middle;
+        line-height: 1.5;
+    }
+}
+
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
