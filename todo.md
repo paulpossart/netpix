@@ -1,4 +1,10 @@
-vitest config,, front and back.
-proxy
-copy assets
-change html (+ reset CSS)
+config/ passport
+controllers
+routes, 
+app
+helpers
+
+try: `store.pruneExpiredSessions();` before the `const sessionMiddleware` to prune on startup. 
+
+frontend
+vitest config for testing React - jsdom, @testinglibrary, etc??
