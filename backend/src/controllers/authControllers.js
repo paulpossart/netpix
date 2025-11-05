@@ -1,13 +1,22 @@
 import passport from '../config/passport.js';
 import { createUser } from '../queries/userQueries.js';
 import { sanitiseUser } from '../utils/authHelpers.js';
+import { isValidInput, httpErr } from '../utils/authHelpers.js';
 
 const isProd = process.env.NODE_ENV === 'production';
 
 export const registerUser = async (req, res, next) => {
-    const { username, password, confirmPassword } = req.body;
-
     try {
+        const { username, password, confirmPassword } = req.body;
+
+        if (
+            !isValidInput('username', username, 1, 30)
+            || !isValidInput('password', password, 6, 30)
+            || password !== confirmPassword
+        ) {
+            return next(httpErr('Invalid input', 400, 'Registration Error'));
+        }
+
         const newUser = await createUser(username, password, confirmPassword);
         req.logIn(newUser, (err) => {
             if (err) return next(err);
@@ -46,6 +55,7 @@ export const login = (req, res, next) => {
 export const logout = (req, res, next) => {
     req.logOut(err => {
         if (err) return next(err);
+        
         req.session.destroy((err) => {
             if (err) return next(err);
 

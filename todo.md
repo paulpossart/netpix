@@ -1,10 +1,6 @@
-config/ passport
-controllers
-routes, 
-app
-helpers
+Tighten up authTest. Finish authTest, do route test, app test
 
-try: `store.pruneExpiredSessions();` before the `const sessionMiddleware` to prune on startup. 
+WCAG colour tests
 
 frontend
 vitest config for testing React - jsdom, @testinglibrary, etc??

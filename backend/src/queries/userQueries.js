@@ -1,19 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 import pool from '../config/db.js';
-import { isValidInput, httpErr } from '../utils/authHelpers.js';
 
 export const createUser = async (username, password, confirmPassword) => {
 
     const id = uuidv4();
-
-    if (
-        !isValidInput('username', username, 1, 30)
-        || !isValidInput('password', password, 6, 30)
-        || password !== confirmPassword
-    ) {
-        throw httpErr('Invalid input', 400, 'Registration Error');
-    }
 
     const checkUsername = await pool.query(
         'SELECT * FROM netpix.users WHERE username = $1',
