@@ -1,4 +1,5 @@
-Tighten up authTest. Finish authTest, do route test, app test
+Do route test, app test
+dont mock sanitseUser outcome in unit tests?
 
 WCAG colour tests
 
