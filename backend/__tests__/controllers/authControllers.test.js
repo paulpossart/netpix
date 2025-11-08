@@ -1,3 +1,5 @@
+vi.mock('../../src/queries/userQueries');
+
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { registerUser, login, logout, authenticateUser } from '../../src/controllers/authControllers';
 import { createUser } from '../../src/queries/userQueries';
@@ -5,8 +7,6 @@ import * as authHelpers from '../../src/utils/authHelpers';
 import passport from '../../src/config/passport';
 
 const isProd = process.env.NODE_ENV === 'production';
-
-vi.mock('../../src/queries/userQueries');
 
 describe('registerUser', () => {
     let req, res, next;
@@ -35,9 +35,7 @@ describe('registerUser', () => {
             id: 1, username: 'username', password_hash: 'hash'
         });
 
-        vi.spyOn(authHelpers, 'sanitiseUser').mockReturnValue({
-            id: 1, username: 'username'
-        });
+        vi.spyOn(authHelpers, 'sanitiseUser');
 
         await registerUser(req, res, next);
 
@@ -123,9 +121,7 @@ describe('login', () => {
             };
         });
 
-        vi.spyOn(authHelpers, 'sanitiseUser').mockReturnValue({
-            id: 1, username: 'username'
-        });
+        vi.spyOn(authHelpers, 'sanitiseUser');
 
         login(req, res, next);
 
@@ -244,9 +240,7 @@ describe('authenticateUser', () => {
             user: { id: 1, username: 'username', password_hash: 'hash' }
         };
 
-        vi.spyOn(authHelpers, 'sanitiseUser').mockReturnValue({
-            id: 1, username: 'username'
-        });
+        vi.spyOn(authHelpers, 'sanitiseUser');
 
         authenticateUser(req, res);
 
