@@ -2,8 +2,8 @@
 
 $netpixRed: rgb(229, 9, 20);
 $hoverRed: rgb(193, 17, 25);
-$greytext: rgb(116, 114, 116);
-$errorText: rgb(225, 0, 0);
+$greytext: rgb(128, 128, 128);
+$errorText: rgb(250, 26, 26);
 
 @mixin flex($dir: column, $jus: space-around, $align: center) {
     display: flex;

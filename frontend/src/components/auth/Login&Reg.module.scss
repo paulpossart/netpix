@@ -27,7 +27,7 @@
     & input {
         background-color: rgb(15, 15, 15);
         color: white;
-        border: solid 1px rgb(94, 94, 94);
+        border: solid 1px $greytext;
         border-radius: 4px;
         font-size: 1.4rem;
         padding: 0.9em;
@@ -36,6 +36,7 @@
 
         &::placeholder {
             font-size: 1.4rem;
+            color: $greytext;
         }
 
         @media (max-height: 500px) {
