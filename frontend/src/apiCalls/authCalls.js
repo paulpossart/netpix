@@ -11,27 +11,28 @@ const apiJsonFetch = async (url, methodStr, options = {}) => {
     if (!response.ok) {
         throw new Error(data.message || `Request failed with status ${response.status}`)
     }
+   
     return data;
 };
 
 export const callRegisterUser = async (username, password, confirmPassword) => {
-    return apiJsonFetch('api/auth/register-user', 'POST', {
+    return apiJsonFetch('/api/auth/register-user', 'POST', {
         body: JSON.stringify({ username, password, confirmPassword })
     });
 };
 
 export const callAuthenticateUser = async () => {
-    return apiJsonFetch('api/auth/authenticate-user', 'GET');
+    return apiJsonFetch('/api/auth/authenticate-user', 'GET');
 };
 
 export const callLogin = async (username, password) => {
-    return apiJsonFetch('api/auth/login', 'POST', {
+    return apiJsonFetch('/api/auth/login', 'POST', {
         body: JSON.stringify({ username, password })
     });
 };
 
 export const callLogout = async () => {
-    const response = await fetch('api/auth/logout', {
+    const response = await fetch('/api/auth/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
     });

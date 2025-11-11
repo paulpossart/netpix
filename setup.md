@@ -32,17 +32,14 @@ Create a Github repo with licence. Copy url. From the Projects folder: git clone
 
 **Create backend folder**
 - npm init -y
-- npm install bcrypt connect-pg-simple cookie-parser cors dotenv express express-session express-rate-limit helmet passport passport-local pg uuid validator
-- npm install -D ts-node-dev typescript jest supertest
-    - npx tsc --init
-    - "scripts": {
-        "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-        "build": "tsc",
-        "start": "node dist/index.js",
-        "test": "jest"
+- npm install bcrypt connect-pg-simple dotenv express express-rate-limit helmet pg uuid validator
+- optional installs: cookie-parser cors express-session passport passport-local 
+- npm install -D vitest supertest nodemon
+   "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "vitest"
     }
-    - use npm run dev
-    - run a second terminal with npx tsc --watch for compile errors, although VS code should catch these. 
 
 **For modern imports:**
 - add "type": "module" to package.json at the top level
@@ -52,8 +49,7 @@ Create a Github repo with licence. Copy url. From the Projects folder: git clone
 add: .env, node_modules, and *.log to .gitignore
 
 ## Auth - need to solve sameSite issue
-- npm install csurf
-- csurf needed for sameSite: none cookies
+- csrf protection needed for sameSite: none cookies
 
 - simple regex: /^[^<>{};\\]*$/ (check the actual .md file, not the Preview)
 
@@ -71,42 +67,12 @@ add: .env, node_modules, and *.log to .gitignore
 - npm install -D sass
 
 - Vitest/jest
-- npm install --save-dev vitest @testing-library/react @testing-library/jest-dom jsdom
+- npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom
 
 then: "scripts": {
   "test": "vitest",
   "test:watch": "vitest --watch"
 }
-
-vite.config:
-/// <reference types="vitest/config" />
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler']],
-      },
-    }),
-  ],
-    server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true
-      }
-    }
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/setupTests.ts',
-    css: true,
-  }
-})
 
 If you need global setup (like extending expect), create src/setupTests.ts: 
 
@@ -118,31 +84,60 @@ use:
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
-at the top of the file
+vite config with proxy and test:
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-also need a src/vite-env.d.ts, with:
-/// <reference types="vite/client" />
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/test/setup.js',
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      }
+    }
+  },
+})
+```
 
-# Jest
-## backend
-npm i -D jest supertest ts-jest @types/jest
-npx ts-jest config:init //initialise jest config.
+set up Mock Service Worker for api fetch mocking:
+npm install -D msw
 
-"scripts": {
-  "test": "jest",
-  "test:watch": "jest --watch"
-}
+```js
+// src/test/handlers/authHandlers.js (eg):
+import { rest } from 'msw';
 
-tsconfig, add:
-"compilerOptions": {
-  ...
-  "types": ["node", "jest"]
-}
+export const authHandlers = [
+  rest.post('/api/login', (req, res, ctx) => {
+    return res(ctx.json({ message: 'Login successful', user: { username: 'username' } }));
+  }),
+  rest.post('/api/logout', (req, res, ctx) => {
+    return res(ctx.json({ message: 'Logout successful' }));
+  }),
+];
 
+// src/test/server.js
+import { setupServer } from 'msw/node';
+import { authHandlers } from './handlers/authHandlers';
 
+export const server = setupServer(...authHandlers);
 
+// src/test/setup.js
+import '@testing-library/jest-dom';
+import { server } from './server'
 
-
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+```
 
 
 ### Connect to GitHub

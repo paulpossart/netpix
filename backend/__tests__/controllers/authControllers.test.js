@@ -35,7 +35,7 @@ describe('registerUser', () => {
             id: 1, username: 'username', password_hash: 'hash'
         });
 
-        vi.spyOn(authHelpers, 'sanitiseUser');
+        vi.spyOn(authHelpers, 'sanitiseUser')
 
         await registerUser(req, res, next);
 
