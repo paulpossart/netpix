@@ -1,6 +1,6 @@
 @use './global' as *;
 
-@mixin button($bgCol: transparent, $bgColHover: transparent, $col: white) {
+@mixin button($bgCol: $netpixRed, $bgColHover: $hoverRed, $col: white) {
     cursor: pointer;
     border: none;
     border-radius: 4px;
@@ -41,8 +41,8 @@
 
 // Main Buttons ===================
 
-.bigRedBtn {
-    @include button($netpixRed, $hoverRed);
+.redBtn {
+    @include button;
     @include mainStyle;
 }
 

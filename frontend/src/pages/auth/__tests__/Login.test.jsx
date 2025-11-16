@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { server } from '../../../test/server';
 import { http, HttpResponse } from 'msw';
 import { AuthProvider } from '../../../context/AuthContext';
-import Login from '../AuthMain';
+import Login from '../Login';
 import { useAuth } from '../../../context/AuthContext';
 
 function TestHomePage() {

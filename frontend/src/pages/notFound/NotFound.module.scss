@@ -1,0 +1,77 @@
+@use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+%textShadow {
+    text-shadow: -1px 1px 4px black;
+}
+
+.notFound {
+    background-image: url(../../assets/bg-lost-in-space.png);
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: -1;
+    }
+
+    .header {
+        grid-area: header;
+        position: fixed;
+        width: 100%;
+        transition: background-color 0.25s linear;
+        z-index: 10;
+
+        background-color: green;
+        height: 10vh;
+    }
+
+    & div {
+        position: relative;
+        top: 24%;
+        margin: 0 20vw;
+
+        & h3 {
+            @extend %textShadow;
+            line-height: 2.5;
+
+            font: {
+                size: clamp(28px, 6vw, 68px);
+                weight: 600;
+            }
+        }
+
+        & p {
+            @extend %textShadow;
+            margin-bottom: 2rem;
+
+            font: {
+                size: clamp(16px, 3vw, 28px);
+            }
+        }
+
+        & aside {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            margin: 12px 24px;
+
+            font: {
+                size: clamp(10px, 2vw, 16px);
+                weight: 300;
+            }
+
+            & span {
+                @extend %textShadow;
+                font-weight: 600;
+                ;
+            }
+        }
+    }
+}

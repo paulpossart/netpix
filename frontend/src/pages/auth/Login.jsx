@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { isValidSubmission, handleInputChange } from '../utils/helpers';
+import { isValidSubmission, handleInputChange } from '../../utils/helpers';
 import styles from './Login&Reg.module.scss';
 import errorIcon from '../../assets/error.svg';
 
@@ -93,17 +93,17 @@ function Login({ setView }) {
 
                 <button
                     type='submit'
-                    className={styles.bigRedBtn}
+                    className={styles.redBtn}
                     style={{ marginTop: '1rem' }}
                 >
-                    Sign in
+                    Sign In
                 </button>
 
                 <p>New to Netpix?
                     <button
                         type='button'
-                        onClick={() => setView('register')}
                         className={styles.textBtn}
+                        onClick={() => setView('register')}
                         style={{ marginLeft: '0.8rem' }}
                     >
                         Sign up now.

@@ -1,13 +1,13 @@
 import { useAuth } from '../../context/AuthContext';
-import { useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Home() {
-const {logout} = useAuth();
-const {user} = useOutletContext();
+const {user, logout} = useAuth();
 
   return (
     <>
       <p>Welcome, {user.username}</p>
+      <Link to='/account'>Account</Link>
       <button onClick={logout}>Logout</button>
     </>
   )

@@ -1,14 +1,17 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { AuthProvider } from '../../../context/AuthContext';
+import { MemoryRouter } from 'react-router-dom';
 import AuthMain from '../AuthMain';
 
 describe('AuthMain', () => {
     beforeEach(() => {
         render(
-            <AuthProvider>
-                <AuthMain />
-            </AuthProvider>
+            <MemoryRouter>
+                <AuthProvider>
+                    <AuthMain />
+                </AuthProvider>
+            </MemoryRouter>
         );
     });
 

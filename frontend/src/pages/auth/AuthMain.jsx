@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Login from './Login';
 import Register from './Register';
 import styles from './AuthMain.module.scss';
+import Footer from '../../components/footer/Footer';
 
 function AuthMain() {
     const [view, setView] = useState('login');
@@ -31,6 +32,8 @@ function AuthMain() {
                         : <Register setView={setView} />
                 }
             </section>
+
+            <Footer />
 
         </main>
     )

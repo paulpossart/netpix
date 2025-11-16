@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { handleInputChange, isValidSubmission } from '../utils/helpers';
+import { handleInputChange, isValidSubmission } from '../../utils/helpers';
 import styles from './Login&Reg.module.scss';
 import errorIcon from '../../assets/error.svg';
 
@@ -134,16 +134,16 @@ function Register({ setView }) {
 
                 <button
                     type='submit'
-                    className={styles.bigRedBtn}
+                    className={styles.redBtn}
                     style={{ marginTop: '1rem' }}
                 >
-                    Become a Member!
+                    New Become a Member!
                 </button>
 
                 <button
                     type='button'
-                    onClick={() => setView('login')}
                     className={styles.textBtn}
+                    onClick={() => setView('login')}
                     style={{ marginTop: '1rem' }}
                 >
                     Go back to sign in.
