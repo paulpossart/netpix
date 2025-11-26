@@ -1,0 +1,99 @@
+@use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+%textShadow {
+    text-shadow: -1px 1px 4px black;
+}
+
+.notFound {
+    background-image: url(../../assets/bg-lost-in-space.png);
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: -1;
+    }
+
+    & header {
+        position: fixed;
+        width: 100%;
+        transition: background-color 0.25s linear;
+        z-index: 10;
+        background-color: transparent;
+        height: auto;
+        text-align: left;
+        padding: 4px 16px;
+
+        @media (min-height: 400px) and (min-width: 550px) {
+            padding: 1vmin 6vmax;
+        }
+    }
+
+    .logo {
+        color: $netpixRed;
+        line-height: 1;
+        display: inline-block;
+        text-decoration: none;
+        transform: translateY(2px);
+
+        font: {
+            family: 'Bebas Neue';
+            size: 2.4rem;
+        }
+
+        @media (min-height: 400px) and (min-width: 550px) {
+            font-size: clamp(24px, 4vw, 40px);
+        }
+    }
+
+    & div {
+        position: relative;
+        top: 20vh;
+        margin: 0 25vw;
+
+
+        & h2 {
+            @extend %textShadow;
+            line-height: 2.5;
+
+            font: {
+                size: clamp(28px, 6vw, 68px);
+                weight: 600;
+            }
+        }
+
+        & p {
+            @extend %textShadow;
+            margin-bottom: 2rem;
+
+            font: {
+                size: clamp(16px, 2vw, 28px);
+            }
+        }
+
+        & aside {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            margin: 12px 24px;
+
+            font: {
+                size: clamp(10px, 2vw, 16px);
+                weight: 300;
+            }
+
+            & span {
+                @extend %textShadow;
+                font-weight: 600;
+                ;
+            }
+        }
+    }
+}

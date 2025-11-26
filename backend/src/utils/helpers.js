@@ -1,0 +1,71 @@
+import bcrypt from 'bcrypt';
+import validator from 'validator';
+import rateLimit from 'express-rate-limit';
+import { getUserByUsername } from '../queries/usersQueries.js';
+
+const isProd = process.env.NODE_ENV === 'production';
+
+export const isValidInput = (type, input, min, max) => {
+    const safeRegex = /^[^<>{};\\]*$/;
+    if (
+        typeof input !== 'string'
+        || !validator.isLength(input, { min, max })
+    ) {
+        return false;
+    }
+    if (type === 'password') return true;
+    if (!input.trim()) return false;
+    if (type === 'username') return validator.matches(input, safeRegex);
+    return false;
+};
+
+export const httpErr = (message, status, name) => {
+    const err = new Error(message);
+    err.status = status;
+    err.name = name;
+    return err;
+};
+
+export const rateCheck = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 10,
+    message: {
+        message: 'Too many requests, try again later.'
+    }
+});
+
+export const checkPassword = async (username, password) => {
+    const user = await getUserByUsername(username);
+    if (!user) return false;
+
+    const isMatch = await bcrypt.compare(password, user.password_hash);
+    return isMatch;
+};
+
+export const sanitiseUser = (user) => {
+    const { password_hash, ...safeUser } = user;
+    return safeUser;
+};
+
+export const signOff = (req, res, next, status = 200, msgContent = 'Logged out') => {
+    req.logOut(err => {
+        if (err) return next(err);
+
+        req.session.destroy((err) => {
+            if (err) return next(err);
+
+            res.clearCookie('connect.sid', {
+                path: '/',
+                httpOnly: true,
+                secure: isProd,
+                sameSite: 'lax'
+            });
+
+            if (status === 204) return res.sendStatus(status);
+
+            return res.status(status).json({
+                message: msgContent,
+            });
+        });
+    });
+};

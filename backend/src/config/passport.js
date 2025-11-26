@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { getUserByUsername, getUserById } from '../queries/userQueries.js';
-import { checkPassword } from '../utils/authHelpers.js';
+import { getUserByUsername, getUserById } from '../queries/usersQueries.js';
+import { checkPassword } from '../utils/helpers.js';
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -24,12 +24,15 @@ passport.use(new LocalStrategy(
 ));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    return done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
     try {
         const user = await getUserById(id);
+        if (!user) {
+            return done(null, false);
+        }
         done(null, user);
     } catch (err) {
         done(err);

@@ -1,0 +1,50 @@
+@use './styles/global' as *;
+
+.Root {
+    display: grid;
+    grid-template-areas: 'header' 'outlet';
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+
+    .header {
+        grid-area: header;
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+        transition:
+            background-color 0.25s linear,
+            border-color 0.25s linear;
+    }
+
+    .homeHeader {
+        background-color: rgba(0, 0, 0, 0.8);
+        border-bottom: solid 1px rgba(0, 0, 0, 0.8);
+    }
+
+    .accHeader {
+        background-color: white;
+        border-bottom: solid 1px rgb(230, 230, 230);
+
+        @media (min-height: 400px) and (min-width: 1280px) {
+            padding: 0 6.25%;
+        }
+    }
+
+    .outlet {
+        grid-area: outlet;
+        padding-bottom: 40px;
+        transition:
+            background-color 0.25s linear,
+            color 0.25s linear;
+    }
+
+    .outletAccount {
+        color: black;
+        background-color: $accBgCol;
+    }
+
+    .outletHome {
+        color: white;
+        background-color: black;
+    }
+}

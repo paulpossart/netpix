@@ -1,0 +1,50 @@
+@use '../../styles/global' as *;
+
+.authPage {
+    position: relative;
+    max-width: 100vw;
+    min-height: 100vh;
+    text-align: left;
+    background-image: url(../../assets/auth-bg.png);
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: -1;
+
+        @media (min-width: 500px) and (min-height: 400px) {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    }
+
+    & h1 {
+        padding: 2rem 0 1rem 1.6rem;
+        color: $netpixRed;
+        z-index: 10;
+        line-height: 1;
+
+        font: {
+            family: 'Bebas Neue';
+            size: 3.2rem;
+        }
+
+        @media (min-height: 550px) and (min-width: 750px) {
+            padding: 8vmin 16vmax;
+            font-size: clamp(32px, 4.5vw, 55px);
+        }
+    }
+
+    & section {
+        width: clamp(320px, 100%, 450px);
+        margin: 0 auto;
+
+        @media (min-width: 500px) and (min-height: 400px) {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    }
+}

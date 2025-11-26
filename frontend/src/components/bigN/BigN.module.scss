@@ -1,0 +1,30 @@
+@keyframes enlargeN {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        width: 1000px;
+        opacity: 0;
+    }
+}
+
+.bigN {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+
+    & img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: enlargeN 2s linear;
+    }
+}

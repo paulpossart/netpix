@@ -1,0 +1,110 @@
+@use '../../styles/global' as *;
+
+.Account {
+    height: 100%;
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        display: grid;
+        grid-template-areas: 'nav main';
+        grid-template-columns: 1fr 2fr;
+        padding-top: 1%;
+    }
+
+    @media (min-height: 400px) and (min-width: 1280px) {
+        margin: 0 6.25%;
+    }
+}
+
+.accNav {
+    padding-left: 16px;
+    border-bottom: solid 1px rgb(230, 230, 230);
+    width: 100%;
+
+    @media (min-height: 400px) and (min-width: 550px) {
+        padding: 0 6vmax;
+        border: none;
+    }
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        grid-area: nav;
+    }
+
+    & ul {
+        @include flex(row, flex-start, center);
+
+        @media (min-height: 400px) and (min-width: 960px) {
+            @include flex(column, center, flex-start);
+            gap: 1.6rem;
+        }
+
+        .toHome {
+            display: none;
+
+            @media (min-height: 400px) and (min-width: 960px) {
+                display: block;
+                margin-bottom: 4rem;
+            }
+        }
+
+        & li {
+            margin-right: 1.6rem;
+
+            @media (min-height: 400px) and (min-width: 960px) {
+                border-radius: 4px;
+                width: 100%;
+                padding: 0.4rem;
+                padding-left: 1.4rem;
+
+                &:active {
+                    background-color: $accLnkHvr;
+                }
+            }
+
+            @media (hover: hover) and (pointer: fine) and (min-height: 400px) and (min-width: 960px) {
+                &:hover {
+                    background-color: $accLnkHvr;
+                }
+            }
+
+            & img {
+                width: 28px;
+            }
+        }
+    }
+}
+
+.activeLink,
+.inactiveLink {
+    display: block;
+    padding: 0.4rem 0;
+    color: black;
+    text-decoration: none;
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        @include flex(row, flex-start, center);
+        gap: 12px;
+    }
+}
+
+.activeLink {
+    border-bottom: solid 3px $netpixRed;
+    font-weight: 600;
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        border: none;
+    }
+}
+
+.inactiveLink {
+    border-bottom: solid 3px $accBgCol;
+
+    @media (hover: hover) and (pointer: fine) and (max-height: 399px) and (max-width: 959px) {
+        &:hover {
+            color: rgb(150, 150, 150);
+        }
+    }
+
+    @media (min-height: 400px) and (min-width: 960px) {
+        border: none;
+    }
+}

@@ -1,6 +1,6 @@
 @use './global' as *;
 
-@mixin button($bgCol: transparent, $bgColHover: transparent, $col: white) {
+@mixin button($bgCol: $netpixRed, $bgColHover: $hoverRed, $col: white) {
     cursor: pointer;
     border: none;
     border-radius: 4px;
@@ -36,19 +36,37 @@
     padding: 0.75em;
     width: 100%;
     display: block;
-    width: 100%;
 }
 
 // Main Buttons ===================
 
-.bigRedBtn {
-    @include button($netpixRed, $hoverRed);
+.redBtn {
+    @include button;
     @include mainStyle;
 }
 
 .textBtn {
     @include button(transparent, transparent, white);
+
     &:hover {
         text-decoration: underline;
     }
+}
+
+.whiteBtn {
+    @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
+    @include mainStyle;
+
+    font: {
+        size: clamp(12px, 2vw, 18px);
+    }
+
+    width: auto;
+    display: inline-block;
+}
+
+.imgBtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
 }

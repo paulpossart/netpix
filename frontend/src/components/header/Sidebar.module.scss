@@ -1,0 +1,88 @@
+@use '../../styles//global' as *;
+@use '../../styles/buttons';
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    //zindex?
+    //pointer events?
+}
+
+.homeOverlay {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.accOverlay {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.sidebar {
+    // @include flex(column);
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 200px;
+    height: 300px;
+    font-weight: 500;
+    margin-right: 16px;
+    visibility: visible;
+    opacity: 1;
+    //zind?
+    transition:
+        opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out;
+
+    .sidebarDiv {
+        @include flex;
+        width: 100%;
+        height: 33%;
+    }
+
+    @media (min-height: 400px) and (min-width: 550px) {
+        margin-right: 6vmax;
+    }
+}
+
+.homeSidebar {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    & a {
+        @extend .textBtn;
+        color: white;
+    }
+
+    & button {
+        color: white;
+    }
+
+    .sidebarDivCentre {
+        border-bottom: solid rgb(64, 64, 64) 1px;
+        border-top: solid rgb(64, 64, 64) 1px;
+    }
+}
+
+.accSidebar {
+    color: black;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow:
+        1px 1px 8px rgb(215, 215, 215),
+        -1px 1px 8px rgb(215, 215, 215),
+        1px -1px 8px rgb(215, 215, 215),
+        -1px -1px 8px rgb(215, 215, 215);
+
+    & a {
+        @extend .textBtn;
+        color: black;
+    }
+
+    & button {
+        color: black;
+    }
+}
+
+.closeSidebar {
+    visibility: hidden;
+    opacity: 0;
+}
