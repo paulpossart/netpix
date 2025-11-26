@@ -5,11 +5,11 @@ function Home() {
 const {user, logout} = useAuth();
 
   return (
-    <>
+    <div>
       <p>Welcome, {user.username}</p>
       <Link to='/account'>Account</Link>
       <button onClick={logout}>Logout</button>
-    </>
+    </div>
   )
 }
 

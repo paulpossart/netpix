@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { callRegisterUser, callAuthenticateUser, callLogin, callLogout } from '../apiCalls/authCalls';
+import { callLogin, callLogout, callLogoutEverywhere } from '../apiCalls/authCalls';
+import { callRegisterUser, callAuthenticateUser } from '../apiCalls/usersCalls';
 
 const AuthContext = createContext();
 const useAuth = () => useContext(AuthContext);
@@ -15,7 +16,7 @@ function AuthProvider({ children }) {
                 if (data?.user) setUser(data.user);
                 else setUser(null);
             } catch (err) {
-                setUser(null);
+                if (err.message.includes('401')) setUser(null);
             } finally {
                 setIsLoading(false);
             }
@@ -54,8 +55,19 @@ function AuthProvider({ children }) {
         }
     };
 
+    const logoutAll = async () => {
+        try {
+            await callLogoutEverywhere();
+            setUser(null);
+        } catch (err) {
+            throw err;
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ user, register, login, logout, isLoading }}>
+        <AuthContext.Provider value={{
+            user, register, login, logout, logoutAll, isLoading
+        }}>
             {children}
         </AuthContext.Provider>
     );

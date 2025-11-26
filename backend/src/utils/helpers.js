@@ -1,7 +1,9 @@
 import bcrypt from 'bcrypt';
 import validator from 'validator';
 import rateLimit from 'express-rate-limit';
-import { getUserByUsername } from '../queries/userQueries.js';
+import { getUserByUsername } from '../queries/usersQueries.js';
+
+const isProd = process.env.NODE_ENV === 'production';
 
 export const isValidInput = (type, input, min, max) => {
     const safeRegex = /^[^<>{};\\]*$/;
@@ -43,4 +45,27 @@ export const checkPassword = async (username, password) => {
 export const sanitiseUser = (user) => {
     const { password_hash, ...safeUser } = user;
     return safeUser;
+};
+
+export const signOff = (req, res, next, status = 200, msgContent = 'Logged out') => {
+    req.logOut(err => {
+        if (err) return next(err);
+
+        req.session.destroy((err) => {
+            if (err) return next(err);
+
+            res.clearCookie('connect.sid', {
+                path: '/',
+                httpOnly: true,
+                secure: isProd,
+                sameSite: 'lax'
+            });
+
+            if (status === 204) return res.sendStatus(status);
+
+            return res.status(status).json({
+                message: msgContent,
+            });
+        });
+    });
 };

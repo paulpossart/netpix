@@ -4,7 +4,7 @@ import styles from './BigN.module.scss';
 function BigN() {
     return (
         <div className={styles.bigN}>
-            <img src={netpixLogo} />
+            <img src={netpixLogo} alt='' />
         </div>
     );
 };

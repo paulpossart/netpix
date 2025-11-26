@@ -36,7 +36,6 @@
     padding: 0.75em;
     width: 100%;
     display: block;
-    width: 100%;
 }
 
 // Main Buttons ===================
@@ -48,7 +47,26 @@
 
 .textBtn {
     @include button(transparent, transparent, white);
+
     &:hover {
         text-decoration: underline;
     }
+}
+
+.whiteBtn {
+    @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
+    @include mainStyle;
+
+    font: {
+        size: clamp(12px, 2vw, 18px);
+    }
+
+    width: auto;
+    display: inline-block;
+}
+
+.imgBtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
 }

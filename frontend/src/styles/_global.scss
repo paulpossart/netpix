@@ -2,8 +2,12 @@
 
 $netpixRed: rgb(229, 9, 20);
 $hoverRed: rgb(193, 17, 25);
+
 $greytext: rgb(128, 128, 128);
 $errorText: rgb(250, 26, 26);
+
+$accBgCol: rgb(250, 250, 250);
+$accLnkHvr: rgb(226, 226, 226);
 
 @mixin flex($dir: column, $jus: space-around, $align: center) {
     display: flex;
@@ -17,27 +21,6 @@ $errorText: rgb(250, 26, 26);
     box-shadow:
         0 0 0 2px white,
         0 0 0 4px blue;
-}
-
-.inputErr {
-    width: 100%;    
-    text-align: center;
-    color: $errorText;
-    font: {
-        size: 1.3rem;
-        weight: 500;
-    }
-
-    & img {
-        width: 1.5em;
-        vertical-align: middle;
-        margin-right: 0.4rem;
-    }
-
-    & span {
-        vertical-align: middle;
-        line-height: 1.5;
-    }
 }
 
 .srOnly {

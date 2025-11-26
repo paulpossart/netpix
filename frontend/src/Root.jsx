@@ -5,34 +5,36 @@ import Footer from "./components/footer/Footer";
 import BigN from "./components/bigN/BigN";
 import styles from './Root.module.scss';
 
-//add modals
+import { useModal } from "./context/ModalContext";
+import TestModal from "./components/modals/TestModal";
+import TextModal from "./components/modals/TextModal";
+
 
 function Root() {
-    const [showBigN, setShowBigN] = useState(true);
+    const { modal, closeModal } = useModal();
 
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
 
-    useEffect(() => {
-        const seenIntro = sessionStorage.getItem('bigN');
+    const [seenBigN, setSeenBigN] = useState(() => {
+        return sessionStorage.getItem('bigN') === 'seen';
+    });
 
-        if (seenIntro) {
-            setShowBigN(false);
-            return;
-        }
+    useEffect(() => {
+        if (seenBigN) return;
 
         const intro = setTimeout(() => {
-            setShowBigN(false);
+            setSeenBigN(true);
             sessionStorage.setItem('bigN', 'seen');
         }, 2000);
 
         return () => {
             clearTimeout(intro);
         }
-    }, []);
+    }, [setSeenBigN]);
 
-    useEffect(()=>{
-        if (!showBigN) {
+    useEffect(() => {
+        if (seenBigN) {
             const spacerHeight = () => {
                 const header = document.getElementById('header');
                 const spacer = document.getElementById('spacer');
@@ -49,16 +51,23 @@ function Root() {
                 window.removeEventListener('resize', spacerHeight);
             }
         }
-    }, [showBigN, path]);
+    }, [seenBigN, path]);
+
+    useEffect(() => {
+        document.body.className = isAccountPath ? 'account' : 'home';
+    }, [isAccountPath]);
 
     return (
         <>
             {
-                showBigN
+                !seenBigN
                     ? <BigN />
-                    : < div className={styles.Root} >
+                    : <div className={styles.Root}>
 
-                        <Header className={`${styles.header} ${isAccountPath && styles.headerAccount}`} />
+                        {modal.type === 'test' && <TestModal modalData={modal.data} onClose={closeModal} />}
+                        {modal.type === 'text' && <TextModal modalData={modal.data} onClose={closeModal} />}
+
+                        <Header className={`${styles.header} ${isAccountPath ? styles.accHeader : styles.homeHeader}`} />
 
                         <div id='spacer'></div>
 

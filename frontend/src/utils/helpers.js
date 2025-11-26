@@ -49,3 +49,20 @@ export const isValidSubmission = (input, type) => {
 
     return true;
 };
+
+export const apiJsonFetch = async (url, methodStr, options = {}) => {
+    const defaultOptions = {
+        method: methodStr,
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        ...options
+    };
+
+    const response = await fetch(url, defaultOptions);
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || `Request failed with status ${response.status}`)
+    }
+
+    return data;
+};

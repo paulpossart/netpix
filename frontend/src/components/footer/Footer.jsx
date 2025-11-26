@@ -7,10 +7,12 @@ function Footer() {
     const isAccountPath = path.startsWith('/account');
 
     return (
-        <footer className={
-            `${styles.tmdb}
-             ${isAccountPath ? styles.account : styles.home}`
-        }>
+        <footer
+            id='footer'
+            className={
+                `${styles.tmdb}
+                 ${isAccountPath ? styles.account : styles.home}`
+            }>
             <p>
                 This product uses the TMDB API but is not endorsed or certified by TMDB
             </p>

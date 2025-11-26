@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Sidebar.module.scss';
-import backIcon from '../../assets/back-arrow.svg';
 
 function Sidebar({ sidebar, setSidebar }) {
     const { user, logout } = useAuth();
@@ -9,21 +9,30 @@ function Sidebar({ sidebar, setSidebar }) {
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
 
+    useEffect(() => {
+        if (!sidebar) return;
+        const closeOnEsc = (e) => { if (e.key === 'Escape') setSidebar(false); }
+        document.addEventListener('keydown', closeOnEsc);
+        return () => document.removeEventListener('keydown', closeOnEsc);
+    }, [sidebar, setSidebar]);
+
     return (
         <>
             {
                 sidebar &&
                 <div
                     onClick={() => setSidebar(false)}
-                    className={`${styles.overlay} ${isAccountPath && styles.accOverlay}`}
+                    className={`${styles.overlay} ${isAccountPath ? styles.accOverlay : styles.homeOverlay}`}
                 ></div>
             }
 
             <nav
+                id='sidebar'
+                aria-label='sidebar navigation'
                 onMouseLeave={() => setSidebar(false)}
                 className={
                     `${styles.sidebar}
-                     ${isAccountPath && styles.accSidebar}
+                     ${isAccountPath ? styles.accSidebar : styles.homeSidebar}
                      ${!sidebar && styles.closeSidebar}`
                 }
             >
@@ -38,7 +47,7 @@ function Sidebar({ sidebar, setSidebar }) {
                 }>
                     {
                         isAccountPath
-                            ? <Link to='/'>Netpix</Link>
+                            ? <Link to='/'>Back to Netpix</Link>
                             : <Link to='/account'>Account</Link>
                     }
                 </div>

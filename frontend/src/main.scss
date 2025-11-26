@@ -1,15 +1,16 @@
 @use './styles/global' as *;
 
 * {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  background-color: black; // header background
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -17,8 +18,6 @@ html {
 }
 
 body {
-  background-color: black;
-  color: white;
   text-align: center;
   line-height: 1.5;
 
@@ -26,4 +25,14 @@ body {
     family: 'Roboto';
     size: 1.6rem;
   }
+}
+
+body.home {
+  background-color: black;
+  color: white;
+}
+
+body.account {
+  background-color: $accBgCol;
+  color: black;
 }
