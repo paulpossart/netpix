@@ -1,0 +1,27 @@
+@use '../../styles/global' as *;
+
+.InputErr {
+    width: 100%;
+    text-align: center;
+    color: rgb(250, 26, 26);
+
+    font: {
+        size: 1.3rem;
+        weight: 500;
+    }
+
+    & img {
+        width: 1.5em;
+        vertical-align: middle;
+        margin-right: 0.4rem;
+    }
+
+    & span {
+        vertical-align: middle;
+        line-height: 1.5;
+    }
+}
+
+.accInputErr {
+    color: rgb(179, 0, 9);
+}

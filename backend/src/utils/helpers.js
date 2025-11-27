@@ -15,6 +15,7 @@ export const isValidInput = (type, input, min, max) => {
     }
     if (type === 'password') return true;
     if (!input.trim()) return false;
+    if (input.startsWith(' ') || input.endsWith(' ')) return false;
     if (type === 'username') return validator.matches(input, safeRegex);
     return false;
 };
@@ -45,27 +46,4 @@ export const checkPassword = async (username, password) => {
 export const sanitiseUser = (user) => {
     const { password_hash, ...safeUser } = user;
     return safeUser;
-};
-
-export const signOff = (req, res, next, status = 200, msgContent = 'Logged out') => {
-    req.logOut(err => {
-        if (err) return next(err);
-
-        req.session.destroy((err) => {
-            if (err) return next(err);
-
-            res.clearCookie('connect.sid', {
-                path: '/',
-                httpOnly: true,
-                secure: isProd,
-                sameSite: 'lax'
-            });
-
-            if (status === 204) return res.sendStatus(status);
-
-            return res.status(status).json({
-                message: msgContent,
-            });
-        });
-    });
 };

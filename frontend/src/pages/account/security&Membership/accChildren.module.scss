@@ -1,75 +1,49 @@
 @use '../../../styles/global' as *;
+@use '../../../styles/buttons';
 @use '../AccOverview.module.scss' as *;
 
 .accChildren {
-    @extend .AccOverview
+    @extend .AccOverview;
 }
 
-.container {
-    background-color: white;
-    border: solid 1px rgb(204, 204, 204);
-    border-radius: 8px;
-    padding: 0.8rem 1.6rem;
-    margin: 1em 0 2em 0;
+.Security {
+    @extend .container;
+}
 
-    .memberSince {
-        margin-left: -1.6rem;
-        margin-top: 1.2rem;
-        padding: 0.8rem 1.6rem;
-        color: white;
-        display: inline-block;
-        background: linear-gradient(90deg, rgb(30, 38, 97), rgb(33, 113, 226));
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
+.UpdateDetails {
+    @extend .container;
 
-        font: {
-            size: 1.2rem;
-            weight: 700;
-        }
-    }
+    & form {
+        @include flex(column, flex-start, center);
+        width: 100%;
+        gap: 4px;
 
-    & p {
-        padding: 1.6rem 0;
-    }
+        & input {
+            border: solid 1px rgb(94, 94, 94);
+            border-radius: 4px;
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            width: 100%;
+            font-family: 'Roboto';
 
-    .username {
-        font-weight: 600;
-    }
-
-    .quickLink {
-        @include flex(row, space-between, center);
-        text-decoration: none;
-        color: black;
-        font-weight: 500;
-        padding: 2rem 0;
-        border-radius: 4px;
-        background-color: white;
-        transition: background-color 0.2s linear;
-
-        &:active {
-            background-color: $accLnkHvr;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-            &:hover {
-                background-color: $accLnkHvr;
+            @media (max-height: 500px) {
+                margin: 2px 0;
             }
         }
-
-        & img {
-            width: 28px;
-        }
-
-        & div {
-            @include flex(row, flex-start, center);
-            gap: 12px;
-        }
     }
 
-    .border {
+    .newPasswords {
         width: 100%;
-        height: 1px;
-        background-color: rgb(220, 220, 220);
-        margin: 0.8rem 0;
+        margin-top: 2em;
     }
+}
+
+.submitErr {
+    font-size: 1.4rem;
+    color: rgb(179, 0, 9);
+    width: 100%;
+    text-align: center;
+    border-radius: 4px;
+    border: solid 2px rgb(179, 0, 9);
+    padding: 1rem;
 }

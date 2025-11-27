@@ -19,3 +19,9 @@ export const callLogoutEverywhere = async () => {
     });
     if (!response.ok) throw new Error('logout failed');
 };
+
+export const callVerifyPassword = async (username, password) => {
+    return apiJsonFetch('/api/auth/verify-password', 'POST', {
+        body: JSON.stringify({username, password})
+    });
+};

@@ -9,18 +9,19 @@ function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    const verifyUser = async () => {
+        try {
+            const data = await callAuthenticateUser();
+            if (data?.user) setUser(data.user);
+            else setUser(null);
+        } catch (err) {
+            if (err.message.includes('401')) setUser(null);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const verifyUser = async () => {
-            try {
-                const data = await callAuthenticateUser();
-                if (data?.user) setUser(data.user);
-                else setUser(null);
-            } catch (err) {
-                if (err.message.includes('401')) setUser(null);
-            } finally {
-                setIsLoading(false);
-            }
-        };
         verifyUser();
     }, []);
 
@@ -66,7 +67,7 @@ function AuthProvider({ children }) {
 
     return (
         <AuthContext.Provider value={{
-            user, register, login, logout, logoutAll, isLoading
+            user, setUser, verifyUser, register, login, logout, logoutAll, isLoading
         }}>
             {children}
         </AuthContext.Provider>

@@ -4,7 +4,8 @@ import {
     replaceUsername,
     removeUser
 } from '../queries/usersQueries.js';
-import { isValidInput, httpErr, sanitiseUser, signOff } from '../utils/helpers.js';
+import { isValidInput, httpErr, sanitiseUser } from '../utils/helpers.js';
+import { signOff } from './authControllers.js';
 
 export const registerUser = async (req, res, next) => {
     try {

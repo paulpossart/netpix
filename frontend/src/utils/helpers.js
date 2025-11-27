@@ -1,4 +1,4 @@
-export const changeInput = (e, setValue, setError, inputType) => {
+const changeInput = (e, setValue, setError, inputType) => {
     const safeRegex = /^[^<>{};\\]*$/;
     const bannedRegEx = '< > { } ; \\';
 
