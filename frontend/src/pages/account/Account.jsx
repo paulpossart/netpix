@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { HomeIcon, SecurityIcon, MemberIcon } from '../../components/svgs/accountSvgs';
+import { HomeIcon, SecurityIcon, MemberIcon } from '../../components/svgs/Svgs';
 import styles from './Account.module.scss';
 import backIcon from '../../assets/back-arrow.svg';
 

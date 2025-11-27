@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function Portal({ isOpen, onClose, children }) {
+export default function Portal({ isOpen, onClick, children }) {
     const modalRoot = document.getElementById("modal-root");
     const path = useLocation().pathname;
     const isAccount = path.startsWith('/account');
@@ -41,14 +41,14 @@ export default function Portal({ isOpen, onClose, children }) {
 
             document.removeEventListener('keydown', closeOnEsc);
         }
-    }, [isOpen, onClose]);
+    }, [isOpen, onClick]);
 
     if (!isOpen) return null;
 
     return createPortal(
         <>
             <div
-                onClick={onClose}
+                onClick={onClick}
                 style={{
                     backdropFilter: 'blur(2px)',
                     backgroundColor: isAccount

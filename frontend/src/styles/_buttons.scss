@@ -38,12 +38,27 @@
     display: block;
 }
 
-// Main Buttons ===================
+// Auth Buttons ===================
 
 .redBtn {
     @include button;
     @include mainStyle;
 }
+
+// Account Buttons =====
+
+.blackBtn {
+    @include button(black, rgb(76, 76, 76));
+    @include mainStyle;
+}
+
+.transparentBtn {
+    @include button(transparent, rgb(226, 226, 226), black);
+    @include mainStyle;
+    border: solid 2px white;
+}
+
+// General =====
 
 .textBtn {
     @include button(transparent, transparent, white);
@@ -52,6 +67,14 @@
         text-decoration: underline;
     }
 }
+
+.imgBtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+// Not Found =====
 
 .whiteBtn {
     @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
@@ -63,10 +86,4 @@
 
     width: auto;
     display: inline-block;
-}
-
-.imgBtn {
-    background-color: transparent;
-    border: none;
-    outline: none;
 }

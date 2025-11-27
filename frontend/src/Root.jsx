@@ -53,10 +53,6 @@ function Root() {
         }
     }, [seenBigN, path]);
 
-    useEffect(() => {
-        document.body.className = isAccountPath ? 'account' : 'home';
-    }, [isAccountPath]);
-
     return (
         <>
             {

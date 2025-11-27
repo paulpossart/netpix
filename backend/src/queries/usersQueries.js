@@ -50,6 +50,13 @@ export const createUser = async (username, password) => {
 export const replacePassword = async (
     id, currentPassword, newPassword,
 ) => {
+
+    const user = await getUserById(id);
+
+    if (!user) {
+        throw httpErr('Username unavailable', 409, 'RegistrationError');
+    }
+
     const passwordMatch = await bcrypt.compare(currentPassword, user.password_hash);
 
     if (!passwordMatch) {
@@ -71,6 +78,7 @@ export const replacePassword = async (
 
     throw httpErr('Failed to update password', 500, 'UpdateError');
 };
+
 
 export const replaceUsername = async (id, newUsername) => {
     const usernameExists = await getUserByUsername(newUsername);

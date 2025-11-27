@@ -42,7 +42,7 @@ function Security() {
             <section>
                 <h3>Account Details</h3>
 
-                <div className={styles.container}>
+                <div className={styles.Security}>
 
                     <ul>
                         <li>

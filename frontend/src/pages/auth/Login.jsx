@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { isValidSubmission, handleInputChange } from '../../utils/helpers';
+import InputErr from '../../components/inputErr/InputErr';
 import styles from './Login&Reg.module.scss';
-import errorIcon from '../../assets/error.svg';
 
 function Login({ setView }) {
     const [username, setUsername] = useState('');
@@ -63,13 +63,7 @@ function Login({ setView }) {
                     aria-errormessage={usernameErr ? 'username-error' : undefined}
                 />
 
-                {
-                    usernameErr &&
-                    <p id='username-error' className={styles.inputErr}>
-                        <img src={errorIcon} alt='' />
-                        <span>{usernameErr}</span>
-                    </p>
-                }
+                {usernameErr && <InputErr id='username-error' errMessage={usernameErr} />}
 
                 <label htmlFor='password' className={styles.srOnly}>Enter password</label>
                 <input
@@ -83,13 +77,7 @@ function Login({ setView }) {
                     aria-errormessage={passwordErr ? 'password-error' : undefined}
                 />
 
-                {
-                    passwordErr &&
-                    <p id='password-error' className={styles.inputErr}>
-                        <img src={errorIcon} alt='' />
-                        <span>{passwordErr}</span>
-                    </p>
-                }
+                {passwordErr && <InputErr id='password-error' errMessage={passwordErr} />}
 
                 <button
                     type='submit'

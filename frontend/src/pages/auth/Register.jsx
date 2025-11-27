@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { handleInputChange, isValidSubmission } from '../../utils/helpers';
+import InputErr from '../../components/inputErr/InputErr';
 import styles from './Login&Reg.module.scss';
-import errorIcon from '../../assets/error.svg';
 
 function Register({ setView }) {
     const [newUsername, setNewUsername] = useState('');
@@ -81,13 +81,7 @@ function Register({ setView }) {
                     aria-errormessage={usernameErr ? 'new-username-error' : undefined}
                 />
 
-                {
-                    usernameErr &&
-                    <p id='new-username-error' className={styles.inputErr}>
-                        <img src={errorIcon} alt='' />
-                        <span>{usernameErr}</span>
-                    </p>
-                }
+                {usernameErr && <InputErr id='new-username-error' errMessage={usernameErr} />}
 
                 <label htmlFor='password' className={styles.srOnly}>Register a new password</label>
                 <input
@@ -101,13 +95,7 @@ function Register({ setView }) {
                     aria-errormessage={passwordErr ? 'new-password-error' : undefined}
                 />
 
-                {
-                    passwordErr &&
-                    <p id='new-password-error' className={styles.inputErr}>
-                        <img src={errorIcon} alt='' />
-                        <span>{passwordErr}</span>
-                    </p>
-                }
+                {passwordErr && <InputErr id='new-password-error' errMessage={passwordErr} />}
 
                 <label htmlFor='confirm-password' className={styles.srOnly}>Confirm your new password</label>
                 <input
@@ -124,13 +112,7 @@ function Register({ setView }) {
                     aria-errormessage={confirmPasswordErr ? 'confirm-password-error' : undefined}
                 />
 
-                {
-                    confirmPasswordErr &&
-                    <p id='confirm-password-error' className={styles.inputErr}>
-                        <img src={errorIcon} alt='' />
-                        <span>{confirmPasswordErr}</span>
-                    </p>
-                }
+                {confirmPasswordErr && <InputErr id='confirm-password-error' errMessage={confirmPasswordErr} />}
 
                 <button
                     type='submit'

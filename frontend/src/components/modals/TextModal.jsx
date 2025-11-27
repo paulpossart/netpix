@@ -4,12 +4,13 @@ function TextModal({ modalData, onClose }) {
 
     const {
         message = '',
+        onClick = onClose,
         extraBtn = false,
         extraOnClick = () => {}
     } = modalData;
 
     return (
-        <Portal isOpen={!!modalData} onClose={onClose}>
+        <Portal isOpen={!!modalData} onClick={onClick}>
             <div>
                 <p style={{}}>{message}</p>
             </div>
@@ -20,7 +21,7 @@ function TextModal({ modalData, onClose }) {
                         Confirm
                     </button>
                 }
-                <button onClick={onClose}>
+                <button onClick={onClick}>
                     {extraBtn ? 'Cancel' : 'OK'}
                 </button>
             </div>
