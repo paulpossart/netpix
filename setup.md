@@ -26,6 +26,23 @@ Create a Github repo with licence. Copy url. From the Projects folder: git clone
 - \dn *lists schemas*
 - \d table_name *Quick summary of table details*
 
+**Row limiter**
+```sql
+CREATE OR REPLACE FUNCTION prevent_excess_schema_table()
+RETURNS trigger AS $$
+BEGIN
+    IF (SELECT COUNT(*) FROM schema.table) >= 1000 THEN
+        RAISE EXCEPTION 'Table limit reached — cannot create new Table.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER schema_table_limit_trigger
+BEFORE INSERT ON schema.table
+FOR EACH ROW EXECUTE FUNCTION prevent_excess_schema_table();
+```
+
 ### Server
 
 *Remember to make endpoints plural nouns for adherence to RESTful principles*

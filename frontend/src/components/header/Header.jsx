@@ -24,7 +24,7 @@ function Header({ className }) {
                 <NavLink
                     to='/'
                     onClick={() => {/*clear search input*/ }}
-                    className={`${styles.logo} ${isAccountPath && styles.accLogo}`}
+                    className={`${styles.logo} ${isAccountPath ? styles.accLogo : ''}`}
                 >
                     NETPIX
                 </NavLink>

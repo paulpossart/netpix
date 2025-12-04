@@ -77,6 +77,7 @@ function Register({ setView }) {
                     value={newUsername}
                     onChange={handleInputChange('username', setNewUsername, setUsernameErr, setSubmitErr)}
                     required
+                    autoFocus
                     aria-invalid={!!usernameErr}
                     aria-errormessage={usernameErr ? 'new-username-error' : undefined}
                 />

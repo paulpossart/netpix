@@ -21,3 +21,7 @@ export const callUpdateUsername = async (newUsername) => {
         body: JSON.stringify({newUsername})
     });
 };
+
+export const callDeleteUser = async () => {
+    return apiJsonFetch('/api/users/delete-user', 'DELETE');
+};

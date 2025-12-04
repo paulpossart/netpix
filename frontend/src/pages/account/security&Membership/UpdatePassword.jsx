@@ -95,6 +95,7 @@ function UpdatePassword() {
                             value={currentPassword}
                             onChange={handleInputChange('password', setCurrentPassword, setCurrentPassErr, setSubmitErr)}
                             required
+                            autoFocus
                             aria-invalid={!!currentPassErr}
                             aria-errormessage={currentPassErr ? 'current-password-error' : undefined}
                         />

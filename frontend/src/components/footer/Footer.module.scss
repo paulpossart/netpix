@@ -4,15 +4,16 @@
     padding-right: 10px;
     text-align: right;
     font-size: 0.9rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
     z-index: 1000;
     transition:
         background-color 0.25s linear,
         color 0.25s linear;
 
-    &.home {
-        color: white;
-        background-color: rgba(0, 0, 0, 0.8);
+    & img {
+        height: 12px;
     }
 
     &.account {
@@ -26,9 +27,5 @@
 
     @media (min-width: 420px) {
         font-size: 1.2rem;
-    }
-
-    & img {
-        height: 12px;
     }
 }

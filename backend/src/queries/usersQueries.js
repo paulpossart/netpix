@@ -54,7 +54,7 @@ export const replacePassword = async (
     const user = await getUserById(id);
 
     if (!user) {
-        throw httpErr('Username unavailable', 409, 'RegistrationError');
+        throw httpErr('Username not found', 409, 'RegistrationError');
     }
 
     const passwordMatch = await bcrypt.compare(currentPassword, user.password_hash);

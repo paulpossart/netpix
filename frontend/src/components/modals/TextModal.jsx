@@ -1,30 +1,48 @@
 import Portal from './Portal';
+import { useLocation } from 'react-router-dom';
+import styles from './modal.module.scss';
 
 function TextModal({ modalData, onClose }) {
+    const path = useLocation().pathname;
+    const isAccountPath = path.startsWith('/account');
 
     const {
         message = '',
         onClick = onClose,
         extraBtn = false,
-        extraOnClick = () => {}
+        extraOnClick = () => { }
     } = modalData;
 
     return (
         <Portal isOpen={!!modalData} onClick={onClick}>
-            <div>
-                <p style={{}}>{message}</p>
-            </div>
+            <section className={`${styles.TextModal} ${isAccountPath ? styles.accTextModal : ''}`}>
+                <h2
+                    id='modal-title'
+                    className={styles.srOnly}
+                >
+                    Notification
+                </h2>
+                <p>{message}</p>
 
-            <div>
-                {
-                    extraBtn && <button onClick={extraOnClick}>
-                        Confirm
+                <div className={styles.btnsDiv}>
+                    {
+                        extraBtn && <button
+                            onClick={extraOnClick}
+                            className={styles.redBtn}
+                        >
+                            Confirm
+                        </button>
+                    }
+                    <button
+                        onClick={onClick}
+                        className={isAccountPath ? styles.blackBtn : styles.redBtn}
+                        autoFocus
+                    >
+                        {extraBtn ? 'Cancel' : 'OK'}
                     </button>
-                }
-                <button onClick={onClick}>
-                    {extraBtn ? 'Cancel' : 'OK'}
-                </button>
-            </div>
+                </div>
+            </section>
+
         </Portal>
     );
 };

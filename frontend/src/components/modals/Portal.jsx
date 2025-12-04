@@ -48,6 +48,7 @@ export default function Portal({ isOpen, onClick, children }) {
     return createPortal(
         <>
             <div
+                aria-hidden="true"
                 onClick={onClick}
                 style={{
                     backdropFilter: 'blur(2px)',
@@ -59,6 +60,9 @@ export default function Portal({ isOpen, onClick, children }) {
                     zIndex: '9500',
                 }}></div>
             <div
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-title"
                 style={{
                     position: 'fixed',
                     top: '50%',

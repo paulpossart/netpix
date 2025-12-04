@@ -9,10 +9,8 @@ function Footer() {
     return (
         <footer
             id='footer'
-            className={
-                `${styles.tmdb}
-                 ${isAccountPath ? styles.account : styles.home}`
-            }>
+            className={`${styles.tmdb} ${isAccountPath ? styles.account : ''}`}
+        >
             <p>
                 This product uses the TMDB API but is not endorsed or certified by TMDB
             </p>
