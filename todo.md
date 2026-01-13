@@ -1,26 +1,11 @@
-tighten CSS - not base + acc + home, but base + acc
-- use ternary, not &&
+aria on search results - h2, etc
+recheck searchResults scss - don't just copy paste it...
 
-add try/catch to backend controllers
-
-check passwords are removed from state after being used
-
-auto focus inputs
-
-account page
- - update password
- - update username
- - delete user
-
-Text Modal styles
-
-logout errs - try / catch: return modal with err msg
-
-Acc tests
-
----
+background color on no img li?
 
 tmdb routes
+add veriifyUser to tmdb router
+searchbar img alts and accessibility
 
 layout: 
 Root
@@ -37,7 +22,11 @@ closeOnEsc (already in MOdal, sidebar)
 tabfocus in all: need a focus trap for modals and sidebar - disclaimer too (inert?)
 colors...
 
-put rate checks back on
+put rate checks back on: different instances for each route!!!
+
+move one-off button styles to their respective folders (white btn (notFound), imgBtn(header/sidebar))???
 
 
 tests
+
+add table limits

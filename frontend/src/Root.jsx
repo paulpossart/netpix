@@ -63,11 +63,11 @@ function Root() {
                         {modal.type === 'test' && <TestModal modalData={modal.data} onClose={closeModal} />}
                         {modal.type === 'text' && <TextModal modalData={modal.data} onClose={closeModal} />}
 
-                        <Header className={`${styles.header} ${isAccountPath ? styles.accHeader : styles.homeHeader}`} />
+                        <Header className={`${styles.header} ${isAccountPath ? styles.accHeader : ''}`} />
 
                         <div id='spacer'></div>
 
-                        <div className={`${styles.outlet} ${isAccountPath ? styles.outletAccount : styles.outletHome}`}>
+                        <div className={`${styles.outlet} ${isAccountPath ? styles.outletAccount : ''}`}>
                             <Outlet />
                         </div>
 

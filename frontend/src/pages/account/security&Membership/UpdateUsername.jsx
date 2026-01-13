@@ -70,6 +70,7 @@ function UpdateUsername() {
                                     value={newUsername}
                                     onChange={handleInputChange('username', setNewUsername, setInputError, setSubmitError)}
                                     required
+                                    autoFocus
                                     aria-invalid={!!inputError}
                                     aria-errormessage={inputError ? 'new-username-error' : undefined}
                                 />

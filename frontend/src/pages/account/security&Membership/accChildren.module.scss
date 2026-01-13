@@ -1,5 +1,5 @@
 @use '../../../styles/global' as *;
-@use '../../../styles/buttons';
+@use '../../../styles/buttons' as *;
 @use '../AccOverview.module.scss' as *;
 
 .accChildren {
@@ -32,18 +32,29 @@
         }
     }
 
+    .submitErr {
+        font-size: 1.4rem;
+        color: rgb(179, 0, 9);
+        width: 100%;
+        text-align: center;
+        border-radius: 4px;
+        border: solid 2px rgb(179, 0, 9);
+        padding: 1rem;
+    }
+
     .newPasswords {
         width: 100%;
         margin-top: 2em;
     }
 }
 
-.submitErr {
-    font-size: 1.4rem;
-    color: rgb(179, 0, 9);
-    width: 100%;
-    text-align: center;
-    border-radius: 4px;
-    border: solid 2px rgb(179, 0, 9);
-    padding: 1rem;
+.Membership {
+    @extend .container;
+
+    .deleteAcc {
+        @include button(white, rgb(226, 226, 226), rgb(235, 57, 66));
+       // @include mainStyle;
+        border: solid 2px rgb(235, 57, 66);
+        margin-bottom: 0.8rem;
+    }
 }

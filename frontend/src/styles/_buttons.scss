@@ -7,7 +7,7 @@
     color: $col;
     background-color: $bgCol;
     line-height: 1;
-    padding: 0;
+    //padding: 0;
     margin: 0;
     text-decoration: none;
     text-align: center;
@@ -15,6 +15,11 @@
     transition:
         background-color 0.2s linear,
         transform 0.2s linear;
+
+    // include mainStyle mixin:
+    padding: 0.75em;
+    width: 100%;
+    display: block;
 
     font: {
         size: 1.6rem;
@@ -32,29 +37,30 @@
     }
 }
 
+/*
 @mixin mainStyle {
     padding: 0.75em;
     width: 100%;
     display: block;
 }
-
+*/
 // Auth Buttons ===================
 
 .redBtn {
     @include button;
-    @include mainStyle;
+   // @include mainStyle;
 }
 
 // Account Buttons =====
 
 .blackBtn {
     @include button(black, rgb(76, 76, 76));
-    @include mainStyle;
+    //@include mainStyle;
 }
 
 .transparentBtn {
     @include button(transparent, rgb(226, 226, 226), black);
-    @include mainStyle;
+   // @include mainStyle;
     border: solid 2px white;
 }
 
@@ -68,17 +74,34 @@
     }
 }
 
-.imgBtn {
-    background-color: transparent;
+// Searchbar ====
+.clearSearchBtn {
+    @include button(transparent, rgba(255, 255, 255, 0.4));
+
+    border-radius: 50%;
+    padding: 1.2rem;
+    margin: 0;
     border: none;
-    outline: none;
+    width: 30px;
+    margin: 0 4px;
+    height: 30px;
 }
+
+.searchBtn {
+    @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
+   // @include mainStyle;
+    padding: 0.4rem 0.8rem;
+    margin: 0 4px;
+    font-size: 1.2rem;
+}
+
+
 
 // Not Found =====
 
 .whiteBtn {
     @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
-    @include mainStyle;
+    //@include mainStyle;
 
     font: {
         size: clamp(12px, 2vw, 18px);

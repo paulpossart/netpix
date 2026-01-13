@@ -29,7 +29,7 @@ function Disclaimer({ onClick }) {
         color: 'rgb(20, 20, 20)',
     };
 
-    const h1Style = {
+    const headingStyle = {
         fontFamily: '"Bebas Neue", Verdana, sans-serif',
         fontSize: '3.2rem',
         fontWeight: '500',
@@ -94,8 +94,15 @@ function Disclaimer({ onClick }) {
             `}</style>
 
             <div style={overlayStyle}></div>
-            <aside style={disclaimerStyle} className={'Disclaimer'}>
-                <h1 style={h1Style}>GRPR DISCLAIMER</h1>
+            <section
+                style={disclaimerStyle}
+                className={'Disclaimer'}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-title"
+            >
+
+                <h2 style={headingStyle} id='modal-title'>GRPR DISCLAIMER</h2>
                 <p>This app is for users aged <span>13 and over</span>.</p>
                 <p>Your <span>username</span> should <span>not</span> include any <span>personal info</span>.</p>
                 <p>User data is stored <span>privately</span> and <span>only</span> used for the app.</p>
@@ -110,7 +117,7 @@ function Disclaimer({ onClick }) {
                 >
                     OK
                 </button>
-            </aside>
+            </section>
         </>
     );
 };

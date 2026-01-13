@@ -1,0 +1,36 @@
+@use '../../styles/global' as *;
+@use '../../styles/buttons';
+
+%modal {
+    max-height: 90vh;
+    max-width: 95vw;
+    overflow-y: auto;
+}
+
+.TextModal {
+    @extend %modal;
+
+    padding: 0.8rem 1.6rem;
+    min-width: 200px;
+
+    & p {
+        padding: 1.6rem 0;
+    }
+
+    .btnsDiv {
+        @include flex;
+        gap: 4px;
+    }
+
+    &.accTextModal {
+        color: black;
+        background-color: white;
+        border: solid 1px rgb(204, 204, 204);
+        border-radius: 8px;
+        box-shadow:
+            1px 1px 4px rgb(215, 215, 215),
+            -1px 1px 4px rgb(215, 215, 215),
+            1px -1px 4px rgb(215, 215, 215),
+            -1px -1px 4px rgb(215, 215, 215);
+    }
+}

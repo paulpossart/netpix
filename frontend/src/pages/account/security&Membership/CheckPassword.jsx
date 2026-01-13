@@ -47,6 +47,7 @@ function CheckPassword({ authorised, setAuthorised }) {
                         value={password}
                         onChange={handleInputChange('password', setPassword, setInputError, setSubmitError)}
                         required
+                        autoFocus
                         aria-invalid={!!inputError}
                         aria-errormessage={inputError ? 'password-error' : undefined}
                     />

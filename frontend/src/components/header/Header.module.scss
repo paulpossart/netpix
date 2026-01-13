@@ -40,12 +40,26 @@
     gap: 8px;
     overflow: hidden;
 
-    & img {
+    .sidebarBtn {
+        background-color: transparent;
+        border: none;
+        outline: none;
         cursor: pointer;
         width: 24px;
+        @include flex;
 
         @media (min-height: 400px) and (min-width: 550px) {
             width: clamp(24px, 4vw, 35px);
         }
+
+        & img {
+            width: 24px;
+
+            @media (min-height: 400px) and (min-width: 550px) {
+                width: clamp(24px, 4vw, 35px);
+            }
+        }
     }
+
+
 }

@@ -13,6 +13,20 @@ function Security() {
 
     const path = useLocation().pathname;
 
+    const handleLogout = async () => {
+        try {
+            await logoutAll()
+        }
+        catch (err) {
+            setModal({
+                type: 'text',
+                data: {
+                    message: 'Sign out failed. Please try again later.'
+                }
+            })
+        }
+    }
+
     const renderModal = () => {
         setModal({
             type: 'text',
@@ -21,7 +35,7 @@ function Security() {
                 extraBtn: true,
                 extraOnClick: async () => {
                     closeModal();
-                    await logoutAll();
+                    await handleLogout();
                 }
             }
         });

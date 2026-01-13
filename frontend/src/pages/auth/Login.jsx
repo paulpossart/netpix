@@ -59,6 +59,7 @@ function Login({ setView }) {
                     value={username}
                     onChange={handleInputChange('username', setUsername, setUsernameErr, setSubmitErr)}
                     required
+                    autoFocus
                     aria-invalid={!!usernameErr}
                     aria-errormessage={usernameErr ? 'username-error' : undefined}
                 />

@@ -1,13 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useSearch } from '../../context/SearchContext';
 import styles from './Sidebar.module.scss';
+import { useModal } from '../../context/ModalContext';
 
 function Sidebar({ sidebar, setSidebar }) {
     const { user, logout } = useAuth();
+    const { clearQueryResults } = useSearch();
     const username = user?.username;
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
+    const { setModal } = useModal();
 
     useEffect(() => {
         if (!sidebar) return;
@@ -16,13 +20,31 @@ function Sidebar({ sidebar, setSidebar }) {
         return () => document.removeEventListener('keydown', closeOnEsc);
     }, [sidebar, setSidebar]);
 
+    useEffect(() => {
+        if (path.startsWith('/account')) clearQueryResults();
+    }, [path]);
+
+    const handleLogout = async () => {
+        try {
+            await logout()
+        }
+        catch (err) {
+            setModal({
+                type: 'text',
+                data: {
+                    message: 'Sign out failed. Please try again later.'
+                }
+            })
+        }
+    }
+
     return (
         <>
             {
                 sidebar &&
                 <div
                     onClick={() => setSidebar(false)}
-                    className={`${styles.overlay} ${isAccountPath ? styles.accOverlay : styles.homeOverlay}`}
+                    className={`${styles.overlay} ${isAccountPath ? styles.accOverlay : ''}`}
                 ></div>
             }
 
@@ -32,7 +54,7 @@ function Sidebar({ sidebar, setSidebar }) {
                 onMouseLeave={() => setSidebar(false)}
                 className={
                     `${styles.sidebar}
-                     ${isAccountPath ? styles.accSidebar : styles.homeSidebar}
+                     ${isAccountPath ? styles.accSidebar : ''}
                      ${!sidebar && styles.closeSidebar}`
                 }
             >
@@ -54,7 +76,7 @@ function Sidebar({ sidebar, setSidebar }) {
 
                 <div className={styles.sidebarDiv}>
                     <button
-                        onClick={logout}
+                        onClick={handleLogout}
                         className={styles.textBtn}
                     >
                         Sign Out
