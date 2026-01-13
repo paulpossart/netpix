@@ -53,7 +53,7 @@
 
     .deleteAcc {
         @include button(white, rgb(226, 226, 226), rgb(235, 57, 66));
-        @include mainStyle;
+       // @include mainStyle;
         border: solid 2px rgb(235, 57, 66);
         margin-bottom: 0.8rem;
     }

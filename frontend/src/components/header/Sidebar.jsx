@@ -1,11 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useSearch } from '../../context/SearchContext';
 import styles from './Sidebar.module.scss';
 import { useModal } from '../../context/ModalContext';
 
 function Sidebar({ sidebar, setSidebar }) {
     const { user, logout } = useAuth();
+    const { clearQueryResults } = useSearch();
     const username = user?.username;
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
@@ -17,6 +19,10 @@ function Sidebar({ sidebar, setSidebar }) {
         document.addEventListener('keydown', closeOnEsc);
         return () => document.removeEventListener('keydown', closeOnEsc);
     }, [sidebar, setSidebar]);
+
+    useEffect(() => {
+        if (path.startsWith('/account')) clearQueryResults();
+    }, [path]);
 
     const handleLogout = async () => {
         try {

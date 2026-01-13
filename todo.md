@@ -1,9 +1,11 @@
-Acc tests
+aria on search results - h2, etc
+recheck searchResults scss - don't just copy paste it...
 
----
+background color on no img li?
 
 tmdb routes
 add veriifyUser to tmdb router
+searchbar img alts and accessibility
 
 layout: 
 Root

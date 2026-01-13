@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-// import useSearch from seartchContext
+import { useSearch } from '../../context/SearchContext';
 import Sidebar from './Sidebar';
 import Searchbar from './Searchbar';
 import styles from './Header.module.scss';
@@ -9,10 +9,17 @@ import accountIconBlack from '../../assets/account-black.svg';
 
 function Header({ className }) {
     const [sidebar, setSidebar] = useState(false);
+    const [searchbarOpen, setSearchbarOpen] = useState(false);
     const path = useLocation().pathname;
     const isAccountPath = path.startsWith('/account');
-    //setSearch State
-    //clear searchbar
+    const { setSearchInput, clearQueryResults } = useSearch();
+
+
+    const clearInput = () => {
+        clearQueryResults();
+        setSearchInput('');
+        if (searchbarOpen) setSearchbarOpen(false);
+    };
 
     return (
         <header id='header' className={className}>
@@ -23,7 +30,7 @@ function Header({ className }) {
 
                 <NavLink
                     to='/'
-                    onClick={() => {/*clear search input*/ }}
+                    onClick={clearInput}
                     className={`${styles.logo} ${isAccountPath ? styles.accLogo : ''}`}
                 >
                     NETPIX
@@ -33,13 +40,17 @@ function Header({ className }) {
                     <>
                         <div className={styles.navBtns}>
                             {
-                                !isAccountPath && <Searchbar />
+                                !isAccountPath && <Searchbar
+                                    clearInput={clearInput}
+                                    searchbarOpen={searchbarOpen}
+                                    setSearchbarOpen={setSearchbarOpen}
+                                />
                             }
                             <button
                                 type='button'
                                 onClick={() => setSidebar(prev => !prev)}
                                 onMouseEnter={() => setSidebar(true)}
-                                className={styles.imgBtn}
+                                className={styles.sidebarBtn}
                                 aria-expanded={sidebar}
                                 aria-controls='account-sidebar'
                             >
