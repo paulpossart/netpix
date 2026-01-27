@@ -6,7 +6,6 @@
 }*/
 //================================================================== 
 
-const bearerToken = process.env.BEARER_TOKEN;
 const apiKey = process.env.API_KEY;
 const baseUrl = 'https://api.themoviedb.org/3/movie/';
 
@@ -14,13 +13,13 @@ const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    //Authorization: `Bearer ${bearerToken}`
   }
 }
 
 export const searchTmdb = async (req, res, next) => {
   const query = req.params.query;
   const bannedWords = [
+    // this list was compiled with the help of chatGPT. I have no idea what any of these words mean...
     'bdsm', 'bondage', 'boobs', 'breast', 'breasts', 'erotic', 'explicit', 'fetish',
     'hardcore', 'nudity', 'porn', 'porno', 'pornography', 'softcore', 'tit', 'tits', 'titties'
   ];
@@ -56,6 +55,22 @@ export const searchTmdb = async (req, res, next) => {
       results: cleanData
     });
 
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const fetchVideosById = async (req, res, next) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const response = await fetch(
+      `${baseUrl}${id}/videos?language=en-US&api_key=${apiKey}`,
+      options
+    );
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data.results);
   } catch (err) {
     next(err);
   }

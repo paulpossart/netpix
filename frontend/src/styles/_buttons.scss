@@ -110,3 +110,23 @@
     width: auto;
     display: inline-block;
 }
+
+// modals
+.iconBtn {
+    @include button(transparent, rgba(255, 255, 255, 0.4));
+    border: solid 1px white;
+    border-radius: 50%;
+    padding: 4%;
+    margin-top: 0;
+    width: 30px;
+    height: 30px;
+
+    @media (min-height: 500px) {
+        padding: 1.2rem;
+        margin: 1.2rem 0;
+    }
+}
+
+.primeBtn {
+    @include button(rgb(0, 114, 249), rgb(1, 90, 199));
+}

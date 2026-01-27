@@ -5,8 +5,6 @@ import chevronRight from '../../assets/chevron-right.svg';
 import securityIcon from '../../assets/security.svg';
 import membershipIcon from '../../assets/membership.svg';
 
-
-
 function Overview() {
     const { user } = useAuth();
     const username = user.username;
