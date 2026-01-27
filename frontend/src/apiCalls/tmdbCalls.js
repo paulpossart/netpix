@@ -5,3 +5,5 @@ export const callSearchTmdb = async (query) => {
     console.log('data:', data)
     return data
 };
+
+export const callFetchVideosById = id => apiJsonFetch(`/api/tmdb/videos/${id}`, 'GET');

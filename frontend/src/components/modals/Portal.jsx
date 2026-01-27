@@ -29,7 +29,7 @@ export default function Portal({ isOpen, onClick, children }) {
 
         document.body.style.overflow = "hidden";
 
-        const closeOnEsc = (e) => { if (e.key === 'Escape') onClose(); }
+        const closeOnEsc = (e) => { if (e.key === 'Escape') onClick(); }
         document.addEventListener('keydown', closeOnEsc);
 
         return () => {

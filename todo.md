@@ -1,11 +1,17 @@
-aria on search results - h2, etc
-recheck searchResults scss - don't just copy paste it...
+style, rename, and complete info modal (quickview?)
+
+delete test modal
+
+moreInfo modal
+
+
+wrap searchResults li content in an <a> for tab focus
 
 background color on no img li?
 
 tmdb routes
 add veriifyUser to tmdb router
-searchbar img alts and accessibility
+
 
 layout: 
 Root
@@ -16,8 +22,6 @@ home page
 home test
 
 WCAG checks: 
-aria in Header?
-aria on BigN?
 closeOnEsc (already in MOdal, sidebar)
 tabfocus in all: need a focus trap for modals and sidebar - disclaimer too (inert?)
 colors...

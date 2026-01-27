@@ -6,9 +6,8 @@ import BigN from "./components/bigN/BigN";
 import styles from './Root.module.scss';
 
 import { useModal } from "./context/ModalContext";
-import TestModal from "./components/modals/TestModal";
 import TextModal from "./components/modals/TextModal";
-
+import InfoModal from "./components/modals/InfoModal";
 
 function Root() {
     const { modal, closeModal } = useModal();
@@ -60,8 +59,8 @@ function Root() {
                     ? <BigN />
                     : <div className={styles.Root}>
 
-                        {modal.type === 'test' && <TestModal modalData={modal.data} onClose={closeModal} />}
                         {modal.type === 'text' && <TextModal modalData={modal.data} onClose={closeModal} />}
+                        {modal.type === 'info' && <InfoModal modalData={modal.data} onClose={closeModal} />}
 
                         <Header className={`${styles.header} ${isAccountPath ? styles.accHeader : ''}`} />
 
