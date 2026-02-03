@@ -31,7 +31,6 @@ function InfoModal({ modalData, onClose }) {
             const vids = await callFetchVideosById(movie.id);
             setVidArray(vids);
             setVidKey(vids[randomIndexGenerator(vids)].key);
-            console.log(vids)
         };
 
         fetchVids();

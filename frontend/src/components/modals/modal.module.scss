@@ -77,17 +77,21 @@
     }
 
     .moreInfoInner {
-        border-bottom: solid white 1px;
-        border-top: solid white 1px;
+        border-top: solid $greyBorder 1px;
         margin: 8px 0;
-        padding: 8px 0;
+        text-align: left;
+
+        article {
+            border-bottom: solid $greyBorder 1px;
+            padding: 8px 0
+        }
     }
 
     .titleAndBtnsDiv {
         @include flex(row, center, center);
         padding: 0 1em;
 
-        & h3 {
+         h3 {
             text-align: left;
             font-weight: 500;
             width: 50%;
