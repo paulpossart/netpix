@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import authRouter from './routes/authRoutes.js';
 import usersRouter from './routes/usersRoutes.js';
 import tmdbRouter from './routes/tmdbRoutes.js';
+import moviesRouter from './routes/moviesRoutes.js';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(passport.session());
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/tmdb', tmdbRouter);
+app.use('/api/movies', moviesRouter);
 
 app.get('/', (req, res) => res.json({ backend: 'up and running' }));
 

@@ -1,14 +1,24 @@
+import { useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
+
 import { useSearch } from '../../context/SearchContext';
 import SearchResults from './searchResults/SearchResults';
+
+import { useList } from '../../context/ListContext';
+
 import styles from './Home.module.scss';
 
 
 function Home() {
   const { user } = useAuth();
+  const { myList, fetchList } = useList();
   const { queryResults } = useSearch();
   const hasResults = queryResults.results.length > 0 || queryResults.message;
+
+  useEffect(() => {
+    fetchList();
+  }, []);
 
   return (
     <main>
