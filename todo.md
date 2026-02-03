@@ -1,4 +1,9 @@
-style, rename, and complete info modal (quickview?)
+List context - console logging err?
+delete movie on front end
+
+
+
+add/remove button styles and logic on infoModal 
 
 delete test modal
 
