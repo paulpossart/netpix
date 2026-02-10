@@ -66,3 +66,8 @@ export const apiJsonFetch = async (url, methodStr, options = {}) => {
 
     return data;
 };
+
+export const randomIndexGenerator = (array) => {
+    const idx = Math.floor(array.length * Math.random());
+    return idx;
+};
