@@ -76,17 +76,59 @@ export const fetchVideosById = async (req, res, next) => {
   }
 };
 
-/*
 export const fetchPopular = async (req, res, next) => {
   try {
     const response = await fetch(
-      `${baseUrl}popular?language=en-US&page=1&api_key=${apiKey}`,
+      `${baseUrl}popular?api_key=${apiKey}&language=en-US&page=1`,
       options
     );
     const data = await response.json();
-    return res.json(data);
-  } catch (error) {
-    next(error);
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data.results);
+  } catch (err) {
+    next(err);
   }
-}
-*/
+};
+
+export const fetchUpcoming = async (req, res, next) => {
+  try {
+    const response = await fetch(
+      `${baseUrl}upcoming?api_key=${apiKey}&language=en-US&page=1`,
+      options
+    );
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data.results);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const fetchNowPlaying = async (req, res, next) => {
+  try {
+    const response = await fetch(
+      `${baseUrl}now_playing?api_key=${apiKey}&language=en-US&page=1`,
+      options
+    );
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data.results);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const fetchDetailsById = async (req, res, next) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const response = await fetch(
+      `${baseUrl}${id}?language=en-US&api_key=${apiKey}`, options
+    );
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.status_message);
+    res.status(200).json(data);
+  } catch (err) {
+    next(err);
+  }
+};

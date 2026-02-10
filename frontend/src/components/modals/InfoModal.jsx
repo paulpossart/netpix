@@ -1,6 +1,10 @@
 import Portal from './Portal';
 import { useEffect, useState } from 'react';
 import { callFetchVideosById } from '../../apiCalls/tmdbCalls';
+import { callCreateMoviesById, callDeleteMovie } from '../../apiCalls/moviesCalls';
+import { randomIndexGenerator } from '../../utils/helpers';
+import { useList } from '../../context/ListContext';
+import { useModal } from '../../context/ModalContext';
 import Trailers from './InfoModalMovies/Trailers';
 
 import styles from './modal.module.scss';
@@ -15,18 +19,19 @@ function InfoModal({ modalData, onClose }) {
     const [vidKey, setVidKey] = useState(null);
     const [vidArray, setVidArray] = useState([]);
     const [moreInfoOpen, setMoreInfoOpen] = useState(false);
+    const { myList, fetchList } = useList();
+    const { setModal } = useModal();
 
     const {
         movie = null,
         onClick = onClose,
     } = modalData;
 
-    useEffect(() => {
-        const randomIndexGenerator = (array) => {
-            const idx = Math.floor(array.length * Math.random());
-            return idx;
-        }
+    const isInMyList = myList.some(
+        item => item.movie_id === movie?.id
+    );
 
+    useEffect(() => {
         const fetchVids = async () => {
             const vids = await callFetchVideosById(movie.id);
             setVidArray(vids);
@@ -46,6 +51,48 @@ function InfoModal({ modalData, onClose }) {
         else moreInfo.style.height = `${moreInfoHeight}px`;
 
     }, [moreInfoOpen]);
+
+    const addToList = async (id) => {
+        try {
+            const data = await callCreateMoviesById(id);
+            setModal({
+                type: 'text',
+                data: {
+                    message: data.message,
+                }
+            });
+        } catch (err) {
+            setModal({
+                type: 'text',
+                data: {
+                    message: err.message,
+                }
+            });
+        } finally {
+            fetchList()
+        }
+    };
+
+    const removeFromList = async (id) => {
+        try {
+            const data = await callDeleteMovie(id);
+            setModal({
+                type: 'text',
+                data: {
+                    message: data.message,
+                }
+            });
+        } catch (err) {
+            setModal({
+                type: 'text',
+                data: {
+                    message: err.message,
+                }
+            });
+        } finally {
+            fetchList()
+        }
+    };
 
     return (
         <Portal isOpen={!!modalData} onClick={onClick}>
@@ -84,8 +131,16 @@ function InfoModal({ modalData, onClose }) {
                         <button
                             aria-label='Add to "My List"'
                             className={styles.iconBtn}
+                            onClick={
+                                isInMyList
+                                    ? () => removeFromList(movie.id)
+                                    : () => addToList(movie.id)
+                            }
                         >
-                            <img src={addIcon} alt='' />
+                            <img
+                                src={isInMyList ? removeIcon : addIcon}
+                                alt=''
+                            />
                         </button>
 
                         <button

@@ -1,24 +1,23 @@
-import { useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { Link } from 'react-router-dom';
-
 import { useSearch } from '../../context/SearchContext';
 import SearchResults from './searchResults/SearchResults';
 
 import { useList } from '../../context/ListContext';
-
+import {
+  callFetchPopular,
+  callFetchNowPlaying,
+  callFetchUpcoming,
+  callFetchDetailsById
+} from '../../apiCalls/tmdbCalls';
+import MovieCarousel from '../../components/movies/MovieCarousel';
+import Banner from '../../components/banner/banner';
 import styles from './Home.module.scss';
 
 
 function Home() {
-  const { user } = useAuth();
-  const { myList, fetchList } = useList();
+
+  const { myList } = useList();
   const { queryResults } = useSearch();
   const hasResults = queryResults.results.length > 0 || queryResults.message;
-
-  useEffect(() => {
-    fetchList();
-  }, []);
 
   return (
     <main>
@@ -36,13 +35,17 @@ function Home() {
 
       {
         hasResults
-          ? <SearchResults />
-          :
-          <>
-            {/* switch to new component... user / lists / movies*/}
-            <p>Hello, {user.username}</p>
-            <Link to='/account'>Account</Link>
-          </>
+          ? (
+            <SearchResults />
+          ) : (
+            <>
+              <Banner />
+              {myList?.length > 0 && <MovieCarousel title='My List' callFetch={callFetchDetailsById} />}
+              <MovieCarousel title='Popular Movies' callFetch={callFetchPopular} />
+              <MovieCarousel title='Upcoming Movies' callFetch={callFetchUpcoming} />
+              <MovieCarousel title='Now in Cinemas' callFetch={callFetchNowPlaying} />
+            </>
+          )
       }
     </main>
   )

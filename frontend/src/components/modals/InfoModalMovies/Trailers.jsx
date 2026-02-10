@@ -11,15 +11,25 @@ function Trailers({ vidArray }) {
         const clipsArray = [];
         const otherArray = [];
 
-        console.log('trailers:', vidArray)
+        const LIMIT = 3;
 
         vidArray.forEach(vid => {
-            if (vid.type === 'Trailer' || vid.type === 'Teaser') trailersArray.push(vid);
-            else if (vid.type === 'Clip') clipsArray.push(vid);
-            else otherArray.push(vid);
+            if (
+                (vid.type === 'Trailer' || vid.type === 'Teaser') &&
+                trailersArray.length < LIMIT
+            ) {
+                trailersArray.push(vid);
+            }
+            else if (
+                vid.type === 'Clip' &&
+                clipsArray.length < LIMIT
+            ) {
+                clipsArray.push(vid);
+            }
+            else if (otherArray.length < LIMIT) {
+                otherArray.push(vid);
+            }
         });
-
-        
 
         setTrailers(trailersArray);
         setClips(clipsArray);
@@ -29,50 +39,58 @@ function Trailers({ vidArray }) {
 
     return (
         <div className={styles.Trailers}>
-            <div>
-                <h4>Trailers</h4>
-                <ul>
-                    {
-                        trailers.map((vid) =>
-                            <li key={vid.id}>
-                                <h3>
-                                    {vid.name}
-                                </h3>
-                                <iframe
-                                    src={`https://www.youtube.com/embed/${vid.key}?autoplay=0`}
-                                    title="YouTube video player"
-                                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerPolicy="strict-origin-when-cross-origin"
-                                    allowFullScreen
-                                >
-                                </iframe>
-                            </li>
-                        )
-                    }
-                </ul>
-            </div>
-            <div>
-                <h4>Clips</h4>
-                <ul>
-                    {
-                        clips.map((vid) =>
-                            <li key={vid.id}>
-                                <h3>
-                                    {vid.name}
-                                </h3>
-                                <iframe
-                                    src={`https://www.youtube.com/embed/${vid.key}?autoplay=0`}
-                                    title="YouTube video player"
-                                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerPolicy="strict-origin-when-cross-origin"
-                                    allowFullScreen
-                                >
-                                </iframe>
-                            </li>
-                        )
-                    }
-                </ul>
-            </div>
+            {
+                trailers.length > 0 ? (
+                    <div>
+                        <h4>Trailers</h4>
+                        <ul>
+                            {
+                                trailers.map((vid) =>
+                                    <li key={vid.id}>
+                                        <h3>
+                                            {vid.name}
+                                        </h3>
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${vid.key}?autoplay=0`}
+                                            title="YouTube video player"
+                                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerPolicy="strict-origin-when-cross-origin"
+                                            allowFullScreen
+                                        >
+                                        </iframe>
+                                    </li>
+                                )
+                            }
+                        </ul>
+                    </div>
+                ) : null
+            }
+            {
+                clips.length > 0 ? (
+                    <div>
+                        <h4>Clips</h4>
+                        <ul>
+                            {
+                                clips.map((vid) =>
+                                    <li key={vid.id}>
+                                        <h3>
+                                            {vid.name}
+                                        </h3>
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${vid.key}?autoplay=0`}
+                                            title="YouTube video player"
+                                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerPolicy="strict-origin-when-cross-origin"
+                                            allowFullScreen
+                                        >
+                                        </iframe>
+                                    </li>
+                                )
+                            }
+                        </ul>
+                    </div>
+                ) : null
+            }
             {
                 otherVids.length > 0 ?
                     <div>

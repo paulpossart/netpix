@@ -1,5 +1,11 @@
+TIDY UP BANNER JSX AND CSS
+
 List context - console logging err?
 delete movie on front end
+
+style text modal for homepage
+
+auth page: text button placement and footer color / position
 
 
 
