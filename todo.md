@@ -16,5 +16,3 @@ tabfocus in all: need a focus trap for modals and sidebar - disclaimer too (iner
 colors...
 
 move one-off button styles to their respective folders (white btn (notFound), imgBtn(header/sidebar))???
-
-add table limits
