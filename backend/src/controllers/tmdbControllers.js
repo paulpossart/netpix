@@ -82,7 +82,11 @@ export const fetchPopular = async (req, res, next) => {
       options
     );
     const data = await response.json();
-    if (!response.ok) throw new Error(data.status_message);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('TMDB ERROR:', response.status, errorText);
+      throw new Error(data.status_message);
+    }
     res.status(200).json(data.results);
   } catch (err) {
     next(err);
