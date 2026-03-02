@@ -1,4 +1,4 @@
-import styles from './Svgs.module.scss';
+import styles from './svgs.module.scss';
 
 export const HomeIcon = ({ isActive }) => (
     <svg
