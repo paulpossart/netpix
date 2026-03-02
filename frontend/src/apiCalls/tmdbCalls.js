@@ -12,3 +12,4 @@ export const callFetchPopular = () => apiJsonFetch('api/tmdb/popular', 'GET');
 export const callFetchUpcoming = () => apiJsonFetch('api/tmdb/upcoming', 'GET');
 export const callFetchNowPlaying = () => apiJsonFetch('api/tmdb/now-playing', 'GET');
 export const callFetchDetailsById = id => apiJsonFetch(`/api/tmdb/details/${id}`, 'GET');
+export const callFetchLogoById = id => apiJsonFetch(`/api/tmdb/logo/${id}`, 'GET');

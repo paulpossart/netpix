@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { randomIndexGenerator } from '../../utils/helpers';
 import { useModal } from '../../context/ModalContext';
-import { callFetchPopular, callFetchVideosById } from '../../apiCalls/tmdbCalls';
+import { callFetchPopular, callFetchLogoById } from '../../apiCalls/tmdbCalls';
 import styles from './banner.module.scss';
-import trailerIcon from '../../assets/black-trailer.svg';
-import infoIcon from '../../assets/info.svg'
+import infoIcon from '../../assets/info-black.svg'
 
 function Banner() {
     const [movie, setMovie] = useState(null);
@@ -40,7 +39,7 @@ function Banner() {
         });
     };
 
-    /*const fetchLogo = async (movie) => {
+    const fetchLogo = async (movie) => {
         try {
             const data = await callFetchLogoById(movie.id);
             const englishLogos = data.filter(logo => (logo.iso_639_1 === 'en'))
@@ -50,12 +49,11 @@ function Banner() {
             console.log('Logo err:', err)
             setLogo(null)
         }
-    }*/
-
+    }
 
 
     return (
-        <>
+        <section>
             <h2 className={styles.title}></h2>
             {
                 movie ? (
@@ -71,8 +69,13 @@ function Banner() {
                                         }
                                     </div>
                                     <div className={styles.btnDiv}>
-                                        <button style={{ whiteSpace: 'nowrap' }} onClick={() => handleTrailer(movie)} className={styles.whtBtn} ><img src={trailerIcon} />Play Trailer</button>
-                                        <button style={{ whiteSpace: 'nowrap' }} onClick={() => handleInfo(movie)} className={styles.opaqueBtn}><img src={infoIcon} />More Info</button>
+                                        <button
+                                            onClick={() => handleClick(movie)}
+                                            className={styles.infoBtn}
+                                        >
+                                            <img src={infoIcon} alt='' />
+                                            More Info
+                                        </button>
                                     </div>
                                 </div>
 
@@ -91,7 +94,7 @@ function Banner() {
                     </div>
                 ) : null
             }
-        </>
+        </section>
     );
 };
 

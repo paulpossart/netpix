@@ -27,11 +27,27 @@ export const httpErr = (message, status, name) => {
     return err;
 };
 
-export const rateCheck = rateLimit({
+export const rateCheckLogin = rateLimit({
     windowMs: 10 * 60 * 1000,
     max: 10,
     message: {
-        message: 'Too many requests, try again later.'
+        message: 'Too many attempts, try again later.'
+    }
+});
+
+export const rateCheckPassword = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 10,
+    message: {
+        message: 'Too many attempts, try again later.'
+    }
+});
+
+export const rateCheckReg = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 10,
+    message: {
+        message: 'Too many attempts, try again later.'
     }
 });
 

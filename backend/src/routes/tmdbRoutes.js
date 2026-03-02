@@ -5,7 +5,8 @@ import {
     fetchPopular,
     fetchUpcoming,
     fetchNowPlaying,
-    fetchDetailsById
+    fetchDetailsById,
+    fetchLogoById
 } from '../controllers/tmdbControllers.js';
 import { requireAuth } from '../controllers/authControllers.js';
 
@@ -17,5 +18,6 @@ router.get('/popular', requireAuth, fetchPopular);
 router.get('/upcoming', requireAuth, fetchUpcoming);
 router.get('/now-playing', requireAuth, fetchNowPlaying);
 router.get('/details/:id', requireAuth, fetchDetailsById);
+router.get('/logo/:id', fetchLogoById);
 
 export default router;
