@@ -1,5 +1,5 @@
 @use '../../styles/global' as *;
-@use '../../styles/buttons';
+@use '../../styles/buttons' as *;
 
 .title {
     text-align: left;
@@ -43,7 +43,7 @@
             @include flex(column, flex-end, flex-start);
             padding-left: 4%;
             padding-bottom: 4%;
-           
+
 
 
             .logo {
@@ -72,10 +72,8 @@
                         width: 30px;
                     }
                 }
-
             }
         }
-
     }
 
     & img {
@@ -88,4 +86,16 @@
         z-index: 3;
         transition: transform 0.1s linear;
     }
+}
+
+.infoBtn {
+    @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
+
+    font: {
+        size: clamp(12px, 2vw, 18px);
+    }
+
+    white-space: nowrap;
+    padding: 0.25em 0.5em;
+    margin: 0.8rem 0.8rem 0.8rem 0;
 }

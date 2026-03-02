@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { rateCheck } from '../utils/helpers.js';
+import { rateCheckReg } from '../utils/helpers.js';
 import {
     registerUser,
     authenticateUser,
@@ -11,7 +11,7 @@ import { requireAuth, requireRecentReauth } from '../controllers/authControllers
 
 const router = Router();
 
-router.post('/register-user', /*rateCheck,*/ registerUser);
+router.post('/register-user', rateCheckReg, registerUser);
 router.get('/authenticate-user', authenticateUser);
 router.post('/update-password', requireAuth, updatePassword);
 router.post(

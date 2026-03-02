@@ -1,3 +1,7 @@
+BEGIN;
+
+CREATE SCHEMA netpix;
+
 CREATE TABLE netpix.session (
   sid text PRIMARY KEY,
   sess json NOT NULL,
@@ -69,3 +73,5 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER netpix_movies_limit_trigger
 BEFORE INSERT ON netpix.movies
 FOR EACH ROW EXECUTE FUNCTION prevent_excess_netpix_movies();
+
+COMMIT;

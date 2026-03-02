@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { rateCheck } from '../utils/helpers.js';
+import { rateCheckLogin, rateCheckPassword } from '../utils/helpers.js';
 import {
     login,
     logout,
@@ -10,12 +10,12 @@ import {
 
 const router = Router();
 
-router.post('/login', /*rateCheck,*/ login);
+router.post('/login', rateCheckLogin, login);
 router.post('/logout', logout);
 router.post('/logout-all', requireAuth, logoutEverywhere);
 router.post(
     '/verify-password',
-    /*rateCheck,*/
+    rateCheckPassword,
     requireAuth,
     verifyPassword
 );
