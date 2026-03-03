@@ -120,14 +120,13 @@ function Register({ setView }) {
                     className={styles.redBtn}
                     style={{ marginTop: '1rem' }}
                 >
-                    New Become a Member!
+                    Become a Member!
                 </button>
 
                 <button
                     type='button'
-                    className={styles.textBtn}
+                    className={styles.authTextBtn}
                     onClick={() => setView('login')}
-                    style={{ marginTop: '1rem' }}
                 >
                     Go back to sign in.
                 </button>

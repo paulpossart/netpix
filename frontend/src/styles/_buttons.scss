@@ -7,7 +7,6 @@
     color: $col;
     background-color: $bgCol;
     line-height: 1;
-    //padding: 0;
     margin: 0;
     text-decoration: none;
     text-align: center;
@@ -16,7 +15,6 @@
         background-color 0.2s linear,
         transform 0.2s linear;
 
-    // include mainStyle mixin:
     padding: 0.75em;
     width: 100%;
     display: block;
@@ -37,38 +35,27 @@
     }
 }
 
-/*
-@mixin mainStyle {
-    padding: 0.75em;
-    width: 100%;
-    display: block;
-}
-*/
 // Auth Buttons ===================
 
 .redBtn {
     @include button;
-   // @include mainStyle;
 }
 
 // Account Buttons =====
 
 .blackBtn {
     @include button(black, rgb(76, 76, 76));
-    //@include mainStyle;
 }
 
 .transparentBtn {
     @include button(transparent, rgb(226, 226, 226), black);
-   // @include mainStyle;
     border: solid 2px white;
 }
 
 // General =====
 
 .textBtn {
-    @include button(transparent, transparent, white);
-
+    @include button(transparent, transparent, white);    
     &:hover {
         text-decoration: underline;
     }
@@ -89,7 +76,6 @@
 
 .searchBtn {
     @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
-   // @include mainStyle;
     padding: 0.4rem 0.8rem;
     margin: 0 4px;
     font-size: 1.2rem;
@@ -101,8 +87,7 @@
 
 .whiteBtn {
     @include button(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9), black);
-    //@include mainStyle;
-
+    
     font: {
         size: clamp(12px, 2vw, 18px);
     }

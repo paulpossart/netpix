@@ -91,7 +91,7 @@ function Login({ setView }) {
                 <p>New to Netpix?
                     <button
                         type='button'
-                        className={styles.textBtn}
+                        className={styles.authTextBtn}
                         onClick={() => setView('register')}
                         style={{ marginLeft: '0.8rem' }}
                     >
