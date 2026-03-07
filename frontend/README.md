@@ -1,16 +1,24 @@
-# React + Vite
+# netpix
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Netpix is a full-stack Netflix clone that uses the PERN stack. It allows users to interact with the TMDB API through a RESTful API with secure authentication.
 
-Currently, two official plugins are available:
+[Visit Site](https://netpix.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- **Frontend:** React, React Context API, React Router, SCSS
 
-## React Compiler
+- **Backend:** Node.js, Express
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Database:** PostgreSQL
 
-## Expanding the ESLint configuration
+- **Authentication:** Express Session with Passport
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+- **TMDB:** Netpix connects to popular third-party API, The Movie Database, enabling users to search for favourite movies, and create their own watchlist. The homepage displays lists of popular, upcoming, and current movies. Video and logo endpoints are integrated for a satisfying user experience.
+
+- **Security:** Users can change their username and password at any time, sign out of all devices, and delete their account.
+
+- **Accessibility:** Semantic HTML, ARIA labels, colour contrast that meets or exceeds WCAG AA standards, and keyboard navigation support - all menus and modals close on Escape, and all interactive elements have a custom tab-focus mode.
+
+- **Testing:** Auth routes are tested using Vitest and Supertest on the backend, Vitest, Mock Service Worker, Jest DOM, and React Testing Library on the frontend.
+
