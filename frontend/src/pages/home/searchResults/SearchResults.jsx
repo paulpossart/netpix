@@ -26,22 +26,19 @@ function SearchResults() {
               <div className={styles.resultsContainer}>
                 <ul>
                   {queryResults.results.map((movie, index) =>
-                    <li
-                      role='button'
-                      key={movie.id}
-                      tabIndex='0'
-                      onClick={() => handleClick(movie)}
-                    >
-                      {movie.poster_path
-                        ? <img
-                          src={`${imgSrc}${width}${movie.poster_path}`}
-                          alt={`Poster for the movie ${movie.title}`}
-                        />
-                        : <div className={styles.noImgLi}>
-                          <h3>{movie.title}</h3>
-                          <p>no image available</p>
-                        </div>
-                      }
+                    <li key={movie.id}>
+                      <button onClick={() => handleClick(movie)}>
+                        {movie.poster_path
+                          ? <img
+                            src={`${imgSrc}${width}${movie.poster_path}`}
+                            alt={`Poster for the movie ${movie.title}`}
+                          />
+                          : <div className={styles.noImgLi}>
+                            <h3>{movie.title}</h3>
+                            <p>no image available</p>
+                          </div>
+                        }
+                      </button>
                     </li>
                   )}
                 </ul>

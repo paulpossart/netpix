@@ -53,3 +53,17 @@ body:not(.account) ::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
   background: rgba(102, 102, 102, 0.8);
 }
+
+:focus {
+  outline: none;
+}
+
+body:not(.account) :focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+body.account :focus-visible {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}

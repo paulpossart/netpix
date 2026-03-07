@@ -72,7 +72,6 @@
         }
     }
 
-
     .moreInfo {
         overflow: hidden;
         height: 0;
@@ -94,7 +93,7 @@
         @include flex(row, center, center);
         padding: 0 1em;
 
-         h3 {
+        h3 {
             text-align: left;
             font-weight: 500;
             width: 50%;

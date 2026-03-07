@@ -54,7 +54,7 @@ function Banner() {
 
     return (
         <section>
-            <h2 className={styles.title}></h2>
+            <h2 className={styles.srOnly}>{movie ? `${movie.title} (rotating banner)` : 'Featured movie banner'}</h2>
             {
                 movie ? (
                     <div className={styles.moviesWrapper}>
@@ -64,8 +64,10 @@ function Banner() {
                                     <div className={styles.logo}>
                                         {
                                             logo
-                                                ? <img src={`${imgSrc}${width}${logo.file_path}`} />
-                                                : <h3>{movie.title}</h3>
+                                                ? <img
+                                                    src={`${imgSrc}${width}${logo.file_path}`}
+                                                    alt={movie.title} />
+                                                : <span>{movie.title}</span>
                                         }
                                     </div>
                                     <div className={styles.btnDiv}>
@@ -81,8 +83,8 @@ function Banner() {
 
                             </div>
                             <img
-                                src={`${imgSrc}${width}${movie.backdrop_path}`
-                                }
+                                src={`${imgSrc}${width}${movie.backdrop_path}`}
+                                alt=''
                                 onLoad={() => {
                                     setLogo(null);
                                     fetchLogo(movie)

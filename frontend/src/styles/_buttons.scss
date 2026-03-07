@@ -55,10 +55,10 @@
 // General =====
 
 .textBtn {
-    @include button(transparent, transparent, white);    
-    &:hover {
-        text-decoration: underline;
-    }
+        @include button(transparent, transparent, white);    
+        &:hover {
+            text-decoration: underline;
+        }
 }
 
 // Searchbar ====

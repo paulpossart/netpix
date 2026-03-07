@@ -136,6 +136,7 @@ function InfoModal({ modalData, onClose }) {
                                     ? () => removeFromList(movie.id)
                                     : () => addToList(movie.id)
                             }
+                            autoFocus
                         >
                             <img
                                 src={isInMyList ? removeIcon : addIcon}

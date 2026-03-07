@@ -45,7 +45,12 @@
             cursor: pointer;
             border-radius: 8px;
             overflow: hidden;
-            margin: 0.5% 0;
+            margin: 4px 0;
+
+            &:focus-within {
+                outline: 2px solid white;
+                outline-offset: 2px;
+            }
 
             @media (orientation: landscape) {
                 flex: 0 0 19.2%;
@@ -60,15 +65,17 @@
                 max-width: 16.5%;
             }
 
-            & img {
-                width: 100%;
-                height: auto;
+            & button {
+                all: unset;
                 display: block;
-                object-fit: cover;
-
-                border-radius: 8px;
-                z-index: 3;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
                 transition: transform 0.1s linear;
+
+                &:focus-visible {
+                    outline: none;
+                }
 
                 @media (hover: hover) and (pointer: fine) {
                     &:hover {
@@ -80,6 +87,15 @@
                     transform: scale(0.9);
 
                 }
+            }
+
+            & img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                border-radius: 8px;
+                z-index: 3;
             }
         }
     }

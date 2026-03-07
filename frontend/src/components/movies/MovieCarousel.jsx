@@ -72,24 +72,27 @@ function MovieCarousel({ title, callFetch }) {
             {
                 movies.length > 0 ? (
                     <div className={styles.moviesWrapper}>
-                        <div className={styles.clickerLeft} onClick={handleClickLeft}><img src={chevronRight} /></div>
+                        <button className={styles.clickerLeft} onClick={handleClickLeft}><img src={chevronRight} /></button>
                         <div ref={scrollRef} className={styles.moviesContainer}>
                             <ul>
                                 {
                                     movies.map(((movie, index) =>
                                         movie.isDummy
                                             ? <li key={index}><img src={dummyIcon} /></li>
-                                            : <li
-                                                key={index}
-                                                onClick={() => handleClick(movie)}
-                                            >
-                                                <img src={`${imgSrc}${width}${movie.poster_path}`} />
+                                            : <li key={index}>
+                                                <button onClick={() => handleClick(movie)}>
+                                                    <img
+                                                        src={`${imgSrc}${width}${movie.poster_path}`}
+                                                        alt={`${movie.title} poster`}
+                                                    />
+                                                </button>
+
                                             </li>
                                     ))
                                 }
                             </ul>
                         </div>
-                        <div className={styles.clickerRight} onClick={handleClickRight}><img src={chevronRight} /></div>
+                        <button className={styles.clickerRight} onClick={handleClickRight}><img src={chevronRight} /></button>
                     </div>
                 ) : (
                     <p>cannot display movies</p>
