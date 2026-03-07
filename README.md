@@ -16,7 +16,7 @@ Netpix is a full-stack Netflix clone that uses the PERN stack. It allows users t
 ## Features
 - **TMDB:** Netpix connects to popular third-party API, The Movie Database, enabling users to search for favourite movies, and create their own watchlist. The homepage displays lists of popular, upcoming, and current movies. Video and logo endpoints are integrated for a satisfying user experience.
 
-- **Security:** Users can change their username and password at any time, sign out of all devices, and delete their account.
+- **Security:** Users can change their username and password at any time, sign out of all devices, and delete their account. The backend uses bcrypt for password hashing, and rate-limiting on public routes protects against abuse.
 
 - **Accessibility:** Semantic HTML, ARIA labels, colour contrast that meets or exceeds WCAG AA standards, and keyboard navigation support - all menus and modals close on Escape, and all interactive elements have a custom tab-focus mode.
 
