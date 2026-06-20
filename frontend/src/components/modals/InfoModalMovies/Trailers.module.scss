@@ -8,10 +8,15 @@
         margin-top: 12px;
         font-size: 2rem;
     }
-//24vmax
+
     iframe {
         width: 80vw;
         height: calc(80vw * (9 / 16));
+
+       @media (orientation: landscape) {
+            width: 50vw;
+            height: calc(50vw * (9 / 16));
+        }
     }
 
     li {
