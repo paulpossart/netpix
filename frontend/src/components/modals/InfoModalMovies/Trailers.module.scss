@@ -8,14 +8,14 @@
         margin-top: 12px;
         font-size: 2rem;
     }
-
+//24
     iframe {
-        width: 24vmax;
-        height: calc(24vmax * (9 / 16));
+        width: 60vmax;
+        height: calc(60vmax * (9 / 16));
     }
 
     li {
-        @include flex(row, space-between, flex-end);
+        @include flex(column, space-between, center);
         border-bottom: solid $greyBorder 1px;
         padding: 8px 2px;
         text-align: left;

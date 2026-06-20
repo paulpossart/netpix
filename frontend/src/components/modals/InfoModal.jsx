@@ -39,7 +39,7 @@ function InfoModal({ modalData, onClose }) {
         };
 
         fetchVids();
-    }, []);
+    }, [movie.id]);
 
     useEffect(() => {
         const moreInfo = document.getElementById('more-info');
